@@ -28,9 +28,10 @@
   --serif:"DM Serif Display", Georgia, serif;
   --corpo:"Outfit", system-ui, sans-serif;
   --mao:"Caveat", cursive;
+  --barra:44px; /* altura da barra de Black Friday */
 }
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:84px}
+html{scroll-behavior:smooth;scroll-padding-top:calc(84px + var(--barra))}
 body{
   margin:0;
   font-family:var(--corpo);
@@ -79,6 +80,13 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .topo{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .3s, box-shadow .3s}
 .topo.rolou{background:rgba(242,230,218,.92);box-shadow:0 6px 20px -14px rgba(74,48,30,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .topo .container{display:flex;align-items:center;justify-content:space-between;height:72px}
+/* barra amarela de Black Friday, acima do menu */
+.barra-bf{height:var(--barra);background:#f2b705;color:var(--tinta);display:flex;align-items:center;justify-content:center;gap:10px 22px;padding:0 16px;font-size:.92rem;letter-spacing:.04em}
+.bf-selo{background:var(--tinta);color:#f2b705;font-weight:700;font-size:.78rem;letter-spacing:.14em;padding:.28rem .85rem;border-radius:999px;white-space:nowrap}
+.bf-frase{font-weight:500}
+.bf-botao{background:var(--tinta);color:#f2b705;font-weight:700;font-size:.8rem;letter-spacing:.08em;text-decoration:none;padding:.4rem 1rem;border-radius:999px;white-space:nowrap;transition:transform .2s, background .2s}
+.bf-botao:hover{background:#2e1b15;transform:translateY(-1px)}
+.bf-botao:focus-visible{outline:3px solid var(--tinta);outline-offset:2px}
 .marca{font-family:var(--serif);font-size:1.45rem;text-decoration:none}
 .marca em{color:var(--azul)}
 .menu ul{display:flex;gap:1.6rem;list-style:none;margin:0;padding:0}
@@ -95,7 +103,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .hamburguer[aria-expanded="true"] span::after{transform:translateY(-7px) rotate(-45deg)}
 
 /* ============ CAPA ============ */
-.capa{padding-top:120px;padding-bottom:0;min-height:100vh;display:flex;flex-direction:column}
+.capa{padding-top:calc(120px + var(--barra));padding-bottom:0;min-height:100vh;display:flex;flex-direction:column}
 .capa-grade{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,72px);align-items:center;flex:1;padding-bottom:64px}
 .capa h1{font-size:clamp(3.2rem,9vw,7rem);letter-spacing:-.01em;margin:.2rem 0 1.2rem}
 .capa h1 em{display:block}
@@ -325,7 +333,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 }
 @media (max-width:860px){
   .hamburguer{display:block}
-  .menu{position:fixed;top:72px;left:0;right:0;background:var(--linho);box-shadow:0 20px 30px -20px rgba(74,48,30,.4);max-height:0;overflow:hidden;transition:max-height .35s ease;visibility:hidden}
+  .menu{position:absolute;top:100%;left:0;right:0;background:var(--linho);box-shadow:0 20px 30px -20px rgba(74,48,30,.4);max-height:0;overflow:hidden;transition:max-height .35s ease;visibility:hidden}
   .menu.aberto{max-height:420px;visibility:visible}
   .menu ul{flex-direction:column;gap:0;padding:8px 16px 20px}
   .menu a{display:block;padding:14px 4px;font-size:1.1rem;border-bottom:1px solid rgba(58,42,32,.1)}
@@ -333,6 +341,13 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   .destaque:nth-child(2){transform:none}
   .destaque:nth-child(2):hover{transform:translateY(-6px)}
   .depoimentos{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  :root{--barra:68px}
+  .barra-bf{flex-wrap:wrap;align-content:center;gap:6px 10px;padding:6px 12px}
+  .bf-frase{order:3;flex-basis:100%;text-align:center;font-size:.74rem;letter-spacing:.03em}
+  .bf-selo{font-size:.7rem}
+  .bf-botao{font-size:.72rem;padding:.3rem .85rem}
 }
 @media (max-width:600px){
   body{font-size:1rem}
@@ -373,6 +388,12 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 
 <!-- ============ MENU FIXO ============ -->
 <header class="topo" id="topo">
+  <!-- Barra de Black Friday: para tirar depois da campanha, apague este bloco e mude --barra para 0px no CSS -->
+  <div class="barra-bf">
+    <span class="bf-selo">BLACK FRIDAY</span>
+    <span class="bf-frase">ÚLTIMAS VAGAS PARA CRIAÇÃO DE CONTEÚDO</span>
+    <a class="bf-botao" href="https://wa.me/5591985954040?text=Oi%20Manu!%20Quero%20reservar%20uma%20vaga%20de%20Black%20Friday%20para%20cria%C3%A7%C3%A3o%20de%20conte%C3%BAdo." target="_blank" rel="noopener">RESERVE AQUI!</a>
+  </div>
   <div class="container">
     <a href="#capa" class="marca">Manu <em>Melo</em></a>
     <button class="hamburguer" id="hamburguer" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span></button>
