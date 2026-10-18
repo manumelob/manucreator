@@ -127,15 +127,15 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .capa-foto{position:relative;max-width:420px;justify-self:center;width:100%}
 
 /* faixa fina das marcas */
-.faixa-marcas{border-top:1px solid rgba(58,42,32,.15);border-bottom:1px solid rgba(58,42,32,.15);padding:18px 0 22px;overflow:hidden;background:#f2e6da}
+.faixa-marcas{padding:18px 0 22px;overflow:hidden}
 .faixa-marcas .rotulo{font-family:var(--mao);font-weight:500;font-size:1.5rem;color:var(--oliva-escura);text-align:center;margin:0 16px 10px}
-/* logos: cada uma é um pedaço do arquivo marcas.jpg (39 quadrados lado a lado) */
+/* logos: cada uma é um pedaço do arquivo marcas.png (36 quadrados lado a lado, fundo transparente) */
 .faixa-marcas .trilho-logos{--t:80px;animation-duration:120s}
 .faixa-marcas .trilho-logos + .trilho-logos{margin-top:10px}
 .faixa-marcas .trilho-logos.reverso{animation-direction:reverse;animation-duration:130s}
 .faixa-marcas .trilho-logos li{padding:0 12px;gap:0}
 .faixa-marcas .trilho-logos li::after{content:none}
-.logo{display:block;width:var(--t);height:var(--t);background:url("marcas.jpg") no-repeat;background-size:calc(var(--t) * 39) var(--t);background-position:calc(var(--i) * var(--t) * -1) 0}
+.logo{display:block;width:var(--t);height:var(--t);background:url("marcas.png") no-repeat;background-size:calc(var(--t) * 36) var(--t);background-position:calc(var(--i) * var(--t) * -1) 0}
 .trilho{display:flex;width:max-content;animation:rolar 40s linear infinite}
 .trilho ul{display:flex;list-style:none;margin:0;padding:0}
 .trilho li{font-family:var(--serif);font-size:1.25rem;padding:0 1.6rem;white-space:nowrap;color:var(--tinta-suave);display:flex;align-items:center;gap:3.2rem}
@@ -172,7 +172,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .envelope .selo-postal{position:absolute;right:10px;top:8px;width:26px;height:30px;background:var(--oliva);outline:2px dotted #fbf7f1;outline-offset:-4px;z-index:3}
 
 /* posições dos objetos */
-.capa .xicara{left:-30px;bottom:110px;animation-delay:-5s}
+.capa .xicara{left:-30px;bottom:300px;animation-delay:-5s}
 .sobre .planta{right:3%;bottom:40px;animation-delay:-1s}
 .contato .envelope{right:4%;top:60px;animation-delay:-3s}
 .servicos .xicara{left:2%;bottom:40px;animation-delay:-6s;opacity:.95}
@@ -355,6 +355,11 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   .trilho{width:auto;flex-wrap:wrap;justify-content:center}
   .trilho ul[aria-hidden="true"]{display:none}
   .trilho ul{flex-wrap:wrap;justify-content:center;row-gap:6px}
+  /* as logos das marcas ficam sempre em 2 fileiras, correndo bem devagar */
+  .faixa-marcas .trilho-logos{width:max-content;flex-wrap:nowrap;animation:rolar 120s linear infinite!important}
+  .faixa-marcas .trilho-logos.reverso{animation:rolar 130s linear infinite reverse!important}
+  .faixa-marcas .trilho-logos ul{flex-wrap:nowrap}
+  .faixa-marcas .trilho-logos ul[aria-hidden="true"]{display:flex}
 }
 </style>
 </head>
@@ -413,7 +418,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 
   <!--
     Faixa com as logos das marcas, em duas linhas que correm devagar.
-    As logos ficam todas em um arquivo só (marcas.jpg), uma ao lado da outra, cada uma num quadrado de 80x80 px.
+    As logos ficam todas em um arquivo só (marcas.png, fundo transparente), uma ao lado da outra, cada uma num quadrado de 80x80 px.
     Os nomes e a ordem ficam em MARCAS no script.
   -->
   <div class="faixa-marcas conteudo">
@@ -634,13 +639,13 @@ const NUMEROS_CAPA = [
 ];
 
 /* Logos da faixa da capa, na mesma ordem em que aparecem no arquivo marcas.jpg.
-   O nome é lido por leitores de tela. As 20 primeiras vão na linha de cima, o resto na de baixo.
+   O nome é lido por leitores de tela. Metade vai na fileira de cima, metade na de baixo.
    "Marca parceira" = logo sem nome identificado: troque pelo nome certo. */
 const MARCAS = [
   "Lacta", "Ortobom", "TIM", "Tupperware", "Magalu", "Doca", "Darrow", "Mix Calçados", "LG", "Elo",
   "L'Oréal Elseve", "Plurae", "Freshmile", "FTW", "Dove", "Casas Bahia", "Seda", "Marca parceira", "Sem Parar", "Comfort",
   "Temu", "Bepantol Baby", "Égua du Óleo", "Marca parceira", "Central Toalhas", "Always Fit", "Biomarine", "Alther", "Mercado Livre", "Petlove",
-  "Veste Go", "Marca parceira", "Marca parceira", "Montessoriando", "Marca parceira", "Saint Germain", "Inner Circle", "Alva", "Toda Up"
+  "Veste Go", "Montessoriando", "Saint Germain", "Inner Circle", "Alva", "Toda Up"
 ];
 
 /* Conteúdos de destaque (três cards de vídeo)
@@ -774,8 +779,9 @@ function montarLogos(el, inicio, fim) {
   ).join("");
   el.innerHTML = `<ul>${lista}</ul><ul aria-hidden="true">${lista}</ul>`;
 }
-montarLogos($("#marcas-linha-1"), 0, 20);
-montarLogos($("#marcas-linha-2"), 20, MARCAS.length);
+const metade = Math.ceil(MARCAS.length / 2);
+montarLogos($("#marcas-linha-1"), 0, metade);
+montarLogos($("#marcas-linha-2"), metade, MARCAS.length);
 montarTrilho($("#trilho-servicos"), SERVICOS.map(s => s.titulo));
 
 /* Destaques */
