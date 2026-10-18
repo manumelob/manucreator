@@ -239,22 +239,32 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .destaque .abrir{display:inline-block;margin-top:.8rem;font-weight:500;color:var(--azul-escuro);font-size:.95rem}
 
 /* ============ TRABALHOS ============ */
-.filtros{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px}
-.filtro{font-family:var(--corpo);font-size:.95rem;font-weight:400;padding:.55rem 1.15rem;border-radius:999px;border:1.5px solid rgba(58,42,32,.25);background:rgba(251,247,241,.6);color:var(--tinta);cursor:pointer;transition:all .25s}
-.filtro:hover{border-color:var(--azul)}
-.filtro[aria-pressed="true"]{background:var(--azul-escuro);border-color:var(--azul-escuro);color:#fff}
-.galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px;list-style:none;padding:0;margin:0}
-.trabalho{background:#fff;padding:10px 10px 16px;border-radius:6px;box-shadow:var(--sombra-leve);transition:transform .3s;animation:surgir .45s ease both}
-.trabalho:nth-child(odd){transform:rotate(-1deg)}
-.trabalho:nth-child(even){transform:rotate(1deg)}
-.trabalho:hover{transform:rotate(0) translateY(-4px)}
-.trabalho a{text-decoration:none;display:block}
-.abre-video{display:block;width:100%;padding:0;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer}
-.trabalho .foto{aspect-ratio:4/5;background:#e9dfd3}
-.trabalho .foto img{width:100%;height:100%;object-fit:cover}
-.trabalho .play{width:54px;height:54px}
-.trabalho .play::before{border-left-width:16px;border-top-width:10px;border-bottom-width:10px;margin-left:5px}
-.abre-video:hover .play{transform:scale(1.1)}
+/* galeria por nicho: uma fileira por nicho, vídeos em carrossel */
+.nichos{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(48px,6vw,72px)}
+.nicho-bloco{min-width:0}
+.nicho-topo{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}
+.nicho-topo h3{font-size:clamp(1.7rem,3.4vw,2.3rem);color:var(--tinta);display:flex;align-items:baseline;gap:10px}
+.nicho-topo h3 small{font-family:var(--corpo);font-size:.95rem;font-weight:500;color:var(--azul);letter-spacing:.04em}
+.nicho-topo p{font-family:var(--serif);font-style:italic;color:var(--tinta-suave);margin:4px 0 0;font-size:1.02rem}
+.nicho-setas{display:flex;gap:10px;flex-shrink:0}
+.nicho-setas button{width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(70,42,33,.2);background:transparent;color:var(--tinta);font-size:1.5rem;line-height:1;padding-bottom:3px;cursor:pointer;transition:background .2s,border-color .2s,opacity .2s}
+.nicho-setas button:hover{background:var(--papel);border-color:var(--azul)}
+.nicho-setas button:disabled{opacity:.35;cursor:default;background:transparent}
+.nicho-trilho{display:flex;gap:clamp(14px,2vw,22px);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;list-style:none;margin:0;padding:4px 2px 18px;scrollbar-width:none;-ms-overflow-style:none}
+.nicho-trilho::-webkit-scrollbar{display:none}
+.nicho-trilho li{flex:0 0 clamp(200px,21vw,240px);scroll-snap-align:start}
+.cartao-video{position:relative;display:block;width:100%;aspect-ratio:9/16;padding:0;border:0;border-radius:18px;overflow:hidden;cursor:pointer;background:#d9cfc3;color:#fff;text-align:left;font:inherit;box-shadow:0 18px 34px -20px rgba(70,42,33,.55);transition:transform .3s ease,box-shadow .3s ease}
+.cartao-video:hover{transform:translateY(-4px);box-shadow:0 24px 40px -20px rgba(70,42,33,.6)}
+.cartao-video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.cartao-video:hover img{transform:scale(1.04)}
+.cartao-video::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 52%,rgba(0,0,0,.72) 100%)}
+.cartao-video .selo{position:absolute;top:12px;left:12px;z-index:1;background:rgba(251,247,241,.94);color:var(--tinta);font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.32rem .7rem;border-radius:99px;max-width:calc(100% - 24px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cartao-video .texto-cartao{position:absolute;left:14px;right:14px;bottom:14px;z-index:1}
+.cartao-video strong{display:block;font-family:var(--serif);font-weight:400;font-size:1.2rem;line-height:1.15}
+.cartao-video .cat{display:block;margin-top:6px;font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.cartao-video .play{z-index:1;width:52px;height:52px;opacity:0;transition:opacity .3s,transform .3s}
+.cartao-video .play::before{border-left-width:15px;border-top-width:10px;border-bottom-width:10px;margin-left:5px}
+.cartao-video:hover .play,.cartao-video:focus-visible .play{opacity:1}
 /* player de vídeo que abre por cima da página */
 .player{position:fixed;inset:0;z-index:320;display:none;align-items:center;justify-content:center;padding:16px}
 .player.aberto{display:flex}
@@ -264,11 +274,6 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .player .legenda-video{color:#f2e6da;font-family:var(--serif);font-size:1.25rem;text-align:center;margin:0}
 .player .fechar{position:absolute;top:-6px;right:-6px;transform:translate(50%,-50%);width:44px;height:44px;border-radius:50%;border:0;background:var(--papel);color:var(--tinta);font-size:1.6rem;line-height:1;cursor:pointer;box-shadow:0 6px 16px -6px rgba(0,0,0,.4)}
 @media (max-width:600px){ .player .fechar{right:16px;top:12px;transform:none} }
-.trabalho .nicho{font-family:var(--mao);font-size:1.25rem;color:var(--marrom-escuro);display:block;margin-top:8px;line-height:1.1}
-.trabalho h3{font-family:var(--corpo);font-weight:500;font-size:1.02rem;line-height:1.35;margin-top:2px}
-.trabalho .formato{font-size:.85rem;color:var(--tinta-suave)}
-@keyframes surgir{from{opacity:0;transform:translateY(12px)}}
-.vazio{color:var(--tinta-suave);font-style:italic}
 
 /* ============ SERVIÇOS ============ */
 .faixa-servicos{background:var(--azul);color:#fff;padding:18px 0;overflow:hidden;transform:rotate(-1.2deg);margin:0 -20px clamp(56px,8vw,90px);box-shadow:var(--sombra-leve)}
@@ -384,8 +389,8 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 @media (max-width:600px){
   body{font-size:1rem}
   .servicos-grade{grid-template-columns:1fr}
-  .galeria{grid-template-columns:repeat(2,1fr);gap:14px}
-  .trabalho h3{font-size:.95rem}
+  .nicho-trilho li{flex-basis:62vw}
+  .nicho-setas button{width:38px;height:38px;font-size:1.3rem}
   .faixa-marcas .trilho-logos{--t:64px}
   .faixa-marcas .trilho-logos li{padding:0 8px}
   .capa .xicara,.servicos .xicara{display:none}
@@ -395,7 +400,6 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   .faixa-servicos li{font-size:1.25rem}
 }
 @media (max-width:380px){
-  .galeria{grid-template-columns:1fr}
   .metricas{grid-template-columns:1fr}
 }
 
@@ -530,10 +534,10 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
     <div class="cabeca revelar">
       <span class="olho">Um pouco de tudo, feito com estratégia.</span>
       <h2 id="titulo-trabalhos">Trabalhos por <em>nicho</em></h2>
-      <p>Escolha um nicho para ver os trabalhos daquele universo.</p>
+      <p>Deslize em cada nicho para ver os vídeos. Toque em um vídeo para assistir.</p>
     </div>
-    <div class="filtros revelar" id="filtros" role="group" aria-label="Filtrar trabalhos por nicho"></div>
-    <ul class="galeria" id="galeria" aria-live="polite"></ul>
+    <!-- Uma fileira por nicho, em carrossel. A ordem vem de NICHOS e os vídeos de TRABALHOS, no script. -->
+    <div class="nichos" id="galeria"></div>
   </div>
 </section>
 
@@ -756,6 +760,20 @@ const NICHOS = [
   "Moda e calçados", "Acessórios", "Gastronomia", "Experiência presencial", "Pet"
 ];
 
+/* Frase curta que aparece embaixo do nome de cada nicho */
+const FRASE_NICHO = {
+  "Tech & Apps": "Apps, plataformas e serviços explicados de um jeito simples",
+  "Casa & Decor": "Produtos que deixam a casa mais bonita, cheirosa e prática",
+  "Maternidade": "A rotina real com a Laura, do jeito que toda mãe se identifica",
+  "Autocuidado": "Cabelo, pele e maquiagem com resultado de verdade",
+  "Saúde e bem-estar": "Suplementos e hábitos da minha jornada de -30kg",
+  "Moda e calçados": "Looks, calçados e conforto para o dia a dia",
+  "Acessórios": "Semijoias e detalhes que completam o look",
+  "Gastronomia": "Receitas, lançamentos e sabores que dão vontade de provar",
+  "Experiência presencial": "Lugares que eu visito e indico de verdade",
+  "Pet": "Os cuidados com os meus pets que viram conteúdo"
+};
+
 /* Trabalhos da galeria (vídeos vindos do portfólio no Canva)
    Cada linha: T(nicho, número do vídeo, título, formato)
    O vídeo fica em midia/<pasta do nicho>/<número>.mp4 e a capa em midia/<pasta do nicho>/<número>.jpg
@@ -910,12 +928,7 @@ document.documentElement.classList.add("js");
 const reduzMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const $ = (s) => document.querySelector(s);
 
-/* Gradientes por nicho para os blocos sem foto */
-const CORES_NICHO = {
-  "Autocuidado": ["#f1d6cc", "#b98572"], "Maternidade": ["#dfe7ee", "#7f9cb5"], "Saúde e bem-estar": ["#e3e4d2", "#8c9472"],
-  "Moda e calçados": ["#e8d6c8", "#8a6f5c"], "Acessórios": ["#efe0c8", "#b08d5c"], "Casa & Decor": ["#e6dccf", "#9a8670"],
-  "Gastronomia": ["#f0d9b8", "#b98150"], "Pet": ["#e6d2b0", "#9a6b3e"], "Experiência presencial": ["#d9e2ea", "#597f9e"], "Tech & Apps": ["#d3d8dd", "#4f5d6a"]
-};
+
 
 function formatar(n, decimais) {
   return n.toLocaleString("pt-BR", { minimumFractionDigits: decimais, maximumFractionDigits: decimais });
@@ -1032,38 +1045,54 @@ trilhoFotos.addEventListener("click", (e) => {
   if (k >= 0 && k !== fotoAtual) irParaFoto(k);
 });
 
-/* Trabalhos com filtro por nicho */
-const filtrosEl = $("#filtros");
+/* Trabalhos: uma fileira por nicho (na ordem de NICHOS), cada uma com seus vídeos em carrossel */
 const galeriaEl = $("#galeria");
-filtrosEl.innerHTML = [...NICHOS, "Todos"].map((n, i) =>
-  `<button type="button" class="filtro" data-nicho="${n}" aria-pressed="${i === 0}">${n}</button>`
-).join("");
+galeriaEl.innerHTML = NICHOS.map((nicho, n) => {
+  const lista = TRABALHOS.map((t, k) => ({ t, k })).filter(x => x.t.nicho === nicho);
+  if (!lista.length) return "";
+  const id = "nicho-" + n;
+  return `<div class="nicho-bloco revelar" role="region" aria-labelledby="${id}">
+      <div class="nicho-topo">
+        <div>
+          <h3 id="${id}">${nicho} <small>${String(lista.length).padStart(2, "0")}</small></h3>
+          ${FRASE_NICHO[nicho] ? `<p>${FRASE_NICHO[nicho]}</p>` : ""}
+        </div>
+        <div class="nicho-setas">
+          <button type="button" data-dir="-1" aria-label="Vídeos anteriores de ${nicho}">‹</button>
+          <button type="button" data-dir="1" aria-label="Próximos vídeos de ${nicho}">›</button>
+        </div>
+      </div>
+      <ul class="nicho-trilho">
+        ${lista.map(({ t, k }) => `<li>
+          <button type="button" class="cartao-video" data-k="${k}" aria-label="Assistir: ${t.titulo}">
+            <img src="${t.capa}" alt="" loading="lazy" width="540" height="960">
+            <span class="selo">${t.formato}</span>
+            <span class="play" aria-hidden="true"></span>
+            <span class="texto-cartao"><strong>${t.titulo}</strong><span class="cat">${nicho}</span></span>
+          </button>
+        </li>`).join("")}
+      </ul>
+    </div>`;
+}).join("");
 
-function mostrarTrabalhos(nicho) {
-  const lista = nicho === "Todos" ? TRABALHOS : TRABALHOS.filter(t => t.nicho === nicho);
-  if (!lista.length) {
-    galeriaEl.innerHTML = `<li class="vazio">Em breve, trabalhos de ${nicho.toLowerCase()} por aqui.</li>`;
-    return;
-  }
-  galeriaEl.innerHTML = lista.map((t, i) => {
-    const k = TRABALHOS.indexOf(t);
-    return `<li class="trabalho" style="animation-delay:${Math.min(i, 12) * 40}ms">
-        <button type="button" class="abre-video" data-k="${k}" aria-label="Assistir: ${t.titulo}">
-          <div class="foto"><img src="${t.capa}" alt="" loading="lazy" width="540" height="960"><span class="play" aria-hidden="true"></span></div>
-          <span class="nicho">${t.nicho}</span>
-          <h3>${t.titulo}</h3>
-          <span class="formato">${t.formato}</span>
-        </button>
-      </li>`;
-  }).join("");
-}
-filtrosEl.addEventListener("click", (e) => {
-  const btn = e.target.closest(".filtro");
-  if (!btn) return;
-  filtrosEl.querySelectorAll(".filtro").forEach(b => b.setAttribute("aria-pressed", b === btn));
-  mostrarTrabalhos(btn.dataset.nicho);
+/* setas de cada fileira: andam uma "tela" de cartões e apagam quando chega no fim */
+galeriaEl.querySelectorAll(".nicho-bloco").forEach(bloco => {
+  const trilho = bloco.querySelector(".nicho-trilho");
+  const [ant, prox] = bloco.querySelectorAll(".nicho-setas button");
+  const atualizar = () => {
+    ant.disabled = trilho.scrollLeft < 4;
+    prox.disabled = trilho.scrollLeft + trilho.clientWidth >= trilho.scrollWidth - 4;
+  };
+  bloco.querySelector(".nicho-setas").addEventListener("click", (e) => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    const passo = trilho.clientWidth * 0.85;
+    trilho.scrollBy({ left: passo * +b.dataset.dir, behavior: reduzMovimento ? "auto" : "smooth" });
+  });
+  trilho.addEventListener("scroll", atualizar, { passive: true });
+  window.addEventListener("resize", atualizar);
+  atualizar();
 });
-mostrarTrabalhos(NICHOS[0]);
 
 /* Player: clicar num trabalho abre o vídeo por cima da página */
 const player = $("#player"), playerVideo = $("#player-video");
@@ -1087,7 +1116,7 @@ function fecharVideo() {
   if (focoAntesDoVideo && focoAntesDoVideo.focus) focoAntesDoVideo.focus();
 }
 galeriaEl.addEventListener("click", (e) => {
-  const b = e.target.closest(".abre-video");
+  const b = e.target.closest(".cartao-video");
   if (b) abrirVideo(TRABALHOS[+b.dataset.k]);
 });
 player.addEventListener("click", (e) => { if (e.target.closest("[data-fechar-video]")) fecharVideo(); });
