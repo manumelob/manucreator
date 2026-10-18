@@ -728,8 +728,8 @@ const GALERIA = [
 
 /* Nichos que aparecem como filtro (a ordem aqui é a ordem dos botões) */
 const NICHOS = [
-  "Autocuidado", "Maternidade", "Saúde e bem-estar", "Moda e calçados", "Acessórios",
-  "Casa, decor e limpeza", "Gastronomia", "Pet", "Experiências", "Tech"
+  "Tech & Apps", "Casa & Decor", "Maternidade", "Autocuidado", "Saúde e bem-estar",
+  "Moda e calçados", "Acessórios", "Gastronomia", "Experiência presencial", "Pet"
 ];
 
 /* Trabalhos da galeria (vindos do portfólio no Canva)
@@ -782,15 +782,15 @@ const TRABALHOS = [
   T("Acessórios", "Óculos", "Lançamento"),
   T("Acessórios", "Joias mãe e filha"),
 
-  T("Casa, decor e limpeza", "Toalha de banho", "Dia da Mulher"),
-  T("Casa, decor e limpeza", "Kit Coala", "Problema x solução"),
-  T("Casa, decor e limpeza", "Tira-manchas de estofados", "Antes e depois"),
-  T("Casa, decor e limpeza", "Vela aromática", "Conteúdo sensorial"),
-  T("Casa, decor e limpeza", "Toalhas", "Lo-fi e nativo"),
-  T("Casa, decor e limpeza", "Luminária decorativa", "Vlog"),
-  T("Casa, decor e limpeza", "Teste de toalha Hoomy", "Comparativo"),
-  T("Casa, decor e limpeza", "Amaciante", "Lançamento"),
-  T("Casa, decor e limpeza", "Cama Ortobom", "Storytelling"),
+  T("Casa & Decor", "Toalha de banho", "Dia da Mulher"),
+  T("Casa & Decor", "Kit Coala", "Problema x solução"),
+  T("Casa & Decor", "Tira-manchas de estofados", "Antes e depois"),
+  T("Casa & Decor", "Vela aromática", "Conteúdo sensorial"),
+  T("Casa & Decor", "Toalhas", "Lo-fi e nativo"),
+  T("Casa & Decor", "Luminária decorativa", "Vlog"),
+  T("Casa & Decor", "Teste de toalha Hoomy", "Comparativo"),
+  T("Casa & Decor", "Amaciante", "Lançamento"),
+  T("Casa & Decor", "Cama Ortobom", "Storytelling"),
 
   T("Gastronomia", "Presenteando com chocolate"),
   T("Gastronomia", "Receita com Super Dicer"),
@@ -807,22 +807,22 @@ const TRABALHOS = [
   T("Pet", "Tratamento de otite canina"),
   T("Pet", "Cuidado oral diário"),
 
-  T("Experiências", "SmartZoo", "Shopping"),
-  T("Experiências", "Restaurante praiano"),
-  T("Experiências", "Restaurante fitness"),
-  T("Experiências", "Passeio cultural"),
-  T("Experiências", "Estética corporal e facial"),
+  T("Experiência presencial", "SmartZoo", "Shopping"),
+  T("Experiência presencial", "Restaurante praiano"),
+  T("Experiência presencial", "Restaurante fitness"),
+  T("Experiência presencial", "Passeio cultural"),
+  T("Experiência presencial", "Estética corporal e facial"),
 
-  T("Tech", "App de IA"),
-  T("Tech", "Máquina de cartão", "Conteúdo financeiro"),
-  T("Tech", "React ML + BBB"),
-  T("Tech", "Grupo de promoção"),
-  T("Tech", "Aplicativo de namoro"),
-  T("Tech", "App de resumo de livros"),
-  T("Tech", "App de controle financeiro"),
-  T("Tech", "Programa para criadores de conteúdo"),
-  T("Tech", "App de motorista", "Topo de funil"),
-  T("Tech", "Empréstimo CLT", "Fundo de funil")
+  T("Tech & Apps", "App de IA"),
+  T("Tech & Apps", "Máquina de cartão", "Conteúdo financeiro"),
+  T("Tech & Apps", "React ML + BBB"),
+  T("Tech & Apps", "Grupo de promoção"),
+  T("Tech & Apps", "Aplicativo de namoro"),
+  T("Tech & Apps", "App de resumo de livros"),
+  T("Tech & Apps", "App de controle financeiro"),
+  T("Tech & Apps", "Programa para criadores de conteúdo"),
+  T("Tech & Apps", "App de motorista", "Topo de funil"),
+  T("Tech & Apps", "Empréstimo CLT", "Fundo de funil")
 ];
 
 /* Serviços (seis cards) */
@@ -871,8 +871,8 @@ const $ = (s) => document.querySelector(s);
 /* Gradientes por nicho para os blocos sem foto */
 const CORES_NICHO = {
   "Autocuidado": ["#f1d6cc", "#b98572"], "Maternidade": ["#dfe7ee", "#7f9cb5"], "Saúde e bem-estar": ["#e3e4d2", "#8c9472"],
-  "Moda e calçados": ["#e8d6c8", "#8a6f5c"], "Acessórios": ["#efe0c8", "#b08d5c"], "Casa, decor e limpeza": ["#e6dccf", "#9a8670"],
-  "Gastronomia": ["#f0d9b8", "#b98150"], "Pet": ["#e6d2b0", "#9a6b3e"], "Experiências": ["#d9e2ea", "#597f9e"], "Tech": ["#d3d8dd", "#4f5d6a"]
+  "Moda e calçados": ["#e8d6c8", "#8a6f5c"], "Acessórios": ["#efe0c8", "#b08d5c"], "Casa & Decor": ["#e6dccf", "#9a8670"],
+  "Gastronomia": ["#f0d9b8", "#b98150"], "Pet": ["#e6d2b0", "#9a6b3e"], "Experiência presencial": ["#d9e2ea", "#597f9e"], "Tech & Apps": ["#d3d8dd", "#4f5d6a"]
 };
 
 function formatar(n, decimais) {
