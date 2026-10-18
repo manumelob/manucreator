@@ -147,7 +147,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .faixa-marcas .trilho-logos.reverso{animation-direction:reverse;animation-duration:130s}
 .faixa-marcas .trilho-logos li{padding:0 12px;gap:0}
 .faixa-marcas .trilho-logos li::after{content:none}
-.logo{display:block;width:var(--t);height:var(--t);background:url("marcas.png") no-repeat;background-size:calc(var(--t) * 36) var(--t);background-position:calc(var(--i) * var(--t) * -1) 0}
+.logo{display:block;width:var(--t);height:var(--t);background:url("logos/marcas.png") no-repeat;background-size:calc(var(--t) * 36) var(--t);background-position:calc(var(--i) * var(--t) * -1) 0}
 .trilho{display:flex;width:max-content;animation:rolar 40s linear infinite}
 .trilho ul{display:flex;list-style:none;margin:0;padding:0}
 .trilho li{font-family:var(--serif);font-size:1.25rem;padding:0 1.6rem;white-space:nowrap;color:var(--tinta-suave);display:flex;align-items:center;gap:3.2rem}
@@ -447,17 +447,17 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 
     <div class="capa-foto revelar">
       <!--
-        FOTO PRINCIPAL: arquivo foto-manu.jpg, na mesma pasta do index.html.
+        FOTO PRINCIPAL: arquivo fotos/foto-manu.jpg.
         Para trocar, substitua o arquivo por outra foto vertical 4:5 (1080x1350 px, até 250 KB).
         O degradê da parte de baixo é feito no CSS (.foto-capa), não precisa editar a imagem.
       -->
-      <img class="foto-capa" src="foto-manu.jpg" alt="Manu Melo sorrindo, de cabelo loiro ondulado, batom vermelho e blusa azul-marinho, com plantas ao fundo" width="1080" height="1350" fetchpriority="high">
+      <img class="foto-capa" src="fotos/foto-manu.jpg" alt="Manu Melo sorrindo, de cabelo loiro ondulado, batom vermelho e blusa azul-marinho, com plantas ao fundo" width="1080" height="1350" fetchpriority="high">
     </div>
   </div>
 
   <!--
     Faixa com as logos das marcas, em duas linhas que correm devagar.
-    As logos ficam todas em um arquivo só (marcas.png, fundo transparente), uma ao lado da outra, cada uma num quadrado de 80x80 px.
+    As logos ficam todas em um arquivo só (logos/marcas.png, fundo transparente), uma ao lado da outra, cada uma num quadrado de 80x80 px.
     Os nomes e a ordem ficam em MARCAS no script.
   -->
   <div class="faixa-marcas conteudo">
@@ -472,7 +472,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   <div class="objeto planta" aria-hidden="true"><span class="folha f4"></span><span class="folha f5"></span><span class="folha f1"></span><span class="folha f3"></span><span class="folha f2"></span><span class="vaso"></span></div>
   <div class="container sobre-grade conteudo">
     <!-- Galeria de fotos em carrossel (foto do meio em destaque, vizinhas nas laterais).
-         As fotos ficam em GALERIA no script (arquivos galeria-1.jpg a galeria-5.jpg, 800x1000 px) -->
+         As fotos ficam em GALERIA no script (arquivos fotos/galeria-1.jpg a fotos/galeria-5.jpg, 800x1000 px) -->
     <div class="carrossel revelar" role="region" aria-roledescription="carrossel" aria-label="Galeria de fotos da Manu">
       <div class="carrossel-trilho" id="carrossel-trilho" tabindex="0"></div>
       <button class="carrossel-btn anterior" type="button" id="foto-anterior" aria-label="Foto anterior">‹</button>
@@ -717,13 +717,13 @@ const DESTAQUES = [
   }
 ];
 
-/* Galeria de fotos do Sobre mim (carrossel). Fotos verticais 4:5, 800x1000 px, na mesma pasta do index.html */
+/* Galeria de fotos do Sobre mim (carrossel). Fotos verticais 4:5, 800x1000 px, dentro da pasta fotos */
 const GALERIA = [
-  { src: "galeria-1.jpg", alt: "Manu sorrindo e segurando um par de sandálias vermelhas Di Santinni" },
-  { src: "galeria-2.jpg", alt: "Manu cheirando uma toalha azul ao lado dos produtos Coala The Queen" },
-  { src: "galeria-3.jpg", alt: "Manu no sofá mostrando três pacotes de Lay's" },
-  { src: "galeria-4.jpg", alt: "Manu segurando uma caixa azul-marinho da Hoomy" },
-  { src: "galeria-5.jpg", alt: "Manu no carro mostrando o app Sem Parar no celular" }
+  { src: "fotos/galeria-1.jpg", alt: "Manu sorrindo e segurando um par de sandálias vermelhas Di Santinni" },
+  { src: "fotos/galeria-2.jpg", alt: "Manu cheirando uma toalha azul ao lado dos produtos Coala The Queen" },
+  { src: "fotos/galeria-3.jpg", alt: "Manu no sofá mostrando três pacotes de Lay's" },
+  { src: "fotos/galeria-4.jpg", alt: "Manu segurando uma caixa azul-marinho da Hoomy" },
+  { src: "fotos/galeria-5.jpg", alt: "Manu no carro mostrando o app Sem Parar no celular" }
 ];
 
 /* Nichos que aparecem como filtro (a ordem aqui é a ordem dos botões) */
