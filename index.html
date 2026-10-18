@@ -5,23 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Manu Melo | Portfólio UGC Creator</title>
 <meta name="description" content="Manu Melo, UGC Creator em Ananindeua. Vídeos que parecem conversa de amiga e vendem como anúncio. Mais de 500 vídeos e 300 marcas atendidas.">
-<meta name="theme-color" content="#b5563a">
+<meta name="theme-color" content="#597f9e">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============ CORES E BASE ============ */
 :root{
-  --linho:#f2e9dc;
+  --linho:#f2e6da;
   --linho-2:#e9dcc8;
   --papel:#fbf7f1;
-  --terracota:#b5563a;
-  --terracota-escura:#94432c;
-  --terracota-clara:#e7b9a4;
-  --oliva:#6d7a4c;
-  --oliva-escura:#525c37;
-  --tinta:#3a2a20;
-  --tinta-suave:#6a5546;
+  --azul:#597f9e;
+  --azul-escuro:#46677f;
+  --azul-claro:#c3d3df;
+  --marrom:#715342;
+  --marrom-escuro:#5a3f31;
+  --tinta:#462a21;
+  --tinta-suave:#6e5446;
   --sombra:0 18px 40px -18px rgba(74,48,30,.35);
   --sombra-leve:0 8px 22px -12px rgba(74,48,30,.28);
   --raio:18px;
@@ -51,39 +51,39 @@ img{max-width:100%;display:block}
 a{color:inherit}
 h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0}
 h2{font-size:clamp(2.1rem,5vw,3.4rem)}
-h2 em,h1 em{color:var(--terracota);font-style:italic}
+h2 em,h1 em{color:var(--azul);font-style:italic}
 p{margin:0 0 1rem}
 .container{width:min(1160px,100% - 32px);margin-inline:auto}
 section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 @supports (overflow:clip){ section{overflow:clip} }
-.olho{font-family:var(--mao);font-size:1.6rem;color:var(--oliva-escura);display:block;margin-bottom:.4rem;line-height:1.1}
+.olho{font-family:var(--mao);font-size:1.6rem;color:var(--marrom-escuro);display:block;margin-bottom:.4rem;line-height:1.1}
 .cabeca{max-width:640px;margin-bottom:clamp(40px,6vw,64px)}
 .cabeca p{color:var(--tinta-suave);margin-top:1rem}
 .pular{position:absolute;left:-999px;top:8px;background:var(--tinta);color:#fff;padding:10px 16px;border-radius:10px;z-index:200}
 .pular:focus{left:16px}
-:focus-visible{outline:3px solid var(--oliva);outline-offset:3px;border-radius:6px}
+:focus-visible{outline:3px solid var(--marrom);outline-offset:3px;border-radius:6px}
 
 /* ============ BOTÕES ============ */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
   font-family:var(--corpo);font-weight:500;font-size:1rem;
-  padding:.95rem 1.6rem;border-radius:999px;border:1.5px solid var(--terracota);
+  padding:.95rem 1.6rem;border-radius:999px;border:1.5px solid var(--azul);
   text-decoration:none;cursor:pointer;transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
 }
-.btn-cheio{background:var(--terracota);color:#fff;box-shadow:var(--sombra-leve)}
-.btn-cheio:hover{background:var(--terracota-escura);transform:translateY(-2px)}
-.btn-vazado{background:transparent;color:var(--terracota-escura)}
-.btn-vazado:hover{background:rgba(181,86,58,.08);transform:translateY(-2px)}
+.btn-cheio{background:var(--azul-escuro);border-color:var(--azul-escuro);color:#fff;box-shadow:var(--sombra-leve)}
+.btn-cheio:hover{background:#3a576d;transform:translateY(-2px)}
+.btn-vazado{background:transparent;color:var(--azul-escuro)}
+.btn-vazado:hover{background:rgba(89,127,158,.08);transform:translateY(-2px)}
 
 /* ============ MENU ============ */
 .topo{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .3s, box-shadow .3s}
-.topo.rolou{background:rgba(242,233,220,.92);box-shadow:0 6px 20px -14px rgba(74,48,30,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.topo.rolou{background:rgba(242,230,218,.92);box-shadow:0 6px 20px -14px rgba(74,48,30,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .topo .container{display:flex;align-items:center;justify-content:space-between;height:72px}
 .marca{font-family:var(--serif);font-size:1.45rem;text-decoration:none}
-.marca em{color:var(--terracota)}
+.marca em{color:var(--azul)}
 .menu ul{display:flex;gap:1.6rem;list-style:none;margin:0;padding:0}
 .menu a{text-decoration:none;font-weight:400;font-size:.98rem;position:relative;padding:4px 0}
-.menu a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--terracota);transition:width .3s}
+.menu a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--azul);transition:width .3s}
 .menu a:hover::after{width:100%}
 .hamburguer{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;position:relative}
 .hamburguer span,.hamburguer span::before,.hamburguer span::after{display:block;position:absolute;left:10px;width:24px;height:2px;background:var(--tinta);transition:transform .3s, opacity .3s;content:""}
@@ -102,7 +102,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .capa .frase{font-size:clamp(1.1rem,2.2vw,1.35rem);max-width:520px;color:var(--tinta-suave)}
 .botoes{display:flex;flex-wrap:wrap;gap:12px;margin:2rem 0 2.6rem}
 .numeros-capa{display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,48px);list-style:none;padding:0;margin:0}
-.numeros-capa strong{display:block;font-family:var(--serif);font-size:clamp(2rem,4vw,2.6rem);font-weight:400;color:var(--terracota-escura);line-height:1}
+.numeros-capa strong{display:block;font-family:var(--serif);font-size:clamp(2rem,4vw,2.6rem);font-weight:400;color:var(--azul-escuro);line-height:1}
 .numeros-capa span{font-size:.92rem;color:var(--tinta-suave)}
 
 /* foto com borda branca de recorte */
@@ -120,7 +120,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   background:
     radial-gradient(circle at 50% 38%, rgba(255,255,255,.45) 0 18%, transparent 19%),
     radial-gradient(ellipse at 50% 95%, rgba(255,255,255,.35) 0 38%, transparent 39%),
-    linear-gradient(160deg, #e7b9a4, #b5563a 60%, #7d3a26);
+    linear-gradient(160deg, #c3d3df, #597f9e 60%, #3c5468);
 }
 .foto-vazia .tag{background:rgba(255,255,255,.85);color:var(--tinta);font-size:.85rem;padding:.3rem .8rem;border-radius:99px;margin-bottom:14px;font-weight:400}
 .fita{position:absolute;width:110px;height:30px;background:rgba(214,196,160,.75);top:-14px;left:50%;transform:translateX(-50%) rotate(-4deg);box-shadow:0 2px 4px rgba(0,0,0,.06)}
@@ -128,7 +128,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 
 /* faixa fina das marcas */
 .faixa-marcas{padding:18px 0 22px;overflow:hidden}
-.faixa-marcas .rotulo{font-family:var(--mao);font-weight:500;font-size:1.5rem;color:var(--oliva-escura);text-align:center;margin:0 16px 10px}
+.faixa-marcas .rotulo{font-family:var(--mao);font-weight:500;font-size:1.5rem;color:var(--marrom-escuro);text-align:center;margin:0 16px 10px}
 /* logos: cada uma é um pedaço do arquivo marcas.png (36 quadrados lado a lado, fundo transparente) */
 .faixa-marcas .trilho-logos{--t:80px;animation-duration:120s}
 .faixa-marcas .trilho-logos + .trilho-logos{margin-top:10px}
@@ -139,7 +139,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .trilho{display:flex;width:max-content;animation:rolar 40s linear infinite}
 .trilho ul{display:flex;list-style:none;margin:0;padding:0}
 .trilho li{font-family:var(--serif);font-size:1.25rem;padding:0 1.6rem;white-space:nowrap;color:var(--tinta-suave);display:flex;align-items:center;gap:3.2rem}
-.trilho li::after{content:"✻";color:var(--terracota);font-size:.9rem;margin-left:1.6rem}
+.trilho li::after{content:"✻";color:var(--azul);font-size:.9rem;margin-left:1.6rem}
 @keyframes rolar{to{transform:translateX(-50%)}}
 
 /* ============ OBJETOS EM CSS PURO ============ */
@@ -152,12 +152,12 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .planta{width:110px;height:150px;--r:4deg}
 .planta .vaso{position:absolute;bottom:0;left:22px;width:66px;height:56px;background:linear-gradient(90deg,#a74d32,#c86a4c 55%,#a74d32);clip-path:polygon(0 0,100% 0,86% 100%,14% 100%);border-radius:4px}
 .planta .vaso::before{content:"";position:absolute;top:0;left:0;right:0;height:12px;background:#94432c}
-.planta .folha{position:absolute;width:30px;height:62px;background:linear-gradient(90deg,var(--oliva-escura),var(--oliva));border-radius:50% 50% 50% 50%/60% 60% 40% 40%;bottom:46px;left:40px;transform-origin:bottom center}
+.planta .folha{position:absolute;width:30px;height:62px;background:linear-gradient(90deg,var(--marrom-escuro),var(--marrom));border-radius:50% 50% 50% 50%/60% 60% 40% 40%;bottom:46px;left:40px;transform-origin:bottom center}
 .planta .f1{transform:rotate(-38deg)}
 .planta .f2{transform:rotate(0deg);height:78px}
 .planta .f3{transform:rotate(36deg)}
-.planta .f4{transform:rotate(-70deg);height:44px;background:#86935f}
-.planta .f5{transform:rotate(68deg);height:46px;background:#86935f}
+.planta .f4{transform:rotate(-70deg);height:44px;background:#8fa06a}
+.planta .f5{transform:rotate(68deg);height:46px;background:#8fa06a}
 /* xícara de café vista de cima */
 .xicara{width:116px;height:116px;--r:10deg}
 .xicara .pires{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#fbf7f1 0 58%,#efe4d4 59% 100%);box-shadow:var(--sombra-leve)}
@@ -169,10 +169,10 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .envelope::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom right,transparent 49.5%,#e6d7c2 50%) left/50% 100% no-repeat,linear-gradient(to bottom left,transparent 49.5%,#e6d7c2 50%) right/50% 100% no-repeat}
 .envelope::after{content:"";position:absolute;left:0;right:0;top:0;height:62px;background:#efe3d1;clip-path:polygon(0 0,100% 0,50% 100%)}
 .envelope .selo{position:absolute;left:61px;top:44px;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle,#c86a4c,#94432c);z-index:2;box-shadow:0 2px 3px rgba(0,0,0,.2)}
-.envelope .selo-postal{position:absolute;right:10px;top:8px;width:26px;height:30px;background:var(--oliva);outline:2px dotted #fbf7f1;outline-offset:-4px;z-index:3}
+.envelope .selo-postal{position:absolute;right:10px;top:8px;width:26px;height:30px;background:var(--marrom);outline:2px dotted #fbf7f1;outline-offset:-4px;z-index:3}
 
 /* posições dos objetos */
-.capa .xicara{left:-30px;bottom:300px;animation-delay:-5s}
+.capa .xicara{left:-58px;bottom:-26px;z-index:3;animation-delay:-5s}
 .sobre .planta{right:3%;bottom:40px;animation-delay:-1s}
 .contato .envelope{right:4%;top:60px;animation-delay:-3s}
 .servicos .xicara{left:2%;bottom:40px;animation-delay:-6s;opacity:.95}
@@ -184,9 +184,9 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .sobre .texto p{font-size:1.1rem}
 .promessas{list-style:none;padding:0;margin:1.6rem 0;display:grid;gap:12px}
 .promessas li{display:flex;gap:14px;align-items:flex-start;background:rgba(251,247,241,.75);padding:14px 18px;border-radius:14px;box-shadow:var(--sombra-leve)}
-.promessas .check{flex:0 0 28px;height:28px;border-radius:50%;background:var(--oliva);color:#fff;display:grid;place-items:center;font-size:.9rem;font-weight:600;margin-top:2px}
+.promessas .check{flex:0 0 28px;height:28px;border-radius:50%;background:var(--marrom);color:#fff;display:grid;place-items:center;font-size:.9rem;font-weight:600;margin-top:2px}
 .promessas strong{font-weight:500}
-.assinatura{font-family:var(--mao);font-size:2.6rem;color:var(--terracota-escura);line-height:1;margin-top:1.4rem;transform:rotate(-3deg);display:inline-block}
+.assinatura{font-family:var(--mao);font-size:2.6rem;color:var(--azul-escuro);line-height:1;margin-top:1.4rem;transform:rotate(-3deg);display:inline-block}
 
 /* ============ DESTAQUES ============ */
 .destaques-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,36px)}
@@ -198,20 +198,20 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .video .tag{position:relative;z-index:1;background:rgba(255,255,255,.88);font-size:.82rem;padding:.3rem .8rem;border-radius:99px;margin-bottom:14px;font-weight:400}
 .play{position:absolute;inset:0;margin:auto;width:70px;height:70px;border-radius:50%;background:rgba(251,247,241,.92);display:grid;place-items:center;box-shadow:0 10px 26px -8px rgba(0,0,0,.4);transition:transform .3s;z-index:1}
-.play::before{content:"";margin-left:6px;border-left:20px solid var(--terracota);border-top:13px solid transparent;border-bottom:13px solid transparent}
+.play::before{content:"";margin-left:6px;border-left:20px solid var(--azul);border-top:13px solid transparent;border-bottom:13px solid transparent}
 .destaque:hover .play{transform:scale(1.1)}
 .destaque .info{padding:18px 8px 0}
-.destaque .numero{font-family:var(--serif);font-size:2.6rem;color:var(--terracota-escura);line-height:1}
-.destaque .rotulo{font-family:var(--mao);font-size:1.35rem;color:var(--oliva-escura);display:block;margin-bottom:.6rem}
+.destaque .numero{font-family:var(--serif);font-size:2.6rem;color:var(--azul-escuro);line-height:1}
+.destaque .rotulo{font-family:var(--mao);font-size:1.35rem;color:var(--marrom-escuro);display:block;margin-bottom:.6rem}
 .destaque h3{font-size:1.4rem;margin-bottom:.3rem}
 .destaque .contexto{color:var(--tinta-suave);font-size:.96rem;margin:0}
-.destaque .abrir{display:inline-block;margin-top:.8rem;font-weight:500;color:var(--terracota-escura);font-size:.95rem}
+.destaque .abrir{display:inline-block;margin-top:.8rem;font-weight:500;color:var(--azul-escuro);font-size:.95rem}
 
 /* ============ TRABALHOS ============ */
 .filtros{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px}
 .filtro{font-family:var(--corpo);font-size:.95rem;font-weight:400;padding:.55rem 1.15rem;border-radius:999px;border:1.5px solid rgba(58,42,32,.25);background:rgba(251,247,241,.6);color:var(--tinta);cursor:pointer;transition:all .25s}
-.filtro:hover{border-color:var(--terracota)}
-.filtro[aria-pressed="true"]{background:var(--terracota);border-color:var(--terracota);color:#fff}
+.filtro:hover{border-color:var(--azul)}
+.filtro[aria-pressed="true"]{background:var(--azul-escuro);border-color:var(--azul-escuro);color:#fff}
 .galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px;list-style:none;padding:0;margin:0}
 .trabalho{background:#fff;padding:10px 10px 16px;border-radius:6px;box-shadow:var(--sombra-leve);transition:transform .3s;animation:surgir .45s ease both}
 .trabalho:nth-child(odd){transform:rotate(-1deg)}
@@ -219,22 +219,22 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .trabalho:hover{transform:rotate(0) translateY(-4px)}
 .trabalho a{text-decoration:none;display:block}
 .trabalho .foto{aspect-ratio:4/5}
-.trabalho .nicho{font-family:var(--mao);font-size:1.25rem;color:var(--oliva-escura);display:block;margin-top:8px;line-height:1.1}
+.trabalho .nicho{font-family:var(--mao);font-size:1.25rem;color:var(--marrom-escuro);display:block;margin-top:8px;line-height:1.1}
 .trabalho h3{font-family:var(--corpo);font-weight:500;font-size:1.02rem;line-height:1.35;margin-top:2px}
 .trabalho .formato{font-size:.85rem;color:var(--tinta-suave)}
 @keyframes surgir{from{opacity:0;transform:translateY(12px)}}
 .vazio{color:var(--tinta-suave);font-style:italic}
 
 /* ============ SERVIÇOS ============ */
-.faixa-servicos{background:var(--terracota);color:#fff;padding:18px 0;overflow:hidden;transform:rotate(-1.2deg);margin:0 -20px clamp(56px,8vw,90px);box-shadow:var(--sombra-leve)}
+.faixa-servicos{background:var(--azul);color:#fff;padding:18px 0;overflow:hidden;transform:rotate(-1.2deg);margin:0 -20px clamp(56px,8vw,90px);box-shadow:var(--sombra-leve)}
 .faixa-servicos .trilho{animation-duration:32s}
 .faixa-servicos li{color:#fff;font-family:var(--serif);font-style:italic;font-size:1.5rem}
-.faixa-servicos li::after{color:var(--terracota-clara)}
+.faixa-servicos li::after{color:var(--azul-claro)}
 .servicos{overflow:hidden}
 .servicos-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;list-style:none;padding:0;margin:0}
 .servico{background:rgba(251,247,241,.82);border-radius:var(--raio);padding:32px 28px;box-shadow:var(--sombra-leve);border:1px solid rgba(58,42,32,.06);transition:transform .3s, box-shadow .3s}
 .servico:hover{transform:translateY(-4px);box-shadow:var(--sombra)}
-.servico .num{font-family:var(--mao);font-size:2rem;color:var(--terracota);line-height:1}
+.servico .num{font-family:var(--mao);font-size:2rem;color:var(--azul);line-height:1}
 .servico h3{font-size:1.55rem;margin:.6rem 0 .5rem}
 .servico p{color:var(--tinta-suave);margin:0;font-size:1rem}
 
@@ -242,11 +242,11 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .numeros{background:linear-gradient(180deg,rgba(109,122,76,.08),rgba(109,122,76,.16))}
 .metricas{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;list-style:none;padding:0;margin:0 0 clamp(56px,8vw,90px)}
 .metrica{text-align:center;padding:28px 16px;border-radius:var(--raio);background:var(--papel);box-shadow:var(--sombra-leve)}
-.metrica strong{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,5vw,3.6rem);color:var(--terracota-escura);line-height:1}
+.metrica strong{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,5vw,3.6rem);color:var(--azul-escuro);line-height:1}
 .metrica span{font-size:.98rem;color:var(--tinta-suave)}
-.subtitulo{font-family:var(--mao);font-size:1.9rem;color:var(--oliva-escura);margin:0 0 20px;line-height:1.1}
+.subtitulo{font-family:var(--mao);font-size:1.9rem;color:var(--marrom-escuro);margin:0 0 20px;line-height:1.1}
 .resultados{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;list-style:none;padding:0;margin:0 0 clamp(56px,8vw,90px)}
-.resultado{background:var(--oliva);color:#fff;padding:28px;border-radius:var(--raio);box-shadow:var(--sombra-leve)}
+.resultado{background:var(--marrom);color:#fff;padding:28px;border-radius:var(--raio);box-shadow:var(--sombra-leve)}
 .resultado strong{display:block;font-family:var(--serif);font-weight:400;font-size:2.6rem;line-height:1}
 .resultado .o-que{display:block;font-weight:500;margin:.3rem 0 .6rem}
 .resultado p{margin:0;font-size:.97rem;opacity:.95}
@@ -254,9 +254,9 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .depoimento{background:#fff;padding:30px 30px 26px;border-radius:6px;box-shadow:var(--sombra-leve);position:relative}
 .depoimento:nth-child(odd){transform:rotate(-.6deg)}
 .depoimento:nth-child(even){transform:rotate(.6deg)}
-.depoimento::before{content:"“";position:absolute;top:-6px;left:22px;font-family:var(--serif);font-size:5rem;color:var(--terracota-clara);line-height:1}
+.depoimento::before{content:"“";position:absolute;top:-6px;left:22px;font-family:var(--serif);font-size:5rem;color:var(--azul-claro);line-height:1}
 .depoimento blockquote{margin:16px 0 18px;font-size:1.05rem}
-.depoimento figcaption{font-family:var(--mao);font-size:1.4rem;line-height:1.2;color:var(--terracota-escura)}
+.depoimento figcaption{font-family:var(--mao);font-size:1.4rem;line-height:1.2;color:var(--azul-escuro)}
 .depoimento figcaption span{display:block;font-family:var(--corpo);font-size:.9rem;color:var(--tinta-suave)}
 
 /* ============ CONTATO ============ */
@@ -266,10 +266,10 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .campo label{font-weight:500;font-size:.95rem}
 .campo input,.campo textarea{font-family:var(--corpo);font-size:1rem;font-weight:300;color:var(--tinta);padding:.85rem 1rem;border-radius:12px;border:1.5px solid rgba(58,42,32,.2);background:#fff;width:100%}
 .campo textarea{min-height:140px;resize:vertical}
-.campo input:focus,.campo textarea:focus{border-color:var(--terracota);outline:3px solid rgba(181,86,58,.25);outline-offset:0}
+.campo input:focus,.campo textarea:focus{border-color:var(--azul);outline:3px solid rgba(89,127,158,.25);outline-offset:0}
 .confirmacao{display:none;text-align:center;padding:20px 0}
 .confirmacao.ativa{display:block}
-.confirmacao .grande{font-family:var(--serif);font-size:2rem;color:var(--terracota-escura);margin-bottom:.4rem}
+.confirmacao .grande{font-family:var(--serif);font-size:2rem;color:var(--azul-escuro);margin-bottom:.4rem}
 .canais{display:grid;gap:14px}
 .canal{display:flex;align-items:center;gap:16px;text-decoration:none;background:rgba(251,247,241,.82);padding:18px 20px;border-radius:16px;box-shadow:var(--sombra-leve);transition:transform .25s}
 .canal:hover{transform:translateX(6px)}
@@ -277,20 +277,20 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .canal .icone svg{width:22px;height:22px}
 .canal strong{display:block;font-weight:500}
 .canal span{font-size:.92rem;color:var(--tinta-suave);word-break:break-word}
-.bg-terracota{background:var(--terracota)}
-.bg-oliva{background:var(--oliva)}
+.bg-azul{background:var(--azul)}
+.bg-marrom{background:var(--marrom)}
 .bg-tinta{background:var(--tinta)}
-.nota-mao{font-family:var(--mao);font-size:1.45rem;color:var(--oliva-escura);margin-top:18px;transform:rotate(-2deg)}
+.nota-mao{font-family:var(--mao);font-size:1.45rem;color:var(--marrom-escuro);margin-top:18px;transform:rotate(-2deg)}
 
 /* ============ RODAPÉ ============ */
 .rodape{background:var(--tinta);color:var(--linho);padding:56px 0 36px}
 .rodape .container{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
 .rodape .marca{color:var(--linho);font-size:1.8rem}
-.rodape .marca em{color:var(--terracota-clara)}
+.rodape .marca em{color:var(--azul-claro)}
 .redes{display:flex;gap:18px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
-.redes a{text-decoration:none;color:var(--linho);border-bottom:1px solid rgba(242,233,220,.35)}
-.redes a:hover{border-color:var(--terracota-clara)}
-.rodape small{display:block;width:100%;color:rgba(242,233,220,.7);font-size:.9rem;padding-top:22px;border-top:1px solid rgba(242,233,220,.15)}
+.redes a{text-decoration:none;color:var(--linho);border-bottom:1px solid rgba(242,230,218,.35)}
+.redes a:hover{border-color:var(--azul-claro)}
+.rodape small{display:block;width:100%;color:rgba(242,230,218,.7);font-size:.9rem;padding-top:22px;border-top:1px solid rgba(242,230,218,.15)}
 
 /* ============ CARD DE CAPTURA ============ */
 .modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:16px}
@@ -302,7 +302,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .modal .fechar{position:absolute;top:12px;right:12px;width:42px;height:42px;border-radius:50%;border:0;background:var(--linho);font-size:1.5rem;line-height:1;cursor:pointer;color:var(--tinta)}
 .modal .fechar:hover{background:var(--linho-2)}
 .modal .btn{width:100%}
-.modal .carimbinho{position:absolute;top:18px;left:26px;background:var(--oliva);color:#fff;font-family:var(--mao);font-size:1.3rem;padding:.2rem 1rem;border-radius:8px;transform:rotate(-4deg)}
+.modal .carimbinho{position:absolute;top:18px;left:26px;background:var(--marrom);color:#fff;font-family:var(--mao);font-size:1.3rem;padding:.2rem 1rem;border-radius:8px;transform:rotate(-4deg)}
 @keyframes entrar{from{opacity:0;transform:translateY(20px) scale(.97)}}
 
 /* ============ ANIMAÇÃO DE ENTRADA ============ */
@@ -388,8 +388,6 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 
 <!-- ============ 1. CAPA ============ -->
 <section class="capa" id="capa" aria-labelledby="titulo-capa">
-  <div class="objeto xicara" aria-hidden="true"><span class="pires"></span><span class="copo"></span><span class="alca"></span><span class="vapor"></span></div>
-
   <div class="container capa-grade conteudo">
     <div class="revelar">
       <span class="olho">Portfólio UGC - Influencer - Shop Creator</span>
@@ -413,6 +411,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
         <div class="foto"><img src="foto-manu.jpg" alt="Manu Melo sorrindo, de óculos e blusa rosa, segurando uma caneca azul na sala de casa" width="800" height="1000" fetchpriority="high"></div>
         <figcaption class="legenda">oi, eu sou a Manu!</figcaption>
       </figure>
+      <div class="objeto xicara" aria-hidden="true"><span class="pires"></span><span class="copo"></span><span class="alca"></span><span class="vapor"></span></div>
     </div>
   </div>
 
@@ -438,7 +437,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
         FOTO DO SOBRE: troque a div abaixo por
         <div class="foto"><img src="foto-sobre.jpg" alt="Manu Melo gravando um vídeo em casa" width="800" height="1000" loading="lazy"></div>
       -->
-      <div class="foto foto-vazia" role="img" aria-label="Espaço para a foto da Manu gravando" style="background:radial-gradient(circle at 50% 38%,rgba(255,255,255,.4) 0 18%,transparent 19%),linear-gradient(160deg,#c9d0b0,#6d7a4c 60%,#3f4829)"><span class="tag">foto de bastidor 4:5</span></div>
+      <div class="foto foto-vazia" role="img" aria-label="Espaço para a foto da Manu gravando" style="background:radial-gradient(circle at 50% 38%,rgba(255,255,255,.4) 0 18%,transparent 19%),linear-gradient(160deg,#e3d3c4,#8a6f5c 60%,#5a3f31)"><span class="tag">foto de bastidor 4:5</span></div>
       <figcaption class="legenda">bastidores do meu cantinho</figcaption>
     </figure>
 
@@ -550,7 +549,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
             <label for="mensagem">Mensagem</label>
             <textarea id="mensagem" name="mensagem" required placeholder="Conta um pouco sobre a marca, o produto e o prazo"></textarea>
           </div>
-          <p id="erro-form" role="alert" style="color:var(--terracota-escura);font-weight:500;margin:0 0 12px"></p>
+          <p id="erro-form" role="alert" style="color:var(--azul-escuro);font-weight:500;margin:0 0 12px"></p>
           <button type="submit" class="btn btn-cheio" style="width:100%">Enviar mensagem</button>
         </form>
         <div class="confirmacao" id="confirmacao" role="status" aria-live="polite" tabindex="-1">
@@ -563,11 +562,11 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
       <div class="revelar">
         <div class="canais">
           <a class="canal" href="https://wa.me/5591985954040?text=Oi%20Manu!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar%20sobre%20um%20conte%C3%BAdo." target="_blank" rel="noopener">
-            <span class="icone bg-oliva" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg></span>
+            <span class="icone bg-marrom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg></span>
             <span><strong>WhatsApp</strong><span>(91) 98595-4040</span></span>
           </a>
           <a class="canal" href="mailto:manumelougc@gmail.com">
-            <span class="icone bg-terracota" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+            <span class="icone bg-azul" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
             <span><strong>E-mail</strong><span>manumelougc@gmail.com</span></span>
           </a>
           <a class="canal" href="https://www.instagram.com/manumelo_b/" target="_blank" rel="noopener">
@@ -615,7 +614,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
           <label for="kit-email">E-mail</label>
           <input id="kit-email" name="email" type="email" autocomplete="email" required>
         </div>
-        <p id="erro-kit" role="alert" style="color:var(--terracota-escura);font-weight:500;margin:0 0 12px"></p>
+        <p id="erro-kit" role="alert" style="color:var(--azul-escuro);font-weight:500;margin:0 0 12px"></p>
         <button type="submit" class="btn btn-cheio">Quero receber</button>
       </form>
     </div>
@@ -660,7 +659,7 @@ const DESTAQUES = [
     rotulo: "views no reels (troque pelo número real)",
     titulo: "Título do conteúdo 01",
     contexto: "Uma linha de contexto: marca, objetivo e formato do vídeo.",
-    cor: ["#e7b9a4", "#b5563a", "#7d3a26"]
+    cor: ["#c3d3df", "#597f9e", "#3c5468"]
   },
   {
     link: "https://www.instagram.com/p/DeUrdmDtZ7e/",
@@ -669,7 +668,7 @@ const DESTAQUES = [
     rotulo: "views no reels (troque pelo número real)",
     titulo: "Título do conteúdo 02",
     contexto: "Uma linha de contexto: marca, objetivo e formato do vídeo.",
-    cor: ["#d7dcc0", "#6d7a4c", "#3f4829"]
+    cor: ["#e3d3c4", "#8a6f5c", "#5a3f31"]
   },
   {
     link: "https://www.instagram.com/p/DdMDqCnNYGW/",
@@ -684,29 +683,101 @@ const DESTAQUES = [
 
 /* Nichos que aparecem como filtro (a ordem aqui é a ordem dos botões) */
 const NICHOS = [
-  "Beleza", "Skincare", "Moda", "Comida", "Casa e decoração",
-  "Fitness", "Maternidade", "Pet", "Tech"
+  "Autocuidado", "Maternidade", "Saúde e bem-estar", "Moda e calçados", "Acessórios",
+  "Casa, decor e limpeza", "Gastronomia", "Pet", "Experiências", "Tech"
 ];
 
-/* Trabalhos da galeria
-   nicho: precisa ser igual a um dos NICHOS acima
-   link:  endereço do vídeo ou post ("#" se ainda não tiver)
-   capa:  imagem vertical 4:5 (ex.: "trabalho-1.jpg"). Vazio = bloco com degradê */
+/* Trabalhos da galeria (vindos do portfólio no Canva)
+   nicho:   precisa ser igual a um dos NICHOS acima
+   formato: o tipo de conteúdo (ex.: "Antes e depois", "Problema x solução")
+   link:    endereço do vídeo ou post ("#" se ainda não tiver)
+   capa:    imagem vertical 4:5 (ex.: "trabalho-1.jpg"). Vazio = bloco com degradê */
+const T = (nicho, titulo, formato = "Vídeo UGC") => ({ nicho, titulo, formato, link: "#", capa: "" });
 const TRABALHOS = [
-  { titulo: "Rotina de maquiagem para o dia a dia", nicho: "Beleza",            formato: "Reels 9:16",        link: "#", capa: "" },
-  { titulo: "Finalização de cabelo em 3 passos",     nicho: "Beleza",            formato: "Vídeo para anúncio", link: "#", capa: "" },
-  { titulo: "Skincare noturno sem complicação",      nicho: "Skincare",          formato: "Reels 9:16",        link: "#", capa: "" },
-  { titulo: "Primeiras impressões de um sérum",      nicho: "Skincare",          formato: "Depoimento UGC",    link: "#", capa: "" },
-  { titulo: "Três looks com a mesma peça",           nicho: "Moda",              formato: "Reels 9:16",        link: "#", capa: "" },
-  { titulo: "Lanche da tarde em 5 minutos",          nicho: "Comida",            formato: "Receita UGC",       link: "#", capa: "" },
-  { titulo: "Provando o snack novo",                 nicho: "Comida",            formato: "Reação UGC",        link: "#", capa: "" },
-  { titulo: "Dia de faxina com cheirinho bom",       nicho: "Casa e decoração",  formato: "Antes e depois",    link: "#", capa: "" },
-  { titulo: "Cantinho de leitura repaginado",        nicho: "Casa e decoração",  formato: "Fotos do produto",  link: "#", capa: "" },
-  { titulo: "Treino rápido em casa",                 nicho: "Fitness",           formato: "Reels 9:16",        link: "#", capa: "" },
-  { titulo: "Bolsa da maternidade organizada",       nicho: "Maternidade",       formato: "Unboxing",          link: "#", capa: "" },
-  { titulo: "Reação do pet ao brinquedo novo",       nicho: "Pet",               formato: "Vídeo UGC",         link: "#", capa: "" },
-  { titulo: "Unboxing da capinha do celular",        nicho: "Tech",              formato: "Unboxing",          link: "#", capa: "" },
-  { titulo: "App que facilitou a minha rotina",      nicho: "Tech",              formato: "Vídeo para anúncio", link: "#", capa: "" }
+  T("Autocuidado", "Lavando o cabelo", "Antes e depois"),
+  T("Autocuidado", "GHK-Cu", "Problema x solução"),
+  T("Autocuidado", "Skincare", "Storytelling de rotina real"),
+  T("Autocuidado", "Sérum Biomarine", "Conteúdo sensorial"),
+  T("Autocuidado", "Cabelo encorpado", "Teste de nó"),
+  T("Autocuidado", "Máscara de hidratação", "Conteúdo educativo"),
+  T("Autocuidado", "Cabelo protegido do sol", "Conteúdo sensorial"),
+  T("Autocuidado", "Rímel de tratamento", "TikTok Shop"),
+  T("Autocuidado", "Creme para pentear Seda + Kibon"),
+  T("Autocuidado", "Batom"),
+
+  T("Maternidade", "Babador impermeável"),
+  T("Maternidade", "Arrumando a mochila com Bepantol"),
+  T("Maternidade", "Organizador de brinquedos"),
+  T("Maternidade", "Fraldas"),
+  T("Maternidade", "Joias mãe e filha"),
+
+  T("Saúde e bem-estar", "Creatina"),
+  T("Saúde e bem-estar", "Suplemento", "Problema x solução"),
+  T("Saúde e bem-estar", "Barra de whey proteica"),
+  T("Saúde e bem-estar", "Óleo essencial"),
+  T("Saúde e bem-estar", "Vitaminas DayShot + Ômega 3"),
+  T("Saúde e bem-estar", "Suplemento capilar", "Problema x solução"),
+  T("Saúde e bem-estar", "Emagrecimento"),
+  T("Saúde e bem-estar", "Bebida proteica"),
+
+  T("Moda e calçados", "Moda praia"),
+  T("Moda e calçados", "Roupa fitness"),
+  T("Moda e calçados", "Moda feminina"),
+  T("Moda e calçados", "Palmilha ortopédica"),
+  T("Moda e calçados", "Campanha", "TikTok Shop"),
+  T("Moda e calçados", "Sandália anatômica"),
+  T("Moda e calçados", "Camisa básica"),
+  T("Moda e calçados", "Moda street"),
+  T("Moda e calçados", "Loja de calçados"),
+  T("Moda e calçados", "Cinta modeladora"),
+
+  T("Acessórios", "Acessório folheado", "Arrume-se comigo"),
+  T("Acessórios", "Semijoias"),
+  T("Acessórios", "Semijoias", "Conteúdo para ads"),
+  T("Acessórios", "Óculos", "Lançamento"),
+  T("Acessórios", "Joias mãe e filha"),
+
+  T("Casa, decor e limpeza", "Toalha de banho", "Dia da Mulher"),
+  T("Casa, decor e limpeza", "Kit Coala", "Problema x solução"),
+  T("Casa, decor e limpeza", "Tira-manchas de estofados", "Antes e depois"),
+  T("Casa, decor e limpeza", "Vela aromática", "Conteúdo sensorial"),
+  T("Casa, decor e limpeza", "Toalhas", "Lo-fi e nativo"),
+  T("Casa, decor e limpeza", "Luminária decorativa", "Vlog"),
+  T("Casa, decor e limpeza", "Teste de toalha Hoomy", "Comparativo"),
+  T("Casa, decor e limpeza", "Amaciante", "Lançamento"),
+  T("Casa, decor e limpeza", "Cama Ortobom", "Storytelling"),
+
+  T("Gastronomia", "Presenteando com chocolate"),
+  T("Gastronomia", "Receita com Super Dicer"),
+  T("Gastronomia", "Receita para bebê"),
+  T("Gastronomia", "Refeição saudável"),
+  T("Gastronomia", "Bebida proteica na rotina"),
+  T("Gastronomia", "Rotina e café"),
+  T("Gastronomia", "Pão de alho"),
+  T("Gastronomia", "Pão sem glúten"),
+  T("Gastronomia", "Lay's", "Lançamento"),
+
+  T("Pet", "Banho pet"),
+  T("Pet", "Bebedouro pet"),
+  T("Pet", "Tratamento de otite canina"),
+  T("Pet", "Cuidado oral diário"),
+
+  T("Experiências", "SmartZoo", "Shopping"),
+  T("Experiências", "Restaurante praiano"),
+  T("Experiências", "Restaurante fitness"),
+  T("Experiências", "Passeio cultural"),
+  T("Experiências", "Estética corporal e facial"),
+
+  T("Tech", "App de IA"),
+  T("Tech", "Máquina de cartão", "Conteúdo financeiro"),
+  T("Tech", "React ML + BBB"),
+  T("Tech", "Grupo de promoção"),
+  T("Tech", "Aplicativo de namoro"),
+  T("Tech", "App de resumo de livros"),
+  T("Tech", "App de controle financeiro"),
+  T("Tech", "Programa para criadores de conteúdo"),
+  T("Tech", "App de motorista", "Topo de funil"),
+  T("Tech", "Empréstimo CLT", "Fundo de funil")
 ];
 
 /* Serviços (seis cards) */
@@ -754,9 +825,9 @@ const $ = (s) => document.querySelector(s);
 
 /* Gradientes por nicho para os blocos sem foto */
 const CORES_NICHO = {
-  "Beleza": ["#f1c9b6", "#c8735a"], "Skincare": ["#f3e1cf", "#d39a77"], "Moda": ["#e3c7b5", "#8c4a36"],
-  "Comida": ["#f0d39e", "#c9763e"], "Casa e decoração": ["#dfd6c3", "#8b7a5c"], "Fitness": ["#d2d9b8", "#6d7a4c"],
-  "Maternidade": ["#f2d6cc", "#b98572"], "Pet": ["#e6d2b0", "#9a6b3e"], "Tech": ["#cfd1c9", "#56594d"]
+  "Autocuidado": ["#f1d6cc", "#b98572"], "Maternidade": ["#dfe7ee", "#7f9cb5"], "Saúde e bem-estar": ["#e3e4d2", "#8c9472"],
+  "Moda e calçados": ["#e8d6c8", "#8a6f5c"], "Acessórios": ["#efe0c8", "#b08d5c"], "Casa, decor e limpeza": ["#e6dccf", "#9a8670"],
+  "Gastronomia": ["#f0d9b8", "#b98150"], "Pet": ["#e6d2b0", "#9a6b3e"], "Experiências": ["#d9e2ea", "#597f9e"], "Tech": ["#d3d8dd", "#4f5d6a"]
 };
 
 function formatar(n, decimais) {
@@ -805,7 +876,7 @@ $("#destaques-grade").innerHTML = DESTAQUES.map((d, i) => {
 /* Trabalhos com filtro por nicho */
 const filtrosEl = $("#filtros");
 const galeriaEl = $("#galeria");
-filtrosEl.innerHTML = ["Todos", ...NICHOS].map((n, i) =>
+filtrosEl.innerHTML = [...NICHOS, "Todos"].map((n, i) =>
   `<button type="button" class="filtro" data-nicho="${n}" aria-pressed="${i === 0}">${n}</button>`
 ).join("");
 
@@ -816,7 +887,7 @@ function mostrarTrabalhos(nicho) {
     return;
   }
   galeriaEl.innerHTML = lista.map((t, i) => {
-    const c = CORES_NICHO[t.nicho] || ["#efd9c0", "#b5563a"];
+    const c = CORES_NICHO[t.nicho] || ["#dfe7ee", "#597f9e"];
     const capa = t.capa
       ? `<div class="foto"><img src="${t.capa}" alt="${t.titulo}" loading="lazy" width="400" height="500"></div>`
       : `<div class="foto foto-vazia" role="img" aria-label="Espaço para a capa do trabalho ${t.titulo}" style="background:linear-gradient(160deg, ${c[0]}, ${c[1]})"><span class="tag">capa 4:5</span></div>`;
@@ -836,7 +907,7 @@ filtrosEl.addEventListener("click", (e) => {
   filtrosEl.querySelectorAll(".filtro").forEach(b => b.setAttribute("aria-pressed", b === btn));
   mostrarTrabalhos(btn.dataset.nicho);
 });
-mostrarTrabalhos("Todos");
+mostrarTrabalhos(NICHOS[0]);
 
 /* Serviços */
 $("#servicos-grade").innerHTML = SERVICOS.map((s, i) =>
