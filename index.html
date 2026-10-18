@@ -104,8 +104,8 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 
 /* ============ CAPA ============ */
 .capa{padding-top:calc(120px + var(--barra));padding-bottom:0;min-height:100vh;display:flex;flex-direction:column}
-.capa-grade{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,72px);align-items:center;flex:1;padding-bottom:64px}
-.capa h1{font-size:clamp(2.5rem,6vw,4.9rem);letter-spacing:-.01em;margin:.2rem 0 1.2rem}
+.capa-grade{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center;flex:1;padding-bottom:64px}
+.capa h1{font-size:clamp(2.5rem,4.4vw,4.2rem);letter-spacing:-.01em;margin:.2rem 0 1.2rem}
 .capa h1 em{display:block}
 .capa .frase{font-size:clamp(1.1rem,2.2vw,1.35rem);max-width:520px;color:var(--tinta-suave)}
 .botoes{display:flex;flex-wrap:wrap;gap:12px;margin:2rem 0 2.6rem}
@@ -132,7 +132,11 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 }
 .foto-vazia .tag{background:rgba(255,255,255,.85);color:var(--tinta);font-size:.85rem;padding:.3rem .8rem;border-radius:99px;margin-bottom:14px;font-weight:400}
 .fita{position:absolute;width:110px;height:30px;background:rgba(214,196,160,.75);top:-14px;left:50%;transform:translateX(-50%) rotate(-4deg);box-shadow:0 2px 4px rgba(0,0,0,.06)}
-.capa-foto{position:relative;max-width:420px;justify-self:center;width:100%}
+.capa-foto{position:relative;max-width:540px;justify-self:center;width:100%}
+/* foto da capa sem moldura, com a parte de baixo sumindo em degradê */
+.foto-capa{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:28px 28px 0 0;
+  -webkit-mask-image:linear-gradient(to bottom,#000 62%,rgba(0,0,0,.6) 80%,transparent 100%);
+          mask-image:linear-gradient(to bottom,#000 62%,rgba(0,0,0,.6) 80%,transparent 100%)}
 
 /* faixa fina das marcas */
 .faixa-marcas{padding:18px 0 22px;overflow:hidden}
@@ -325,7 +329,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 /* ============ RESPONSIVO ============ */
 @media (max-width:980px){
   .capa-grade,.sobre-grade,.contato-grade{grid-template-columns:1fr}
-  .capa-foto{max-width:360px;margin-top:10px}
+  .capa-foto{max-width:440px;margin-top:10px}
   .servicos-grade{grid-template-columns:repeat(2,1fr)}
   .metricas{grid-template-columns:repeat(2,1fr)}
   .resultados{grid-template-columns:1fr}
@@ -428,15 +432,12 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
     </div>
 
     <div class="capa-foto revelar">
-      <figure class="recorte" style="margin:0">
-        <span class="fita" aria-hidden="true"></span>
-        <!--
-          FOTO PRINCIPAL: arquivo foto-manu.jpg, na mesma pasta do index.html.
-          Para trocar, substitua o arquivo por outra foto vertical 4:5 (800x1000 px, até 200 KB).
-        -->
-        <div class="foto"><img src="foto-manu.jpg" alt="Manu Melo sorrindo, de cabelo loiro ondulado, batom vermelho e blusa azul-marinho, com plantas ao fundo" width="800" height="1000" fetchpriority="high"></div>
-        <figcaption class="legenda">oi, eu sou a Manu!</figcaption>
-      </figure>
+      <!--
+        FOTO PRINCIPAL: arquivo foto-manu.jpg, na mesma pasta do index.html.
+        Para trocar, substitua o arquivo por outra foto vertical 4:5 (1080x1350 px, até 250 KB).
+        O degradê da parte de baixo é feito no CSS (.foto-capa), não precisa editar a imagem.
+      -->
+      <img class="foto-capa" src="foto-manu.jpg" alt="Manu Melo sorrindo, de cabelo loiro ondulado, batom vermelho e blusa azul-marinho, com plantas ao fundo" width="1080" height="1350" fetchpriority="high">
       <div class="objeto xicara" aria-hidden="true"><span class="pires"></span><span class="copo"></span><span class="alca"></span><span class="vapor"></span></div>
     </div>
   </div>
