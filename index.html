@@ -249,7 +249,21 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .trabalho:nth-child(even){transform:rotate(1deg)}
 .trabalho:hover{transform:rotate(0) translateY(-4px)}
 .trabalho a{text-decoration:none;display:block}
-.trabalho .foto{aspect-ratio:4/5}
+.abre-video{display:block;width:100%;padding:0;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.trabalho .foto{aspect-ratio:4/5;background:#e9dfd3}
+.trabalho .foto img{width:100%;height:100%;object-fit:cover}
+.trabalho .play{width:54px;height:54px}
+.trabalho .play::before{border-left-width:16px;border-top-width:10px;border-bottom-width:10px;margin-left:5px}
+.abre-video:hover .play{transform:scale(1.1)}
+/* player de vídeo que abre por cima da página */
+.player{position:fixed;inset:0;z-index:320;display:none;align-items:center;justify-content:center;padding:16px}
+.player.aberto{display:flex}
+.player .fundo{position:absolute;inset:0;background:rgba(30,20,14,.82)}
+.player .caixa{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;max-height:100%}
+.player video{display:block;height:min(80vh,calc((100vw - 32px) * 16 / 9));max-height:calc(100vh - 110px);aspect-ratio:9/16;max-width:100%;border-radius:18px;background:#000;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.player .legenda-video{color:#f2e6da;font-family:var(--serif);font-size:1.25rem;text-align:center;margin:0}
+.player .fechar{position:absolute;top:-6px;right:-6px;transform:translate(50%,-50%);width:44px;height:44px;border-radius:50%;border:0;background:var(--papel);color:var(--tinta);font-size:1.6rem;line-height:1;cursor:pointer;box-shadow:0 6px 16px -6px rgba(0,0,0,.4)}
+@media (max-width:600px){ .player .fechar{right:16px;top:12px;transform:none} }
 .trabalho .nicho{font-family:var(--mao);font-size:1.25rem;color:var(--marrom-escuro);display:block;margin-top:8px;line-height:1.1}
 .trabalho h3{font-family:var(--corpo);font-weight:500;font-size:1.02rem;line-height:1.35;margin-top:2px}
 .trabalho .formato{font-size:.85rem;color:var(--tinta-suave)}
@@ -632,6 +646,16 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   </div>
 </footer>
 
+<!-- ============ PLAYER DOS VÍDEOS DA GALERIA ============ -->
+<div class="player" id="player" aria-hidden="true">
+  <div class="fundo" data-fechar-video></div>
+  <div class="caixa" role="dialog" aria-modal="true" aria-labelledby="player-titulo">
+    <button class="fechar" type="button" aria-label="Fechar vídeo" data-fechar-video>×</button>
+    <video id="player-video" controls playsinline preload="none"></video>
+    <p class="legenda-video" id="player-titulo"></p>
+  </div>
+</div>
+
 <!-- ============ CARD DE CAPTURA (MÍDIA KIT) ============ -->
 <div class="modal" id="modal" aria-hidden="true">
   <div class="fundo" data-fechar></div>
@@ -732,97 +756,115 @@ const NICHOS = [
   "Moda e calçados", "Acessórios", "Gastronomia", "Experiência presencial", "Pet"
 ];
 
-/* Trabalhos da galeria (vindos do portfólio no Canva)
+/* Trabalhos da galeria (vídeos vindos do portfólio no Canva)
+   Cada linha: T(nicho, número do vídeo, título, formato)
+   O vídeo fica em midia/<pasta do nicho>/<número>.mp4 e a capa em midia/<pasta do nicho>/<número>.jpg
    nicho:   precisa ser igual a um dos NICHOS acima
-   formato: o tipo de conteúdo (ex.: "Antes e depois", "Problema x solução")
-   link:    endereço do vídeo ou post ("#" se ainda não tiver)
-   capa:    imagem vertical 4:5 (ex.: "trabalho-1.jpg"). Vazio = bloco com degradê */
-const T = (nicho, titulo, formato = "Vídeo UGC") => ({ nicho, titulo, formato, link: "#", capa: "" });
+   formato: o tipo de conteúdo (ex.: "Antes e depois", "Problema x solução") */
+const PASTA_NICHO = {
+  "Tech & Apps": "tech-e-apps", "Casa & Decor": "casa-e-decor", "Maternidade": "maternidade", "Autocuidado": "autocuidado",
+  "Saúde e bem-estar": "saude-e-bem-estar", "Moda e calçados": "moda-e-calcados", "Acessórios": "acessorios",
+  "Gastronomia": "gastronomia", "Experiência presencial": "experiencia-presencial", "Pet": "pet"
+};
+const T = (nicho, num, titulo, formato = "Vídeo UGC") => ({
+  nicho, titulo, formato,
+  video: `midia/${PASTA_NICHO[nicho]}/${num}.mp4`,
+  capa: `midia/${PASTA_NICHO[nicho]}/${num}.jpg`
+});
 const TRABALHOS = [
-  T("Autocuidado", "Lavando o cabelo", "Antes e depois"),
-  T("Autocuidado", "GHK-Cu", "Problema x solução"),
-  T("Autocuidado", "Skincare", "Storytelling de rotina real"),
-  T("Autocuidado", "Sérum Biomarine", "Conteúdo sensorial"),
-  T("Autocuidado", "Cabelo encorpado", "Teste de nó"),
-  T("Autocuidado", "Máscara de hidratação", "Conteúdo educativo"),
-  T("Autocuidado", "Cabelo protegido do sol", "Conteúdo sensorial"),
-  T("Autocuidado", "Rímel de tratamento", "TikTok Shop"),
-  T("Autocuidado", "Creme para pentear Seda + Kibon"),
-  T("Autocuidado", "Batom"),
+  T("Tech & Apps", "01", "Provador virtual com IA", "App de IA"),
+  T("Tech & Apps", "02", "Empréstimo CLT", "Fundo de funil"),
+  T("Tech & Apps", "03", "Inner Circle", "Aplicativo de namoro"),
+  T("Tech & Apps", "04", "App de resumo de livros"),
+  T("Tech & Apps", "05", "App de controle financeiro"),
+  T("Tech & Apps", "06", "Grupo de promoção"),
+  T("Tech & Apps", "07", "Mercado Livre + BBB", "React"),
+  T("Tech & Apps", "08", "Acelera Casas Bahia", "Programa para criadores de conteúdo"),
+  T("Tech & Apps", "09", "App de motorista", "Topo de funil"),
+  T("Tech & Apps", "10", "Máquina de cartão", "Conteúdo financeiro"),
 
-  T("Maternidade", "Babador impermeável"),
-  T("Maternidade", "Arrumando a mochila com Bepantol"),
-  T("Maternidade", "Organizador de brinquedos"),
-  T("Maternidade", "Fraldas"),
-  T("Maternidade", "Joias mãe e filha"),
+  T("Casa & Decor", "01", "Kit Coala The Queen", "Problema x solução"),
+  T("Casa & Decor", "02", "Toalhas", "Lo-fi e nativo"),
+  T("Casa & Decor", "03", "Toalha de banho", "Conteúdo sensorial"),
+  T("Casa & Decor", "04", "Vela aromática", "Conteúdo sensorial"),
+  T("Casa & Decor", "05", "Tira-manchas de estofados", "Antes e depois"),
+  T("Casa & Decor", "06", "Luminária decorativa", "Vlog"),
+  T("Casa & Decor", "07", "Teste de toalha Hoomy", "Comparativo"),
+  T("Casa & Decor", "08", "Amaciante Comfort", "Lançamento"),
+  T("Casa & Decor", "09", "Cama Ortobom", "Storytelling"),
+  T("Casa & Decor", "10", "Toalha de banho"),
 
-  T("Saúde e bem-estar", "Creatina"),
-  T("Saúde e bem-estar", "Suplemento", "Problema x solução"),
-  T("Saúde e bem-estar", "Barra de whey proteica"),
-  T("Saúde e bem-estar", "Óleo essencial"),
-  T("Saúde e bem-estar", "Vitaminas DayShot + Ômega 3"),
-  T("Saúde e bem-estar", "Suplemento capilar", "Problema x solução"),
-  T("Saúde e bem-estar", "Emagrecimento"),
-  T("Saúde e bem-estar", "Bebida proteica"),
+  T("Maternidade", "01", "Joias infantis Pingo de Gente"),
+  T("Maternidade", "02", "Passeio com a Laura"),
+  T("Maternidade", "03", "Fraldas"),
+  T("Maternidade", "04", "Arrumando a mochila com Bepantol"),
+  T("Maternidade", "05", "Roupinhas de bebê"),
+  T("Maternidade", "06", "Mochila personalizada da Laura"),
+  T("Maternidade", "07", "Sapatinhos infantis"),
+  T("Maternidade", "08", "Tema do aniversário da Laura"),
+  T("Maternidade", "09", "Livrinhos infantis Corações Preciosos"),
 
-  T("Moda e calçados", "Moda praia"),
-  T("Moda e calçados", "Roupa fitness"),
-  T("Moda e calçados", "Moda feminina"),
-  T("Moda e calçados", "Palmilha ortopédica"),
-  T("Moda e calçados", "Campanha", "TikTok Shop"),
-  T("Moda e calçados", "Sandália anatômica"),
-  T("Moda e calçados", "Camisa básica"),
-  T("Moda e calçados", "Moda street"),
-  T("Moda e calçados", "Loja de calçados"),
-  T("Moda e calçados", "Cinta modeladora"),
+  T("Autocuidado", "01", "Sérum GHK-Cu Biomarine", "Problema x solução"),
+  T("Autocuidado", "02", "Lavando o cabelo com Elseve", "Antes e depois"),
+  T("Autocuidado", "03", "Skincare", "Storytelling de rotina real"),
+  T("Autocuidado", "04", "Cabelo protegido do sol com Dove", "Conteúdo sensorial"),
+  T("Autocuidado", "05", "Máscara de hidratação", "Conteúdo educativo"),
+  T("Autocuidado", "06", "Skincare com vitamina C", "Conteúdo sensorial"),
+  T("Autocuidado", "07", "Cabelo encorpado com Elseve"),
+  T("Autocuidado", "08", "Rímel de tratamento", "TikTok Shop"),
+  T("Autocuidado", "09", "Creme para pentear Seda + Kibon"),
+  T("Autocuidado", "10", "Batom"),
 
-  T("Acessórios", "Acessório folheado", "Arrume-se comigo"),
-  T("Acessórios", "Semijoias"),
-  T("Acessórios", "Semijoias", "Conteúdo para ads"),
-  T("Acessórios", "Óculos", "Lançamento"),
-  T("Acessórios", "Joias mãe e filha"),
+  T("Saúde e bem-estar", "01", "Emagrecimento", "Problema x solução"),
+  T("Saúde e bem-estar", "02", "Creatina FTW"),
+  T("Saúde e bem-estar", "03", "Barra de whey proteica"),
+  T("Saúde e bem-estar", "04", "Suplemento", "Problema x solução"),
+  T("Saúde e bem-estar", "05", "Óleo essencial"),
+  T("Saúde e bem-estar", "06", "Vitaminas"),
+  T("Saúde e bem-estar", "07", "Consulta online de emagrecimento"),
+  T("Saúde e bem-estar", "08", "Bebida proteica Nutren"),
+  T("Saúde e bem-estar", "09", "Acompanhamento para emagrecimento", "Storytelling"),
+  T("Saúde e bem-estar", "10", "Colágeno com proteína"),
 
-  T("Casa & Decor", "Toalha de banho", "Dia da Mulher"),
-  T("Casa & Decor", "Kit Coala", "Problema x solução"),
-  T("Casa & Decor", "Tira-manchas de estofados", "Antes e depois"),
-  T("Casa & Decor", "Vela aromática", "Conteúdo sensorial"),
-  T("Casa & Decor", "Toalhas", "Lo-fi e nativo"),
-  T("Casa & Decor", "Luminária decorativa", "Vlog"),
-  T("Casa & Decor", "Teste de toalha Hoomy", "Comparativo"),
-  T("Casa & Decor", "Amaciante", "Lançamento"),
-  T("Casa & Decor", "Cama Ortobom", "Storytelling"),
+  T("Moda e calçados", "01", "Palmilha ortopédica"),
+  T("Moda e calçados", "02", "Moda feminina Posthaus", "Campanha"),
+  T("Moda e calçados", "03", "Roupa fitness"),
+  T("Moda e calçados", "04", "Moda praia"),
+  T("Moda e calçados", "05", "Sandália anatômica"),
+  T("Moda e calçados", "06", "Chinelo Pé de Algodão"),
+  T("Moda e calçados", "07", "Camisa básica"),
+  T("Moda e calçados", "08", "Moda street"),
+  T("Moda e calçados", "09", "Loja de calçados"),
+  T("Moda e calçados", "10", "Cinta modeladora"),
 
-  T("Gastronomia", "Presenteando com chocolate"),
-  T("Gastronomia", "Receita com Super Dicer"),
-  T("Gastronomia", "Receita para bebê"),
-  T("Gastronomia", "Refeição saudável"),
-  T("Gastronomia", "Bebida proteica na rotina"),
-  T("Gastronomia", "Rotina e café"),
-  T("Gastronomia", "Pão de alho"),
-  T("Gastronomia", "Pão sem glúten"),
-  T("Gastronomia", "Lay's", "Lançamento"),
+  T("Acessórios", "01", "Colar com inicial", "Arrume-se comigo"),
+  T("Acessórios", "02", "Semijoias", "Conteúdo para ads"),
+  T("Acessórios", "03", "Brincos semijoias"),
+  T("Acessórios", "04", "Óculos", "Lançamento"),
+  T("Acessórios", "05", "Joias mãe e filha"),
 
-  T("Pet", "Banho pet"),
-  T("Pet", "Bebedouro pet"),
-  T("Pet", "Tratamento de otite canina"),
-  T("Pet", "Cuidado oral diário"),
+  T("Gastronomia", "01", "Receita com Super Dicer"),
+  T("Gastronomia", "02", "Presenteando com chocolate"),
+  T("Gastronomia", "03", "Bebida proteica na rotina"),
+  T("Gastronomia", "04", "Rotina e café"),
+  T("Gastronomia", "05", "Pão de alho"),
+  T("Gastronomia", "06", "Receita de bolo de banana", "Receita"),
+  T("Gastronomia", "07", "Refeição saudável"),
+  T("Gastronomia", "08", "Pão sem glúten", "Receita"),
+  T("Gastronomia", "09", "Lay's", "Lançamento"),
+  T("Gastronomia", "10", "Degustação de bebida"),
 
-  T("Experiência presencial", "SmartZoo", "Shopping"),
-  T("Experiência presencial", "Restaurante praiano"),
-  T("Experiência presencial", "Restaurante fitness"),
-  T("Experiência presencial", "Passeio cultural"),
-  T("Experiência presencial", "Estética corporal e facial"),
+  T("Experiência presencial", "01", "SmartZoo", "Shopping"),
+  T("Experiência presencial", "02", "Passeio cultural"),
+  T("Experiência presencial", "03", "Restaurante praiano"),
+  T("Experiência presencial", "04", "Restaurante fitness"),
+  T("Experiência presencial", "05", "Estética corporal e facial"),
 
-  T("Tech & Apps", "App de IA"),
-  T("Tech & Apps", "Máquina de cartão", "Conteúdo financeiro"),
-  T("Tech & Apps", "React ML + BBB"),
-  T("Tech & Apps", "Grupo de promoção"),
-  T("Tech & Apps", "Aplicativo de namoro"),
-  T("Tech & Apps", "App de resumo de livros"),
-  T("Tech & Apps", "App de controle financeiro"),
-  T("Tech & Apps", "Programa para criadores de conteúdo"),
-  T("Tech & Apps", "App de motorista", "Topo de funil"),
-  T("Tech & Apps", "Empréstimo CLT", "Fundo de funil")
+  T("Pet", "01", "Bebedouro pet"),
+  T("Pet", "02", "Tratamento de otite canina"),
+  T("Pet", "03", "Banho pet"),
+  T("Pet", "04", "Cuidado oral diário"),
+  T("Pet", "05", "Plano de saúde pet")
 ];
 
 /* Serviços (seis cards) */
@@ -1004,17 +1046,14 @@ function mostrarTrabalhos(nicho) {
     return;
   }
   galeriaEl.innerHTML = lista.map((t, i) => {
-    const c = CORES_NICHO[t.nicho] || ["#dfe7ee", "#597f9e"];
-    const capa = t.capa
-      ? `<div class="foto"><img src="${t.capa}" alt="${t.titulo}" loading="lazy" width="400" height="500"></div>`
-      : `<div class="foto foto-vazia" role="img" aria-label="Espaço para a capa do trabalho ${t.titulo}" style="background:linear-gradient(160deg, ${c[0]}, ${c[1]})"><span class="tag">capa 4:5</span></div>`;
-    const abre = t.link && t.link !== "#" ? ` href="${t.link}" target="_blank" rel="noopener"` : "";
-    return `<li class="trabalho" style="animation-delay:${i * 40}ms">
-        <a${abre}>${capa}
+    const k = TRABALHOS.indexOf(t);
+    return `<li class="trabalho" style="animation-delay:${Math.min(i, 12) * 40}ms">
+        <button type="button" class="abre-video" data-k="${k}" aria-label="Assistir: ${t.titulo}">
+          <div class="foto"><img src="${t.capa}" alt="" loading="lazy" width="540" height="960"><span class="play" aria-hidden="true"></span></div>
           <span class="nicho">${t.nicho}</span>
           <h3>${t.titulo}</h3>
           <span class="formato">${t.formato}</span>
-        </a>
+        </button>
       </li>`;
   }).join("");
 }
@@ -1025,6 +1064,42 @@ filtrosEl.addEventListener("click", (e) => {
   mostrarTrabalhos(btn.dataset.nicho);
 });
 mostrarTrabalhos(NICHOS[0]);
+
+/* Player: clicar num trabalho abre o vídeo por cima da página */
+const player = $("#player"), playerVideo = $("#player-video");
+let focoAntesDoVideo = null;
+function abrirVideo(t) {
+  focoAntesDoVideo = document.activeElement;
+  playerVideo.poster = t.capa;
+  playerVideo.src = t.video;
+  $("#player-titulo").textContent = t.titulo;
+  player.classList.add("aberto");
+  player.setAttribute("aria-hidden", "false");
+  player.querySelector(".fechar").focus();
+  playerVideo.play().catch(() => {});
+}
+function fecharVideo() {
+  playerVideo.pause();
+  playerVideo.removeAttribute("src");
+  playerVideo.load();
+  player.classList.remove("aberto");
+  player.setAttribute("aria-hidden", "true");
+  if (focoAntesDoVideo && focoAntesDoVideo.focus) focoAntesDoVideo.focus();
+}
+galeriaEl.addEventListener("click", (e) => {
+  const b = e.target.closest(".abre-video");
+  if (b) abrirVideo(TRABALHOS[+b.dataset.k]);
+});
+player.addEventListener("click", (e) => { if (e.target.closest("[data-fechar-video]")) fecharVideo(); });
+document.addEventListener("keydown", (e) => {
+  if (!player.classList.contains("aberto")) return;
+  if (e.key === "Escape") fecharVideo();
+  if (e.key === "Tab") {
+    const itens = [player.querySelector(".fechar"), playerVideo];
+    if (e.shiftKey && document.activeElement === itens[0]) { e.preventDefault(); itens[1].focus(); }
+    else if (!e.shiftKey && document.activeElement === itens[1]) { e.preventDefault(); itens[0].focus(); }
+  }
+});
 
 /* Serviços */
 $("#servicos-grade").innerHTML = SERVICOS.map((s, i) =>
