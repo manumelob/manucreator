@@ -127,8 +127,15 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .capa-foto{position:relative;max-width:420px;justify-self:center;width:100%}
 
 /* faixa fina das marcas */
-.faixa-marcas{border-top:1px solid rgba(58,42,32,.15);border-bottom:1px solid rgba(58,42,32,.15);padding:14px 0;overflow:hidden;background:rgba(251,247,241,.5)}
-.faixa-marcas .rotulo{position:absolute;left:-999px}
+.faixa-marcas{border-top:1px solid rgba(58,42,32,.15);border-bottom:1px solid rgba(58,42,32,.15);padding:18px 0 22px;overflow:hidden;background:#f2e6da}
+.faixa-marcas .rotulo{font-family:var(--mao);font-weight:500;font-size:1.5rem;color:var(--oliva-escura);text-align:center;margin:0 16px 10px}
+/* logos: cada uma é um pedaço do arquivo marcas.jpg (39 quadrados lado a lado) */
+.faixa-marcas .trilho-logos{--t:80px;animation-duration:120s}
+.faixa-marcas .trilho-logos + .trilho-logos{margin-top:10px}
+.faixa-marcas .trilho-logos.reverso{animation-direction:reverse;animation-duration:130s}
+.faixa-marcas .trilho-logos li{padding:0 12px;gap:0}
+.faixa-marcas .trilho-logos li::after{content:none}
+.logo{display:block;width:var(--t);height:var(--t);background:url("marcas.jpg") no-repeat;background-size:calc(var(--t) * 39) var(--t);background-position:calc(var(--i) * var(--t) * -1) 0}
 .trilho{display:flex;width:max-content;animation:rolar 40s linear infinite}
 .trilho ul{display:flex;list-style:none;margin:0;padding:0}
 .trilho li{font-family:var(--serif);font-size:1.25rem;padding:0 1.6rem;white-space:nowrap;color:var(--tinta-suave);display:flex;align-items:center;gap:3.2rem}
@@ -327,6 +334,8 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   .servicos-grade{grid-template-columns:1fr}
   .galeria{grid-template-columns:repeat(2,1fr);gap:14px}
   .trabalho h3{font-size:.95rem}
+  .faixa-marcas .trilho-logos{--t:64px}
+  .faixa-marcas .trilho-logos li{padding:0 8px}
   .capa .xicara,.servicos .xicara{display:none}
   .sobre .planta{right:0;bottom:10px;opacity:.6;width:90px}
   .contato .envelope{right:8px;top:24px;opacity:.55;transform:scale(.7)}
@@ -402,10 +411,15 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
     </div>
   </div>
 
-  <!-- Faixa fina com as marcas: edite em MARCAS no script -->
+  <!--
+    Faixa com as logos das marcas, em duas linhas que correm devagar.
+    As logos ficam todas em um arquivo só (marcas.jpg), uma ao lado da outra, cada uma num quadrado de 80x80 px.
+    Os nomes e a ordem ficam em MARCAS no script.
+  -->
   <div class="faixa-marcas conteudo">
-    <h2 class="rotulo">Marcas com quem já trabalhei</h2>
-    <div class="trilho" id="trilho-marcas"></div>
+    <h2 class="rotulo">marcas que já confiaram no meu trabalho</h2>
+    <div class="trilho trilho-logos" id="marcas-linha-1"></div>
+    <div class="trilho trilho-logos reverso" id="marcas-linha-2"></div>
   </div>
 </section>
 
@@ -619,10 +633,14 @@ const NUMEROS_CAPA = [
   { valor: 10,  prefixo: "+", sufixo: "M", rotulo: "views somadas" }
 ];
 
-/* Marcas da faixa fina da capa */
+/* Logos da faixa da capa, na mesma ordem em que aparecem no arquivo marcas.jpg.
+   O nome é lido por leitores de tela. As 20 primeiras vão na linha de cima, o resto na de baixo.
+   "Marca parceira" = logo sem nome identificado: troque pelo nome certo. */
 const MARCAS = [
-  "Coala", "OMO", "Gocase", "Alva", "Confort", "Toda Up", "Mercado Livre",
-  "Sem Parar", "Seda", "Lacta", "Lay's", "Pet Love", "Inner Circle"
+  "Lacta", "Ortobom", "TIM", "Tupperware", "Magalu", "Doca", "Darrow", "Mix Calçados", "LG", "Elo",
+  "L'Oréal Elseve", "Plurae", "Freshmile", "FTW", "Dove", "Casas Bahia", "Seda", "Marca parceira", "Sem Parar", "Comfort",
+  "Temu", "Bepantol Baby", "Égua du Óleo", "Marca parceira", "Central Toalhas", "Always Fit", "Biomarine", "Alther", "Mercado Livre", "Petlove",
+  "Veste Go", "Marca parceira", "Marca parceira", "Montessoriando", "Marca parceira", "Saint Germain", "Inner Circle", "Alva", "Toda Up"
 ];
 
 /* Conteúdos de destaque (três cards de vídeo)
@@ -750,7 +768,14 @@ function montarTrilho(el, itens) {
   const lista = itens.map(i => `<li>${i}</li>`).join("");
   el.innerHTML = `<ul>${lista}</ul><ul aria-hidden="true">${lista}</ul>`;
 }
-montarTrilho($("#trilho-marcas"), MARCAS);
+function montarLogos(el, inicio, fim) {
+  const lista = MARCAS.slice(inicio, fim).map((nome, k) =>
+    `<li><span class="logo" role="img" aria-label="${nome.replace(/"/g, "&quot;")}" style="--i:${inicio + k}"></span></li>`
+  ).join("");
+  el.innerHTML = `<ul>${lista}</ul><ul aria-hidden="true">${lista}</ul>`;
+}
+montarLogos($("#marcas-linha-1"), 0, 20);
+montarLogos($("#marcas-linha-2"), 20, MARCAS.length);
 montarTrilho($("#trilho-servicos"), SERVICOS.map(s => s.titulo));
 
 /* Destaques */
