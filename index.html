@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emanuela Melo | Portfólio UGC Creator</title>
+<meta name="description" content="Emanuela Melo, UGC Creator em Ananindeua. Vídeos que parecem conversa de amiga e vendem como anúncio. Mais de 500 vídeos e 300 marcas atendidas.">
+<meta name="theme-color" content="#b5563a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ CORES E BASE ============ */
+:root{
+  --linho:#f2e9dc;
+  --linho-2:#e9dcc8;
+  --papel:#fbf7f1;
+  --terracota:#b5563a;
+  --terracota-escura:#94432c;
+  --terracota-clara:#e7b9a4;
+  --oliva:#6d7a4c;
+  --oliva-escura:#525c37;
+  --tinta:#3a2a20;
+  --tinta-suave:#6a5546;
+  --sombra:0 18px 40px -18px rgba(74,48,30,.35);
+  --sombra-leve:0 8px 22px -12px rgba(74,48,30,.28);
+  --raio:18px;
+  --serif:"DM Serif Display", Georgia, serif;
+  --corpo:"Outfit", system-ui, sans-serif;
+  --mao:"Caveat", cursive;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  margin:0;
+  font-family:var(--corpo);
+  font-weight:300;
+  font-size:1.0625rem;
+  line-height:1.7;
+  color:var(--tinta);
+  background-color:var(--linho);
+  /* textura de tecido de linho feita só com CSS */
+  background-image:
+    repeating-linear-gradient(0deg, rgba(110,80,50,.045) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(110,80,50,.035) 0 1px, transparent 1px 4px),
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,.35), transparent 60%);
+  overflow-x:hidden;
+}
+@supports (overflow:clip){ body{overflow-x:clip} }
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;margin:0}
+h2{font-size:clamp(2.1rem,5vw,3.4rem)}
+h2 em,h1 em{color:var(--terracota);font-style:italic}
+p{margin:0 0 1rem}
+.container{width:min(1160px,100% - 32px);margin-inline:auto}
+section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
+@supports (overflow:clip){ section{overflow:clip} }
+.olho{font-family:var(--mao);font-size:1.6rem;color:var(--oliva-escura);display:block;margin-bottom:.4rem;line-height:1.1}
+.cabeca{max-width:640px;margin-bottom:clamp(40px,6vw,64px)}
+.cabeca p{color:var(--tinta-suave);margin-top:1rem}
+.pular{position:absolute;left:-999px;top:8px;background:var(--tinta);color:#fff;padding:10px 16px;border-radius:10px;z-index:200}
+.pular:focus{left:16px}
+:focus-visible{outline:3px solid var(--oliva);outline-offset:3px;border-radius:6px}
+
+/* ============ BOTÕES ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  font-family:var(--corpo);font-weight:500;font-size:1rem;
+  padding:.95rem 1.6rem;border-radius:999px;border:1.5px solid var(--terracota);
+  text-decoration:none;cursor:pointer;transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+.btn-cheio{background:var(--terracota);color:#fff;box-shadow:var(--sombra-leve)}
+.btn-cheio:hover{background:var(--terracota-escura);transform:translateY(-2px)}
+.btn-vazado{background:transparent;color:var(--terracota-escura)}
+.btn-vazado:hover{background:rgba(181,86,58,.08);transform:translateY(-2px)}
+
+/* ============ MENU ============ */
+.topo{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .3s, box-shadow .3s}
+.topo.rolou{background:rgba(242,233,220,.92);box-shadow:0 6px 20px -14px rgba(74,48,30,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.topo .container{display:flex;align-items:center;justify-content:space-between;height:72px}
+.marca{font-family:var(--serif);font-size:1.45rem;text-decoration:none}
+.marca em{color:var(--terracota)}
+.menu ul{display:flex;gap:1.6rem;list-style:none;margin:0;padding:0}
+.menu a{text-decoration:none;font-weight:400;font-size:.98rem;position:relative;padding:4px 0}
+.menu a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--terracota);transition:width .3s}
+.menu a:hover::after{width:100%}
+.hamburguer{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;position:relative}
+.hamburguer span,.hamburguer span::before,.hamburguer span::after{display:block;position:absolute;left:10px;width:24px;height:2px;background:var(--tinta);transition:transform .3s, opacity .3s;content:""}
+.hamburguer span{top:21px}
+.hamburguer span::before{top:-7px;left:0}
+.hamburguer span::after{top:7px;left:0}
+.hamburguer[aria-expanded="true"] span{background:transparent}
+.hamburguer[aria-expanded="true"] span::before{transform:translateY(7px) rotate(45deg)}
+.hamburguer[aria-expanded="true"] span::after{transform:translateY(-7px) rotate(-45deg)}
+
+/* ============ CAPA ============ */
+.capa{padding-top:120px;padding-bottom:0;min-height:100vh;display:flex;flex-direction:column}
+.capa-grade{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,72px);align-items:center;flex:1;padding-bottom:64px}
+.capa h1{font-size:clamp(3.2rem,9vw,7rem);letter-spacing:-.01em;margin:.2rem 0 1.2rem}
+.capa h1 em{display:block}
+.capa .frase{font-size:clamp(1.1rem,2.2vw,1.35rem);max-width:520px;color:var(--tinta-suave)}
+.botoes{display:flex;flex-wrap:wrap;gap:12px;margin:2rem 0 2.6rem}
+.numeros-capa{display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,48px);list-style:none;padding:0;margin:0}
+.numeros-capa strong{display:block;font-family:var(--serif);font-size:clamp(2rem,4vw,2.6rem);font-weight:400;color:var(--terracota-escura);line-height:1}
+.numeros-capa span{font-size:.92rem;color:var(--tinta-suave)}
+
+/* foto com borda branca de recorte */
+.recorte{
+  position:relative;background:#fff;padding:14px 14px 54px;border-radius:4px;
+  box-shadow:var(--sombra);transform:rotate(2deg);
+}
+.recorte .legenda{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-family:var(--mao);font-size:1.4rem;color:var(--tinta-suave)}
+.foto{
+  position:relative;aspect-ratio:4/5;border-radius:2px;overflow:hidden;
+  display:flex;align-items:flex-end;justify-content:center;
+}
+.foto img{width:100%;height:100%;object-fit:cover}
+.foto-vazia{
+  background:
+    radial-gradient(circle at 50% 38%, rgba(255,255,255,.45) 0 18%, transparent 19%),
+    radial-gradient(ellipse at 50% 95%, rgba(255,255,255,.35) 0 38%, transparent 39%),
+    linear-gradient(160deg, #e7b9a4, #b5563a 60%, #7d3a26);
+}
+.foto-vazia .tag{background:rgba(255,255,255,.85);color:var(--tinta);font-size:.85rem;padding:.3rem .8rem;border-radius:99px;margin-bottom:14px;font-weight:400}
+.fita{position:absolute;width:110px;height:30px;background:rgba(214,196,160,.75);top:-14px;left:50%;transform:translateX(-50%) rotate(-4deg);box-shadow:0 2px 4px rgba(0,0,0,.06)}
+.capa-foto{position:relative;max-width:420px;justify-self:center;width:100%}
+
+/* carimbo redondo tracejado */
+.carimbo{
+  position:absolute;width:130px;height:130px;left:-48px;bottom:40px;z-index:2;
+  border:2px dashed var(--terracota);border-radius:50%;
+  display:grid;place-items:center;transform:rotate(-14deg);
+  background:rgba(251,247,241,.88);
+}
+.carimbo svg{width:112px;height:112px;animation:girar 22s linear infinite}
+.carimbo text{font-family:var(--corpo);font-weight:500;font-size:13.5px;letter-spacing:3px;fill:var(--terracota-escura);text-transform:uppercase}
+.carimbo .coracao{position:absolute;font-family:var(--serif);font-style:italic;font-size:1.6rem;color:var(--terracota)}
+@keyframes girar{to{transform:rotate(360deg)}}
+
+/* faixa fina das marcas */
+.faixa-marcas{border-top:1px solid rgba(58,42,32,.15);border-bottom:1px solid rgba(58,42,32,.15);padding:14px 0;overflow:hidden;background:rgba(251,247,241,.5)}
+.faixa-marcas .rotulo{position:absolute;left:-999px}
+.trilho{display:flex;width:max-content;animation:rolar 40s linear infinite}
+.trilho ul{display:flex;list-style:none;margin:0;padding:0}
+.trilho li{font-family:var(--serif);font-size:1.25rem;padding:0 1.6rem;white-space:nowrap;color:var(--tinta-suave);display:flex;align-items:center;gap:3.2rem}
+.trilho li::after{content:"✻";color:var(--terracota);font-size:.9rem;margin-left:1.6rem}
+@keyframes rolar{to{transform:translateX(-50%)}}
+
+/* ============ OBJETOS EM CSS PURO ============ */
+.objeto{position:absolute;pointer-events:none;z-index:0;animation:flutuar 9s ease-in-out infinite}
+@keyframes flutuar{
+  0%,100%{transform:translateY(0) rotate(var(--r,0deg))}
+  50%{transform:translateY(-16px) rotate(calc(var(--r,0deg) + 3deg))}
+}
+/* rádio vintage */
+.radio{width:150px;height:96px;background:linear-gradient(180deg,#c86a4c,#a74d32);border-radius:18px;box-shadow:var(--sombra);--r:-8deg}
+.radio::before{content:"";position:absolute;width:3px;height:70px;background:#5a4030;left:30px;top:-58px;transform:rotate(-28deg);border-radius:3px}
+.radio .grade{position:absolute;left:14px;top:16px;width:66px;height:64px;border-radius:12px;background:radial-gradient(circle,#7d3a26 2px,transparent 2.5px) 0 0/9px 9px,#efd9c8}
+.radio .dial{position:absolute;right:18px;top:18px;width:38px;height:38px;border-radius:50%;background:radial-gradient(circle,#f6efe4 0 30%,#d8c4ad 31% 100%);border:3px solid #7d3a26}
+.radio .faixinha{position:absolute;right:14px;bottom:16px;width:46px;height:10px;border-radius:4px;background:var(--oliva)}
+/* plantinha no vaso */
+.planta{width:110px;height:150px;--r:4deg}
+.planta .vaso{position:absolute;bottom:0;left:22px;width:66px;height:56px;background:linear-gradient(90deg,#a74d32,#c86a4c 55%,#a74d32);clip-path:polygon(0 0,100% 0,86% 100%,14% 100%);border-radius:4px}
+.planta .vaso::before{content:"";position:absolute;top:0;left:0;right:0;height:12px;background:#94432c}
+.planta .folha{position:absolute;width:30px;height:62px;background:linear-gradient(90deg,var(--oliva-escura),var(--oliva));border-radius:50% 50% 50% 50%/60% 60% 40% 40%;bottom:46px;left:40px;transform-origin:bottom center}
+.planta .f1{transform:rotate(-38deg)}
+.planta .f2{transform:rotate(0deg);height:78px}
+.planta .f3{transform:rotate(36deg)}
+.planta .f4{transform:rotate(-70deg);height:44px;background:#86935f}
+.planta .f5{transform:rotate(68deg);height:46px;background:#86935f}
+/* xícara de café vista de cima */
+.xicara{width:116px;height:116px;--r:10deg}
+.xicara .pires{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#fbf7f1 0 58%,#efe4d4 59% 100%);box-shadow:var(--sombra-leve)}
+.xicara .copo{position:absolute;inset:22px;border-radius:50%;background:radial-gradient(circle at 45% 42%,#8a5a3c 0 20%,#5a3524 55%,#4a2b1d 66%,#fff 67%)}
+.xicara .alca{position:absolute;right:-4px;top:46px;width:26px;height:22px;border:6px solid #fff;border-left:0;border-radius:0 14px 14px 0}
+.xicara .vapor{position:absolute;left:44px;top:42px;width:20px;height:20px;border:2px solid rgba(255,255,255,.55);border-radius:50%;border-color:rgba(255,255,255,.6) transparent transparent transparent}
+/* envelope */
+.envelope{width:150px;height:100px;background:#fbf7f1;border-radius:6px;box-shadow:var(--sombra);overflow:hidden;--r:-6deg}
+.envelope::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom right,transparent 49.5%,#e6d7c2 50%) left/50% 100% no-repeat,linear-gradient(to bottom left,transparent 49.5%,#e6d7c2 50%) right/50% 100% no-repeat}
+.envelope::after{content:"";position:absolute;left:0;right:0;top:0;height:62px;background:#efe3d1;clip-path:polygon(0 0,100% 0,50% 100%)}
+.envelope .selo{position:absolute;left:61px;top:44px;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle,#c86a4c,#94432c);z-index:2;box-shadow:0 2px 3px rgba(0,0,0,.2)}
+.envelope .selo-postal{position:absolute;right:10px;top:8px;width:26px;height:30px;background:var(--oliva);outline:2px dotted #fbf7f1;outline-offset:-4px;z-index:3}
+
+/* posições dos objetos */
+.capa .radio{right:4%;top:96px;animation-delay:-2s}
+.capa .xicara{left:-30px;bottom:110px;animation-delay:-5s}
+.sobre .planta{right:3%;bottom:40px;animation-delay:-1s}
+.contato .envelope{right:4%;top:60px;animation-delay:-3s}
+.servicos .xicara{left:2%;bottom:40px;animation-delay:-6s;opacity:.95}
+.conteudo{position:relative;z-index:1}
+
+/* ============ SOBRE ============ */
+.sobre-grade{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,6vw,90px);align-items:center}
+.sobre .recorte{transform:rotate(-2.5deg);max-width:400px}
+.sobre .texto p{font-size:1.1rem}
+.promessas{list-style:none;padding:0;margin:1.6rem 0;display:grid;gap:12px}
+.promessas li{display:flex;gap:14px;align-items:flex-start;background:rgba(251,247,241,.75);padding:14px 18px;border-radius:14px;box-shadow:var(--sombra-leve)}
+.promessas .check{flex:0 0 28px;height:28px;border-radius:50%;background:var(--oliva);color:#fff;display:grid;place-items:center;font-size:.9rem;font-weight:600;margin-top:2px}
+.promessas strong{font-weight:500}
+.assinatura{font-family:var(--mao);font-size:2.6rem;color:var(--terracota-escura);line-height:1;margin-top:1.4rem;transform:rotate(-3deg);display:inline-block}
+
+/* ============ DESTAQUES ============ */
+.destaques-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,36px)}
+.destaque{display:block;text-decoration:none;background:var(--papel);border-radius:var(--raio);padding:12px 12px 22px;box-shadow:var(--sombra);transition:transform .35s ease, box-shadow .35s ease}
+.destaque:nth-child(2){transform:translateY(28px)}
+.destaque:hover{transform:translateY(-6px) rotate(-.6deg)}
+.destaque:nth-child(2):hover{transform:translateY(22px) rotate(.6deg)}
+.video{position:relative;aspect-ratio:9/16;border-radius:12px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+.video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.video .tag{position:relative;z-index:1;background:rgba(255,255,255,.88);font-size:.82rem;padding:.3rem .8rem;border-radius:99px;margin-bottom:14px;font-weight:400}
+.play{position:absolute;inset:0;margin:auto;width:70px;height:70px;border-radius:50%;background:rgba(251,247,241,.92);display:grid;place-items:center;box-shadow:0 10px 26px -8px rgba(0,0,0,.4);transition:transform .3s;z-index:1}
+.play::before{content:"";margin-left:6px;border-left:20px solid var(--terracota);border-top:13px solid transparent;border-bottom:13px solid transparent}
+.destaque:hover .play{transform:scale(1.1)}
+.destaque .info{padding:18px 8px 0}
+.destaque .numero{font-family:var(--serif);font-size:2.6rem;color:var(--terracota-escura);line-height:1}
+.destaque .rotulo{font-family:var(--mao);font-size:1.35rem;color:var(--oliva-escura);display:block;margin-bottom:.6rem}
+.destaque h3{font-size:1.4rem;margin-bottom:.3rem}
+.destaque .contexto{color:var(--tinta-suave);font-size:.96rem;margin:0}
+.destaque .abrir{display:inline-block;margin-top:.8rem;font-weight:500;color:var(--terracota-escura);font-size:.95rem}
+
+/* ============ TRABALHOS ============ */
+.filtros{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px}
+.filtro{font-family:var(--corpo);font-size:.95rem;font-weight:400;padding:.55rem 1.15rem;border-radius:999px;border:1.5px solid rgba(58,42,32,.25);background:rgba(251,247,241,.6);color:var(--tinta);cursor:pointer;transition:all .25s}
+.filtro:hover{border-color:var(--terracota)}
+.filtro[aria-pressed="true"]{background:var(--terracota);border-color:var(--terracota);color:#fff}
+.galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px;list-style:none;padding:0;margin:0}
+.trabalho{background:#fff;padding:10px 10px 16px;border-radius:6px;box-shadow:var(--sombra-leve);transition:transform .3s;animation:surgir .45s ease both}
+.trabalho:nth-child(odd){transform:rotate(-1deg)}
+.trabalho:nth-child(even){transform:rotate(1deg)}
+.trabalho:hover{transform:rotate(0) translateY(-4px)}
+.trabalho a{text-decoration:none;display:block}
+.trabalho .foto{aspect-ratio:4/5}
+.trabalho .nicho{font-family:var(--mao);font-size:1.25rem;color:var(--oliva-escura);display:block;margin-top:8px;line-height:1.1}
+.trabalho h3{font-family:var(--corpo);font-weight:500;font-size:1.02rem;line-height:1.35;margin-top:2px}
+.trabalho .formato{font-size:.85rem;color:var(--tinta-suave)}
+@keyframes surgir{from{opacity:0;transform:translateY(12px)}}
+.vazio{color:var(--tinta-suave);font-style:italic}
+
+/* ============ SERVIÇOS ============ */
+.faixa-servicos{background:var(--terracota);color:#fff;padding:18px 0;overflow:hidden;transform:rotate(-1.2deg);margin:0 -20px clamp(56px,8vw,90px);box-shadow:var(--sombra-leve)}
+.faixa-servicos .trilho{animation-duration:32s}
+.faixa-servicos li{color:#fff;font-family:var(--serif);font-style:italic;font-size:1.5rem}
+.faixa-servicos li::after{color:var(--terracota-clara)}
+.servicos{overflow:hidden}
+.servicos-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;list-style:none;padding:0;margin:0}
+.servico{background:rgba(251,247,241,.82);border-radius:var(--raio);padding:32px 28px;box-shadow:var(--sombra-leve);border:1px solid rgba(58,42,32,.06);transition:transform .3s, box-shadow .3s}
+.servico:hover{transform:translateY(-4px);box-shadow:var(--sombra)}
+.servico .num{font-family:var(--mao);font-size:2rem;color:var(--terracota);line-height:1}
+.servico h3{font-size:1.55rem;margin:.6rem 0 .5rem}
+.servico p{color:var(--tinta-suave);margin:0;font-size:1rem}
+
+/* ============ NÚMEROS E DEPOIMENTOS ============ */
+.numeros{background:linear-gradient(180deg,rgba(109,122,76,.08),rgba(109,122,76,.16))}
+.metricas{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;list-style:none;padding:0;margin:0 0 clamp(56px,8vw,90px)}
+.metrica{text-align:center;padding:28px 16px;border-radius:var(--raio);background:var(--papel);box-shadow:var(--sombra-leve)}
+.metrica strong{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,5vw,3.6rem);color:var(--terracota-escura);line-height:1}
+.metrica span{font-size:.98rem;color:var(--tinta-suave)}
+.subtitulo{font-family:var(--mao);font-size:1.9rem;color:var(--oliva-escura);margin:0 0 20px;line-height:1.1}
+.resultados{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;list-style:none;padding:0;margin:0 0 clamp(56px,8vw,90px)}
+.resultado{background:var(--oliva);color:#fff;padding:28px;border-radius:var(--raio);box-shadow:var(--sombra-leve)}
+.resultado strong{display:block;font-family:var(--serif);font-weight:400;font-size:2.6rem;line-height:1}
+.resultado .o-que{display:block;font-weight:500;margin:.3rem 0 .6rem}
+.resultado p{margin:0;font-size:.97rem;opacity:.95}
+.depoimentos{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;list-style:none;padding:0;margin:0}
+.depoimento{background:#fff;padding:30px 30px 26px;border-radius:6px;box-shadow:var(--sombra-leve);position:relative}
+.depoimento:nth-child(odd){transform:rotate(-.6deg)}
+.depoimento:nth-child(even){transform:rotate(.6deg)}
+.depoimento::before{content:"“";position:absolute;top:-6px;left:22px;font-family:var(--serif);font-size:5rem;color:var(--terracota-clara);line-height:1}
+.depoimento blockquote{margin:16px 0 18px;font-size:1.05rem}
+.depoimento figcaption{font-family:var(--mao);font-size:1.4rem;line-height:1.2;color:var(--terracota-escura)}
+.depoimento figcaption span{display:block;font-family:var(--corpo);font-size:.9rem;color:var(--tinta-suave)}
+
+/* ============ CONTATO ============ */
+.contato-grade{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,5vw,72px);align-items:start}
+.form{background:var(--papel);padding:clamp(24px,4vw,40px);border-radius:var(--raio);box-shadow:var(--sombra)}
+.campo{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+.campo label{font-weight:500;font-size:.95rem}
+.campo input,.campo textarea{font-family:var(--corpo);font-size:1rem;font-weight:300;color:var(--tinta);padding:.85rem 1rem;border-radius:12px;border:1.5px solid rgba(58,42,32,.2);background:#fff;width:100%}
+.campo textarea{min-height:140px;resize:vertical}
+.campo input:focus,.campo textarea:focus{border-color:var(--terracota);outline:3px solid rgba(181,86,58,.25);outline-offset:0}
+.confirmacao{display:none;text-align:center;padding:20px 0}
+.confirmacao.ativa{display:block}
+.confirmacao .grande{font-family:var(--serif);font-size:2rem;color:var(--terracota-escura);margin-bottom:.4rem}
+.canais{display:grid;gap:14px}
+.canal{display:flex;align-items:center;gap:16px;text-decoration:none;background:rgba(251,247,241,.82);padding:18px 20px;border-radius:16px;box-shadow:var(--sombra-leve);transition:transform .25s}
+.canal:hover{transform:translateX(6px)}
+.canal .icone{flex:0 0 46px;height:46px;border-radius:50%;display:grid;place-items:center;color:#fff}
+.canal .icone svg{width:22px;height:22px}
+.canal strong{display:block;font-weight:500}
+.canal span{font-size:.92rem;color:var(--tinta-suave);word-break:break-word}
+.bg-terracota{background:var(--terracota)}
+.bg-oliva{background:var(--oliva)}
+.bg-tinta{background:var(--tinta)}
+.nota-mao{font-family:var(--mao);font-size:1.45rem;color:var(--oliva-escura);margin-top:18px;transform:rotate(-2deg)}
+
+/* ============ RODAPÉ ============ */
+.rodape{background:var(--tinta);color:var(--linho);padding:56px 0 36px}
+.rodape .container{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+.rodape .marca{color:var(--linho);font-size:1.8rem}
+.rodape .marca em{color:var(--terracota-clara)}
+.redes{display:flex;gap:18px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+.redes a{text-decoration:none;color:var(--linho);border-bottom:1px solid rgba(242,233,220,.35)}
+.redes a:hover{border-color:var(--terracota-clara)}
+.rodape small{display:block;width:100%;color:rgba(242,233,220,.7);font-size:.9rem;padding-top:22px;border-top:1px solid rgba(242,233,220,.15)}
+
+/* ============ CARD DE CAPTURA ============ */
+.modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:16px}
+.modal.aberto{display:flex}
+.modal .fundo{position:absolute;inset:0;background:rgba(40,26,18,.6)}
+.modal .card{position:relative;background:var(--papel);border-radius:22px;max-width:440px;width:100%;padding:66px 30px 30px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);animation:entrar .4s ease both;max-height:calc(100vh - 32px);overflow:auto}
+.modal .card h2{font-size:2rem;margin-bottom:.4rem;padding-right:24px}
+.modal .card p{color:var(--tinta-suave)}
+.modal .fechar{position:absolute;top:12px;right:12px;width:42px;height:42px;border-radius:50%;border:0;background:var(--linho);font-size:1.5rem;line-height:1;cursor:pointer;color:var(--tinta)}
+.modal .fechar:hover{background:var(--linho-2)}
+.modal .btn{width:100%}
+.modal .carimbinho{position:absolute;top:18px;left:26px;background:var(--oliva);color:#fff;font-family:var(--mao);font-size:1.3rem;padding:.2rem 1rem;border-radius:8px;transform:rotate(-4deg)}
+@keyframes entrar{from{opacity:0;transform:translateY(20px) scale(.97)}}
+
+/* ============ ANIMAÇÃO DE ENTRADA ============ */
+.js .revelar{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease}
+.js .revelar.visivel{opacity:1;transform:none}
+
+/* ============ RESPONSIVO ============ */
+@media (max-width:980px){
+  .capa-grade,.sobre-grade,.contato-grade{grid-template-columns:1fr}
+  .capa-foto{max-width:360px;margin-top:10px}
+  .servicos-grade{grid-template-columns:repeat(2,1fr)}
+  .metricas{grid-template-columns:repeat(2,1fr)}
+  .resultados{grid-template-columns:1fr}
+  .sobre .recorte{margin-inline:auto}
+}
+@media (max-width:860px){
+  .hamburguer{display:block}
+  .menu{position:fixed;top:72px;left:0;right:0;background:var(--linho);box-shadow:0 20px 30px -20px rgba(74,48,30,.4);max-height:0;overflow:hidden;transition:max-height .35s ease;visibility:hidden}
+  .menu.aberto{max-height:420px;visibility:visible}
+  .menu ul{flex-direction:column;gap:0;padding:8px 16px 20px}
+  .menu a{display:block;padding:14px 4px;font-size:1.1rem;border-bottom:1px solid rgba(58,42,32,.1)}
+  .destaques-grade{grid-template-columns:1fr;max-width:380px;margin-inline:auto;gap:36px}
+  .destaque:nth-child(2){transform:none}
+  .destaque:nth-child(2):hover{transform:translateY(-6px)}
+  .depoimentos{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  body{font-size:1rem}
+  .servicos-grade{grid-template-columns:1fr}
+  .galeria{grid-template-columns:repeat(2,1fr);gap:14px}
+  .trabalho h3{font-size:.95rem}
+  .carimbo{width:104px;height:104px;left:-12px;bottom:30px}
+  .carimbo svg{width:90px;height:90px}
+  .capa .radio{transform:scale(.6);right:-30px;top:80px}
+  .capa .xicara,.servicos .xicara{display:none}
+  .sobre .planta{right:0;bottom:10px;opacity:.6;width:90px}
+  .contato .envelope{right:8px;top:24px;opacity:.55;transform:scale(.7)}
+  .botoes .btn{flex:1 1 100%}
+  .faixa-servicos li{font-size:1.25rem}
+}
+@media (max-width:380px){
+  .galeria{grid-template-columns:1fr}
+  .metricas{grid-template-columns:1fr}
+}
+
+/* ============ MOVIMENTO REDUZIDO ============ */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .revelar{opacity:1;transform:none}
+  .trilho{width:auto;flex-wrap:wrap;justify-content:center}
+  .trilho ul[aria-hidden="true"]{display:none}
+  .trilho ul{flex-wrap:wrap;justify-content:center;row-gap:6px}
+}
+</style>
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+<!-- ============ MENU FIXO ============ -->
+<header class="topo" id="topo">
+  <div class="container">
+    <a href="#capa" class="marca">Emanuela <em>Melo</em></a>
+    <button class="hamburguer" id="hamburguer" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+    <nav class="menu" id="menu" aria-label="Menu principal">
+      <ul>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#destaques">Destaques</a></li>
+        <li><a href="#trabalhos">Trabalhos</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#numeros">Números</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<!-- ============ 1. CAPA ============ -->
+<section class="capa" id="capa" aria-labelledby="titulo-capa">
+  <div class="objeto radio" aria-hidden="true"><span class="grade"></span><span class="dial"></span><span class="faixinha"></span></div>
+  <div class="objeto xicara" aria-hidden="true"><span class="pires"></span><span class="copo"></span><span class="alca"></span><span class="vapor"></span></div>
+
+  <div class="container capa-grade conteudo">
+    <div class="revelar">
+      <span class="olho">UGC Creator em Ananindeua, PA</span>
+      <h1 id="titulo-capa">Emanuela <em>Melo</em></h1>
+      <p class="frase">Crio vídeos que fazem a sua marca parecer conversa de amiga e vender como anúncio. Roteiro, gravação e edição com cara de gente de verdade.</p>
+      <div class="botoes">
+        <a href="#contato" class="btn btn-cheio">Falar comigo</a>
+        <a href="#destaques" class="btn btn-vazado">Ver os trabalhos</a>
+      </div>
+      <!-- Números da capa: edite em NUMEROS_CAPA no script -->
+      <ul class="numeros-capa" id="numeros-capa"></ul>
+    </div>
+
+    <div class="capa-foto revelar">
+      <figure class="recorte" style="margin:0">
+        <span class="fita" aria-hidden="true"></span>
+        <!--
+          FOTO PRINCIPAL: para trocar pela foto real, apague a div abaixo e coloque:
+          <div class="foto"><img src="minha-foto.jpg" alt="Emanuela Melo sorrindo segurando um produto" width="800" height="1000"></div>
+          Use uma foto vertical 4:5 (ex.: 800x1000 px) em .jpg ou .webp leve (até 200 KB).
+        -->
+        <div class="foto foto-vazia" role="img" aria-label="Espaço para a foto da creator Emanuela Melo"><span class="tag">foto da creator 4:5</span></div>
+        <figcaption class="legenda">oi, eu sou a Manu!</figcaption>
+      </figure>
+      <div class="carimbo" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <defs><path id="circulo" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+          <text><textPath href="#circulo">feito à mão ✻ feito à mão ✻</textPath></text>
+        </svg>
+        <span class="coracao">♥</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Faixa fina com as marcas: edite em MARCAS no script -->
+  <div class="faixa-marcas conteudo">
+    <h2 class="rotulo">Marcas com quem já trabalhei</h2>
+    <div class="trilho" id="trilho-marcas"></div>
+  </div>
+</section>
+
+<!-- ============ 2. SOBRE MIM ============ -->
+<section class="sobre" id="sobre" aria-labelledby="titulo-sobre">
+  <div class="objeto planta" aria-hidden="true"><span class="folha f4"></span><span class="folha f5"></span><span class="folha f1"></span><span class="folha f3"></span><span class="folha f2"></span><span class="vaso"></span></div>
+  <div class="container sobre-grade conteudo">
+    <figure class="recorte revelar" style="margin:0">
+      <span class="fita" aria-hidden="true"></span>
+      <!--
+        FOTO DO SOBRE: troque a div abaixo por
+        <div class="foto"><img src="foto-sobre.jpg" alt="Emanuela Melo gravando um vídeo em casa" width="800" height="1000" loading="lazy"></div>
+      -->
+      <div class="foto foto-vazia" role="img" aria-label="Espaço para a foto da Emanuela gravando" style="background:radial-gradient(circle at 50% 38%,rgba(255,255,255,.4) 0 18%,transparent 19%),linear-gradient(160deg,#c9d0b0,#6d7a4c 60%,#3f4829)"><span class="tag">foto de bastidor 4:5</span></div>
+      <figcaption class="legenda">bastidores do meu cantinho</figcaption>
+    </figure>
+
+    <div class="texto revelar">
+      <span class="olho">prazer, Manu</span>
+      <h2 id="titulo-sobre">Conteúdo com <em>cuidado</em> de quem faz à mão</h2>
+      <p style="margin-top:1.4rem">Eu sou a Emanuela, mas pode me chamar de Manu. Moro em Ananindeua e transformo produtos em histórias que as pessoas querem assistir até o fim. Já foram mais de 500 vídeos e 300 marcas, e em cada um eu trato o seu produto como se fosse meu.</p>
+      <p>Meu jeito é simples: entendo o que você precisa, escrevo um roteiro que soa natural, gravo com luz bonita e entrego pronto para postar ou anunciar. Sem enrolação e com muito carinho nos detalhes.</p>
+      <ul class="promessas">
+        <li><span class="check" aria-hidden="true">✓</span><span><strong>Roteiro aprovado antes de gravar.</strong> Você vê tudo antes, sem surpresa.</span></li>
+        <li><span class="check" aria-hidden="true">✓</span><span><strong>Uma rodada de ajuste inclusa.</strong> Se algo não ficou do seu jeito, eu ajusto.</span></li>
+        <li><span class="check" aria-hidden="true">✓</span><span><strong>Entrega em até 72 horas úteis.</strong> Depois do roteiro aprovado e do produto recebido.</span></li>
+      </ul>
+      <span class="assinatura">Emanuela Melo</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. CONTEÚDOS DE DESTAQUE ============ -->
+<section class="destaques" id="destaques" aria-labelledby="titulo-destaques">
+  <div class="container conteudo">
+    <div class="cabeca revelar">
+      <span class="olho">os queridinhos</span>
+      <h2 id="titulo-destaques">Conteúdos de <em>destaque</em></h2>
+      <p>Três vídeos que mostram bem o meu jeito de criar. Toque em qualquer um para assistir no Instagram.</p>
+    </div>
+    <!--
+      Os três cards são gerados a partir do array DESTAQUES no começo do script.
+      LINK DO VÍDEO: campo "link" de cada item.
+      CAPA DO VÍDEO: campo "capa" de cada item (ex.: "capa-1.jpg", imagem vertical 9:16, 540x960 px).
+      Se "capa" ficar vazio, aparece o bloco com degradê.
+    -->
+    <div class="destaques-grade" id="destaques-grade"></div>
+  </div>
+</section>
+
+<!-- ============ 4. TRABALHOS POR NICHO ============ -->
+<section class="trabalhos" id="trabalhos" aria-labelledby="titulo-trabalhos">
+  <div class="container conteudo">
+    <div class="cabeca revelar">
+      <span class="olho">um pouco de tudo, feito com calma</span>
+      <h2 id="titulo-trabalhos">Trabalhos por <em>nicho</em></h2>
+      <p>Escolha um nicho para ver os trabalhos daquele universo.</p>
+    </div>
+    <div class="filtros revelar" id="filtros" role="group" aria-label="Filtrar trabalhos por nicho"></div>
+    <ul class="galeria" id="galeria" aria-live="polite"></ul>
+  </div>
+</section>
+
+<!-- ============ 5. COMO EU TE AJUDO ============ -->
+<section class="servicos" id="servicos" aria-labelledby="titulo-servicos" style="padding-top:clamp(60px,8vw,100px)">
+  <div class="objeto xicara" aria-hidden="true"><span class="pires"></span><span class="copo"></span><span class="alca"></span><span class="vapor"></span></div>
+  <div class="faixa-servicos conteudo" aria-hidden="true">
+    <div class="trilho" id="trilho-servicos"></div>
+  </div>
+  <div class="container conteudo">
+    <div class="cabeca revelar">
+      <span class="olho">o que eu faço por você</span>
+      <h2 id="titulo-servicos">Como eu te <em>ajudo</em></h2>
+      <p>Do vídeo único ao pacote do mês inteiro. Me conta o seu objetivo e eu monto o formato ideal.</p>
+    </div>
+    <ul class="servicos-grade" id="servicos-grade"></ul>
+  </div>
+</section>
+
+<!-- ============ 6. NÚMEROS E DEPOIMENTOS ============ -->
+<section class="numeros" id="numeros" aria-labelledby="titulo-numeros">
+  <div class="container conteudo">
+    <div class="cabeca revelar">
+      <span class="olho">o que os números contam</span>
+      <h2 id="titulo-numeros">Resultados e <em>palavras</em> de quem confia</h2>
+    </div>
+    <ul class="metricas" id="metricas"></ul>
+
+    <p class="subtitulo revelar">resultados de campanha</p>
+    <ul class="resultados" id="resultados"></ul>
+
+    <p class="subtitulo revelar">o que dizem por aí</p>
+    <ul class="depoimentos" id="depoimentos"></ul>
+  </div>
+</section>
+
+<!-- ============ 7. BORA CRIAR JUNTOS ============ -->
+<section class="contato" id="contato" aria-labelledby="titulo-contato">
+  <div class="objeto envelope" aria-hidden="true"><span class="selo"></span><span class="selo-postal"></span></div>
+  <div class="container conteudo">
+    <div class="cabeca revelar">
+      <span class="olho">vamos conversar?</span>
+      <h2 id="titulo-contato">Bora criar <em>juntos</em></h2>
+      <p>Me conta sobre a sua marca e o que você precisa. Eu respondo rapidinho.</p>
+    </div>
+    <div class="contato-grade">
+      <div class="form revelar">
+        <!--
+          O formulário mostra a confirmação na tela, sem recarregar.
+          Para receber as mensagens de verdade no seu e-mail, crie uma conta grátis no Formspree
+          (formspree.io), copie o endereço do seu formulário e cole em FORM_ENDPOINT no script.
+        -->
+        <form id="form-contato" novalidate>
+          <div class="campo">
+            <label for="nome">Seu nome</label>
+            <input id="nome" name="nome" type="text" autocomplete="name" required>
+          </div>
+          <div class="campo">
+            <label for="email">Seu e-mail</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="campo">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" required placeholder="Conta um pouco sobre a marca, o produto e o prazo"></textarea>
+          </div>
+          <p id="erro-form" role="alert" style="color:var(--terracota-escura);font-weight:500;margin:0 0 12px"></p>
+          <button type="submit" class="btn btn-cheio" style="width:100%">Enviar mensagem</button>
+        </form>
+        <div class="confirmacao" id="confirmacao" role="status" aria-live="polite" tabindex="-1">
+          <p class="grande">Recebi, obrigada!</p>
+          <p>Sua mensagem chegou por aqui. Respondo em até um dia útil. Se preferir agilizar, me chama no WhatsApp.</p>
+          <a class="btn btn-vazado" id="enviar-email" href="mailto:manumelougc@gmail.com">Enviar também pelo e-mail</a>
+        </div>
+      </div>
+
+      <div class="revelar">
+        <div class="canais">
+          <a class="canal" href="https://wa.me/5591985954040?text=Oi%20Manu!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar%20sobre%20um%20conte%C3%BAdo." target="_blank" rel="noopener">
+            <span class="icone bg-oliva" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg></span>
+            <span><strong>WhatsApp</strong><span>(91) 98595-4040</span></span>
+          </a>
+          <a class="canal" href="mailto:manumelougc@gmail.com">
+            <span class="icone bg-terracota" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+            <span><strong>E-mail</strong><span>manumelougc@gmail.com</span></span>
+          </a>
+          <a class="canal" href="https://www.instagram.com/manumelo_b/" target="_blank" rel="noopener">
+            <span class="icone bg-tinta" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+            <span><strong>Instagram</strong><span>@manumelo_b</span></span>
+          </a>
+        </div>
+        <p class="nota-mao">atendo marcas do Brasil inteiro, direto de Ananindeua ♥</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ 8. RODAPÉ ============ -->
+<footer class="rodape">
+  <div class="container">
+    <a href="#capa" class="marca">Emanuela <em>Melo</em></a>
+    <ul class="redes">
+      <li><a href="https://www.instagram.com/manumelo_b/" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://wa.me/5591985954040" target="_blank" rel="noopener">WhatsApp</a></li>
+      <li><a href="mailto:manumelougc@gmail.com">E-mail</a></li>
+      <!-- TikTok: troque @seuusuario pelo seu usuário ou apague a linha -->
+      <li><a href="https://www.tiktok.com/@seuusuario" target="_blank" rel="noopener">TikTok</a></li>
+    </ul>
+    <small>© <span id="ano">2026</span> Emanuela Melo. UGC Creator em Ananindeua, PA. Todos os direitos reservados.</small>
+  </div>
+</footer>
+
+<!-- ============ CARD DE CAPTURA (MÍDIA KIT) ============ -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="fundo" data-fechar></div>
+  <div class="card" role="dialog" aria-modal="true" aria-labelledby="titulo-modal">
+    <span class="carimbinho" aria-hidden="true">mimo grátis</span>
+    <button class="fechar" type="button" aria-label="Fechar" data-fechar>×</button>
+    <div id="modal-form-area">
+      <h2 id="titulo-modal">Quer meu mídia kit <em>completo</em>?</h2>
+      <p>Preços, formatos e cases em um PDF bonitinho. Deixa seu contato que eu te envio.</p>
+      <form id="form-kit" novalidate>
+        <div class="campo">
+          <label for="kit-nome">Nome</label>
+          <input id="kit-nome" name="nome" type="text" autocomplete="name" required>
+        </div>
+        <div class="campo">
+          <label for="kit-email">E-mail</label>
+          <input id="kit-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <p id="erro-kit" role="alert" style="color:var(--terracota-escura);font-weight:500;margin:0 0 12px"></p>
+        <button type="submit" class="btn btn-cheio">Quero receber</button>
+      </form>
+    </div>
+    <div class="confirmacao" id="kit-ok" role="status" tabindex="-1">
+      <p class="grande">Anotado!</p>
+      <p>Seu mídia kit vai chegar no seu e-mail em breve. Obrigada pelo interesse!</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   SEUS DADOS: edite aqui sem mexer no HTML
+   ===================================================================== */
+
+/* Números da capa (três números curtos) */
+const NUMEROS_CAPA = [
+  { valor: 500, prefixo: "+", sufixo: "",  rotulo: "vídeos entregues" },
+  { valor: 300, prefixo: "+", sufixo: "",  rotulo: "marcas atendidas" },
+  { valor: 10,  prefixo: "+", sufixo: "M", rotulo: "views somadas" }
+];
+
+/* Marcas da faixa fina da capa */
+const MARCAS = [
+  "Coala", "OMO", "Gocase", "Alva", "Confort", "Toda Up", "Mercado Livre",
+  "Sem Parar", "Seda", "Lacta", "Lay's", "Pet Love", "Inner Circle"
+];
+
+/* Conteúdos de destaque (três cards de vídeo)
+   link:  endereço do vídeo (abre em nova aba)
+   capa:  caminho da imagem de capa vertical 9:16 (ex.: "capa-1.jpg"). Vazio = bloco com degradê
+   numero e rotulo: TROQUE pelos números reais de cada vídeo (estão como placeholder) */
+const DESTAQUES = [
+  {
+    link: "https://www.instagram.com/p/DeMgUAWtRPz/",
+    capa: "",
+    numero: "+X,XM",
+    rotulo: "views no reels (troque pelo número real)",
+    titulo: "Título do conteúdo 01",
+    contexto: "Uma linha de contexto: marca, objetivo e formato do vídeo.",
+    cor: ["#e7b9a4", "#b5563a", "#7d3a26"]
+  },
+  {
+    link: "https://www.instagram.com/p/DeUrdmDtZ7e/",
+    capa: "",
+    numero: "+X,XM",
+    rotulo: "views no reels (troque pelo número real)",
+    titulo: "Título do conteúdo 02",
+    contexto: "Uma linha de contexto: marca, objetivo e formato do vídeo.",
+    cor: ["#d7dcc0", "#6d7a4c", "#3f4829"]
+  },
+  {
+    link: "https://www.instagram.com/p/DdMDqCnNYGW/",
+    capa: "",
+    numero: "+X,XM",
+    rotulo: "views no reels (troque pelo número real)",
+    titulo: "Título do conteúdo 03",
+    contexto: "Uma linha de contexto: marca, objetivo e formato do vídeo.",
+    cor: ["#efd9c0", "#c98b5e", "#6b4129"]
+  }
+];
+
+/* Nichos que aparecem como filtro (a ordem aqui é a ordem dos botões) */
+const NICHOS = [
+  "Beleza", "Skincare", "Moda", "Comida", "Casa e decoração",
+  "Fitness", "Maternidade", "Pet", "Tech"
+];
+
+/* Trabalhos da galeria
+   nicho: precisa ser igual a um dos NICHOS acima
+   link:  endereço do vídeo ou post ("#" se ainda não tiver)
+   capa:  imagem vertical 4:5 (ex.: "trabalho-1.jpg"). Vazio = bloco com degradê */
+const TRABALHOS = [
+  { titulo: "Rotina de maquiagem para o dia a dia", nicho: "Beleza",            formato: "Reels 9:16",        link: "#", capa: "" },
+  { titulo: "Finalização de cabelo em 3 passos",     nicho: "Beleza",            formato: "Vídeo para anúncio", link: "#", capa: "" },
+  { titulo: "Skincare noturno sem complicação",      nicho: "Skincare",          formato: "Reels 9:16",        link: "#", capa: "" },
+  { titulo: "Primeiras impressões de um sérum",      nicho: "Skincare",          formato: "Depoimento UGC",    link: "#", capa: "" },
+  { titulo: "Três looks com a mesma peça",           nicho: "Moda",              formato: "Reels 9:16",        link: "#", capa: "" },
+  { titulo: "Lanche da tarde em 5 minutos",          nicho: "Comida",            formato: "Receita UGC",       link: "#", capa: "" },
+  { titulo: "Provando o snack novo",                 nicho: "Comida",            formato: "Reação UGC",        link: "#", capa: "" },
+  { titulo: "Dia de faxina com cheirinho bom",       nicho: "Casa e decoração",  formato: "Antes e depois",    link: "#", capa: "" },
+  { titulo: "Cantinho de leitura repaginado",        nicho: "Casa e decoração",  formato: "Fotos do produto",  link: "#", capa: "" },
+  { titulo: "Treino rápido em casa",                 nicho: "Fitness",           formato: "Reels 9:16",        link: "#", capa: "" },
+  { titulo: "Bolsa da maternidade organizada",       nicho: "Maternidade",       formato: "Unboxing",          link: "#", capa: "" },
+  { titulo: "Reação do pet ao brinquedo novo",       nicho: "Pet",               formato: "Vídeo UGC",         link: "#", capa: "" },
+  { titulo: "Unboxing da capinha do celular",        nicho: "Tech",              formato: "Unboxing",          link: "#", capa: "" },
+  { titulo: "App que facilitou a minha rotina",      nicho: "Tech",              formato: "Vídeo para anúncio", link: "#", capa: "" }
+];
+
+/* Serviços (seis cards) */
+const SERVICOS = [
+  { titulo: "Vídeo UGC",              descricao: "Vídeo vertical com roteiro, gravação e edição, falando do seu produto do jeito que gente de verdade fala." },
+  { titulo: "Corte para anúncio",     descricao: "Versões com ganchos diferentes e duração certa para rodar no Meta Ads e no TikTok Ads." },
+  { titulo: "Fotos do produto",       descricao: "Fotos lifestyle com luz natural e composição de mesa, prontas para feed, site e marketplace." },
+  { titulo: "Unboxing",               descricao: "A experiência de abrir o pacote com reação sincera, valorizando embalagem e primeiros detalhes." },
+  { titulo: "Publicação no meu perfil", descricao: "O conteúdo vai ao ar no @manumelo_b, com legenda pensada e stories de apoio." },
+  { titulo: "Pacote mensal",          descricao: "Uma leva de conteúdos por mês com planejamento, roteiro e entregas programadas." }
+];
+
+/* Métricas com contador (quatro) */
+const METRICAS = [
+  { valor: 500, prefixo: "+", sufixo: "",  rotulo: "vídeos entregues" },
+  { valor: 300, prefixo: "+", sufixo: "",  rotulo: "marcas atendidas" },
+  { valor: 10,  prefixo: "+", sufixo: "M", rotulo: "views somadas" },
+  { valor: 72,  prefixo: "",  sufixo: "h", rotulo: "úteis para entregar" }
+];
+
+/* Resultados de campanha (três): TROQUE os placeholders pelos números reais */
+const RESULTADOS = [
+  { numero: "+XX%", oque: "de engajamento",       texto: "Campanha para Marca 01. Descreva em uma linha o que foi feito e o resultado." },
+  { numero: "+XX%", oque: "de cliques no anúncio", texto: "Campanha para Marca 02. Descreva em uma linha o que foi feito e o resultado." },
+  { numero: "XXk",  oque: "de alcance orgânico",   texto: "Campanha para Marca 03. Descreva em uma linha o que foi feito e o resultado." }
+];
+
+/* Depoimentos (quatro): TROQUE pelos depoimentos reais dos seus clientes */
+const DEPOIMENTOS = [
+  { texto: "Cole aqui o depoimento real do cliente. Algo como: a Manu entendeu a nossa marca de primeira e entregou antes do prazo.", nome: "Cliente 01", empresa: "Marca 01" },
+  { texto: "Cole aqui o depoimento real do cliente. Algo como: o roteiro chegou redondinho e o vídeo virou o nosso melhor anúncio.", nome: "Cliente 02", empresa: "Marca 02" },
+  { texto: "Cole aqui o depoimento real do cliente. Algo como: comunicação leve, prazos cumpridos e conteúdo com muita verdade.", nome: "Cliente 03", empresa: "Marca 03" },
+  { texto: "Cole aqui o depoimento real do cliente. Algo como: já fechamos o pacote mensal porque o resultado apareceu rápido.", nome: "Cliente 04", empresa: "Marca 04" }
+];
+
+/* Endereço do Formspree (opcional). Vazio = só mostra a confirmação na tela */
+const FORM_ENDPOINT = "";
+
+/* =====================================================================
+   DAQUI PARA BAIXO É O FUNCIONAMENTO DA PÁGINA
+   ===================================================================== */
+document.documentElement.classList.add("js");
+const reduzMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = (s) => document.querySelector(s);
+
+/* Gradientes por nicho para os blocos sem foto */
+const CORES_NICHO = {
+  "Beleza": ["#f1c9b6", "#c8735a"], "Skincare": ["#f3e1cf", "#d39a77"], "Moda": ["#e3c7b5", "#8c4a36"],
+  "Comida": ["#f0d39e", "#c9763e"], "Casa e decoração": ["#dfd6c3", "#8b7a5c"], "Fitness": ["#d2d9b8", "#6d7a4c"],
+  "Maternidade": ["#f2d6cc", "#b98572"], "Pet": ["#e6d2b0", "#9a6b3e"], "Tech": ["#cfd1c9", "#56594d"]
+};
+
+function formatar(n, decimais) {
+  return n.toLocaleString("pt-BR", { minimumFractionDigits: decimais, maximumFractionDigits: decimais });
+}
+
+/* Números da capa */
+$("#numeros-capa").innerHTML = NUMEROS_CAPA.map(n =>
+  `<li><strong class="contador" data-alvo="${n.valor}" data-prefixo="${n.prefixo}" data-sufixo="${n.sufixo}">${n.prefixo}${formatar(n.valor, 0)}${n.sufixo}</strong><span>${n.rotulo}</span></li>`
+).join("");
+
+/* Faixas que rolam (marcas e serviços): a lista vai duplicada para o loop ficar contínuo */
+function montarTrilho(el, itens) {
+  const lista = itens.map(i => `<li>${i}</li>`).join("");
+  el.innerHTML = `<ul>${lista}</ul><ul aria-hidden="true">${lista}</ul>`;
+}
+montarTrilho($("#trilho-marcas"), MARCAS);
+montarTrilho($("#trilho-servicos"), SERVICOS.map(s => s.titulo));
+
+/* Destaques */
+$("#destaques-grade").innerHTML = DESTAQUES.map((d, i) => {
+  const fundo = `linear-gradient(165deg, ${d.cor[0]}, ${d.cor[1]} 55%, ${d.cor[2]})`;
+  const capa = d.capa
+    ? `<img src="${d.capa}" alt="Capa do vídeo: ${d.titulo}" loading="lazy" width="540" height="960">`
+    : `<span class="tag">capa do vídeo 9:16</span>`;
+  return `<a class="destaque revelar" href="${d.link}" target="_blank" rel="noopener" aria-label="Assistir no Instagram: ${d.titulo}">
+      <div class="video" style="background:${fundo}">${capa}<span class="play" aria-hidden="true"></span></div>
+      <div class="info">
+        <div class="numero">${d.numero}</div>
+        <span class="rotulo">${d.rotulo}</span>
+        <h3>${d.titulo}</h3>
+        <p class="contexto">${d.contexto}</p>
+        <span class="abrir">Assistir no Instagram ↗</span>
+      </div>
+    </a>`;
+}).join("");
+
+/* Trabalhos com filtro por nicho */
+const filtrosEl = $("#filtros");
+const galeriaEl = $("#galeria");
+filtrosEl.innerHTML = ["Todos", ...NICHOS].map((n, i) =>
+  `<button type="button" class="filtro" data-nicho="${n}" aria-pressed="${i === 0}">${n}</button>`
+).join("");
+
+function mostrarTrabalhos(nicho) {
+  const lista = nicho === "Todos" ? TRABALHOS : TRABALHOS.filter(t => t.nicho === nicho);
+  if (!lista.length) {
+    galeriaEl.innerHTML = `<li class="vazio">Em breve, trabalhos de ${nicho.toLowerCase()} por aqui.</li>`;
+    return;
+  }
+  galeriaEl.innerHTML = lista.map((t, i) => {
+    const c = CORES_NICHO[t.nicho] || ["#efd9c0", "#b5563a"];
+    const capa = t.capa
+      ? `<div class="foto"><img src="${t.capa}" alt="${t.titulo}" loading="lazy" width="400" height="500"></div>`
+      : `<div class="foto foto-vazia" role="img" aria-label="Espaço para a capa do trabalho ${t.titulo}" style="background:linear-gradient(160deg, ${c[0]}, ${c[1]})"><span class="tag">capa 4:5</span></div>`;
+    const abre = t.link && t.link !== "#" ? ` href="${t.link}" target="_blank" rel="noopener"` : "";
+    return `<li class="trabalho" style="animation-delay:${i * 40}ms">
+        <a${abre}>${capa}
+          <span class="nicho">${t.nicho}</span>
+          <h3>${t.titulo}</h3>
+          <span class="formato">${t.formato}</span>
+        </a>
+      </li>`;
+  }).join("");
+}
+filtrosEl.addEventListener("click", (e) => {
+  const btn = e.target.closest(".filtro");
+  if (!btn) return;
+  filtrosEl.querySelectorAll(".filtro").forEach(b => b.setAttribute("aria-pressed", b === btn));
+  mostrarTrabalhos(btn.dataset.nicho);
+});
+mostrarTrabalhos("Todos");
+
+/* Serviços */
+$("#servicos-grade").innerHTML = SERVICOS.map((s, i) =>
+  `<li class="servico revelar"><span class="num">${String(i + 1).padStart(2, "0")}</span><h3>${s.titulo}</h3><p>${s.descricao}</p></li>`
+).join("");
+
+/* Métricas, resultados e depoimentos */
+$("#metricas").innerHTML = METRICAS.map(m =>
+  `<li class="metrica revelar"><strong class="contador" data-alvo="${m.valor}" data-prefixo="${m.prefixo}" data-sufixo="${m.sufixo}">${m.prefixo}${formatar(m.valor, 0)}${m.sufixo}</strong><span>${m.rotulo}</span></li>`
+).join("");
+$("#resultados").innerHTML = RESULTADOS.map(r =>
+  `<li class="resultado revelar"><strong>${r.numero}</strong><span class="o-que">${r.oque}</span><p>${r.texto}</p></li>`
+).join("");
+$("#depoimentos").innerHTML = DEPOIMENTOS.map(d =>
+  `<li class="revelar"><figure class="depoimento" style="margin:0"><blockquote>${d.texto}</blockquote><figcaption>${d.nome}<span>${d.empresa}</span></figcaption></figure></li>`
+).join("");
+
+/* Ano automático no rodapé */
+$("#ano").textContent = new Date().getFullYear();
+
+/* Menu: fundo ao rolar e menu-sanduíche no celular */
+const topo = $("#topo"), menu = $("#menu"), hamb = $("#hamburguer");
+const aoRolar = () => topo.classList.toggle("rolou", window.scrollY > 20);
+window.addEventListener("scroll", aoRolar, { passive: true });
+aoRolar();
+function fecharMenu() {
+  menu.classList.remove("aberto");
+  hamb.setAttribute("aria-expanded", "false");
+  hamb.setAttribute("aria-label", "Abrir menu");
+}
+hamb.addEventListener("click", () => {
+  const abrir = !menu.classList.contains("aberto");
+  menu.classList.toggle("aberto", abrir);
+  hamb.setAttribute("aria-expanded", String(abrir));
+  hamb.setAttribute("aria-label", abrir ? "Fechar menu" : "Abrir menu");
+});
+menu.addEventListener("click", (e) => { if (e.target.closest("a")) fecharMenu(); });
+
+/* Contador animado */
+function animarContador(el) {
+  const alvo = parseFloat(el.dataset.alvo);
+  const pre = el.dataset.prefixo || "", suf = el.dataset.sufixo || "";
+  if (reduzMovimento) { el.textContent = pre + formatar(alvo, 0) + suf; return; }
+  const duracao = 1800, inicio = performance.now();
+  const passo = (agora) => {
+    const p = Math.min((agora - inicio) / duracao, 1);
+    const suave = 1 - Math.pow(1 - p, 3);
+    el.textContent = pre + formatar(Math.round(alvo * suave), 0) + suf;
+    if (p < 1) requestAnimationFrame(passo);
+  };
+  requestAnimationFrame(passo);
+}
+
+/* Animação de entrada ao rolar */
+const revelaveis = document.querySelectorAll(".revelar");
+const contadores = document.querySelectorAll(".contador");
+if ("IntersectionObserver" in window && !reduzMovimento) {
+  const io = new IntersectionObserver((entradas) => {
+    entradas.forEach(en => {
+      if (!en.isIntersecting) return;
+      en.target.classList.add("visivel");
+      io.unobserve(en.target);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  revelaveis.forEach(el => io.observe(el));
+
+  const ioNum = new IntersectionObserver((entradas) => {
+    entradas.forEach(en => {
+      if (!en.isIntersecting) return;
+      animarContador(en.target);
+      ioNum.unobserve(en.target);
+    });
+  }, { threshold: 0.5 });
+  contadores.forEach(el => { el.textContent = (el.dataset.prefixo || "") + "0" + (el.dataset.sufixo || ""); ioNum.observe(el); });
+} else {
+  revelaveis.forEach(el => el.classList.add("visivel"));
+}
+
+/* Validação simples dos formulários */
+function validar(form, erroEl) {
+  const campos = [...form.querySelectorAll("[required]")];
+  for (const c of campos) {
+    if (!c.value.trim()) { erroEl.textContent = "Preencha todos os campos, por favor."; c.focus(); return false; }
+    if (c.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.value.trim())) {
+      erroEl.textContent = "Confere o e-mail? Parece que falta alguma coisa."; c.focus(); return false;
+    }
+  }
+  erroEl.textContent = "";
+  return true;
+}
+function enviarParaServico(dados) {
+  if (!FORM_ENDPOINT) return;
+  fetch(FORM_ENDPOINT, { method: "POST", headers: { "Accept": "application/json" }, body: dados }).catch(() => {});
+}
+
+/* Formulário de contato */
+const formContato = $("#form-contato");
+formContato.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (!validar(formContato, $("#erro-form"))) return;
+  const dados = new FormData(formContato);
+  enviarParaServico(dados);
+  const assunto = encodeURIComponent("Contato pelo portfólio: " + dados.get("nome"));
+  const corpo = encodeURIComponent(dados.get("mensagem") + "\n\n" + dados.get("nome") + " | " + dados.get("email"));
+  $("#enviar-email").href = `mailto:manumelougc@gmail.com?subject=${assunto}&body=${corpo}`;
+  formContato.reset();
+  formContato.style.display = "none";
+  const ok = $("#confirmacao");
+  ok.classList.add("ativa");
+  ok.focus();
+});
+
+/* Card de captura: aparece após 7 segundos, uma vez por visita */
+const modal = $("#modal");
+let focoAnterior = null;
+function jaViu() { try { return sessionStorage.getItem("midiaKitVisto") === "1"; } catch (e) { return false; } }
+function marcarVisto() { try { sessionStorage.setItem("midiaKitVisto", "1"); } catch (e) {} }
+function abrirModal() {
+  if (jaViu()) return;
+  marcarVisto();
+  focoAnterior = document.activeElement;
+  modal.classList.add("aberto");
+  modal.setAttribute("aria-hidden", "false");
+  setTimeout(() => $("#kit-nome").focus(), 50);
+}
+function fecharModal() {
+  modal.classList.remove("aberto");
+  modal.setAttribute("aria-hidden", "true");
+  if (focoAnterior && focoAnterior.focus) focoAnterior.focus();
+}
+modal.addEventListener("click", (e) => { if (e.target.closest("[data-fechar]")) fecharModal(); });
+document.addEventListener("keydown", (e) => {
+  if (!modal.classList.contains("aberto")) {
+    if (e.key === "Escape" && menu.classList.contains("aberto")) { fecharMenu(); hamb.focus(); }
+    return;
+  }
+  if (e.key === "Escape") fecharModal();
+  if (e.key === "Tab") {
+    const focaveis = [...modal.querySelectorAll("button, input, a[href]")].filter(el => el.offsetParent !== null);
+    const primeiro = focaveis[0], ultimo = focaveis[focaveis.length - 1];
+    if (e.shiftKey && document.activeElement === primeiro) { e.preventDefault(); ultimo.focus(); }
+    else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primeiro.focus(); }
+  }
+});
+const formKit = $("#form-kit");
+formKit.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (!validar(formKit, $("#erro-kit"))) return;
+  const dados = new FormData(formKit);
+  dados.append("origem", "midia-kit");
+  enviarParaServico(dados);
+  $("#modal-form-area").style.display = "none";
+  const ok = $("#kit-ok");
+  ok.classList.add("ativa");
+  ok.focus();
+  setTimeout(fecharModal, 3500);
+});
+if (!jaViu()) setTimeout(abrirModal, 7000);
+</script>
+</body>
+</html>
