@@ -190,17 +190,21 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .conteudo{position:relative;z-index:1}
 
 /* ============ SOBRE ============ */
-.sobre-grade{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,6vw,90px);align-items:center}
-/* carrossel de fotos do Sobre */
-.carrossel{position:relative;width:100%;max-width:420px;justify-self:center}
-.carrossel-trilho{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;border-radius:24px;box-shadow:0 22px 44px -20px rgba(70,42,33,.45),0 6px 14px -8px rgba(70,42,33,.25);scrollbar-width:none;-ms-overflow-style:none}
+.sobre-grade{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(40px,6vw,72px)}
+.sobre .texto{max-width:760px}
+/* carrossel de fotos do Sobre: foto do meio em destaque, vizinhas apagadas nas laterais */
+.carrossel{--w:min(340px,68vw);position:relative;width:100%}
+.carrossel-trilho{display:flex;gap:clamp(14px,2.4vw,26px);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:20px calc(50% - var(--w) / 2) 34px;scrollbar-width:none;-ms-overflow-style:none;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(to right,transparent,#000 14%,#000 86%,transparent)}
 .carrossel-trilho::-webkit-scrollbar{display:none}
-.carrossel-trilho img{flex:0 0 100%;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;scroll-snap-align:center;display:block}
-.carrossel-btn{position:absolute;top:calc(50% - 22px);transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:rgba(251,247,241,.92);color:var(--tinta);font-size:1.9rem;line-height:1;padding-bottom:4px;cursor:pointer;box-shadow:0 6px 16px -6px rgba(0,0,0,.35);transition:background .2s,transform .2s}
+.carrossel-trilho img{flex:0 0 var(--w);width:var(--w);height:auto;aspect-ratio:4/5;object-fit:cover;scroll-snap-align:center;display:block;border-radius:22px;
+  box-shadow:0 22px 40px -20px rgba(70,42,33,.5),0 6px 14px -8px rgba(70,42,33,.25);opacity:.4;transform:scale(.88);transition:opacity .45s ease,transform .45s ease}
+.carrossel-trilho img.ativa{opacity:1;transform:none}
+.carrossel-btn{position:absolute;top:calc(20px + var(--w) * .625);transform:translateY(-50%);z-index:2;width:44px;height:44px;border-radius:50%;border:0;background:rgba(251,247,241,.95);color:var(--tinta);font-size:1.9rem;line-height:1;padding-bottom:4px;cursor:pointer;box-shadow:0 6px 16px -6px rgba(0,0,0,.35);transition:background .2s,transform .2s}
 .carrossel-btn:hover{background:#fff;transform:translateY(-50%) scale(1.06)}
-.carrossel-btn.anterior{left:12px}
-.carrossel-btn.proxima{right:12px}
-.carrossel-pontos{display:flex;justify-content:center;gap:8px;margin-top:16px}
+.carrossel-btn.anterior{left:max(4px,calc(50% - var(--w) / 2 - 64px))}
+.carrossel-btn.proxima{right:max(4px,calc(50% - var(--w) / 2 - 64px))}
+.carrossel-pontos{display:flex;justify-content:center;gap:8px;margin-top:4px}
 .carrossel-pontos button{width:9px;height:9px;padding:0;border:0;border-radius:99px;background:rgba(70,42,33,.25);cursor:pointer;transition:width .25s,background .25s}
 .carrossel-pontos button[aria-current="true"]{width:26px;background:var(--azul)}
 .sobre .texto p{font-size:1.1rem}
@@ -338,7 +342,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 
 /* ============ RESPONSIVO ============ */
 @media (max-width:980px){
-  .capa-grade,.sobre-grade,.contato-grade{grid-template-columns:1fr}
+  .capa-grade,.sobre-grade,.contato-grade{grid-template-columns:minmax(0,1fr)}
   .capa-foto{max-width:440px;margin-top:10px}
   .servicos-grade{grid-template-columns:repeat(2,1fr)}
   .metricas{grid-template-columns:repeat(2,1fr)}
@@ -371,7 +375,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   .faixa-marcas .trilho-logos{--t:64px}
   .faixa-marcas .trilho-logos li{padding:0 8px}
   .capa .xicara,.servicos .xicara{display:none}
-  .sobre .planta{right:0;bottom:10px;opacity:.6;width:90px}
+  .sobre .planta{display:none}
   .contato .envelope{right:8px;top:24px;opacity:.55;transform:scale(.7)}
   .botoes .btn{flex:1 1 100%}
   .faixa-servicos li{font-size:1.25rem}
@@ -467,14 +471,6 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 <section class="sobre" id="sobre" aria-labelledby="titulo-sobre">
   <div class="objeto planta" aria-hidden="true"><span class="folha f4"></span><span class="folha f5"></span><span class="folha f1"></span><span class="folha f3"></span><span class="folha f2"></span><span class="vaso"></span></div>
   <div class="container sobre-grade conteudo">
-    <!-- Galeria de fotos em carrossel: as fotos ficam em GALERIA no script (arquivos galeria-1.jpg a galeria-5.jpg, 800x1000 px) -->
-    <div class="carrossel revelar" role="region" aria-roledescription="carrossel" aria-label="Galeria de fotos da Manu">
-      <div class="carrossel-trilho" id="carrossel-trilho" tabindex="0"></div>
-      <button class="carrossel-btn anterior" type="button" id="foto-anterior" aria-label="Foto anterior">‹</button>
-      <button class="carrossel-btn proxima" type="button" id="foto-proxima" aria-label="Próxima foto">›</button>
-      <div class="carrossel-pontos" id="carrossel-pontos"></div>
-    </div>
-
     <div class="texto revelar">
       <span class="olho">conteúdo que comunica valor</span>
       <h2 id="titulo-sobre">Sua marca tem algo a dizer. Eu transformo isso em <em>conteúdo</em>.</h2>
@@ -482,6 +478,15 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
       <p>Na criação de conteúdo eu transformo minha rotina real em vídeos dinâmicos, criativos e com alta retenção, pensados para prender a atenção desde o primeiro segundo e fazer a audiência assistir até o final.</p>
       <p>Sou de Belém - PA e levo para o conteúdo uma comunicação leve, natural e estratégica, que gera conexão de verdade e faz o público confiar e comprar.</p>
       <span class="assinatura">Manu Melo</span>
+    </div>
+
+    <!-- Galeria de fotos em carrossel (foto do meio em destaque, vizinhas nas laterais).
+         As fotos ficam em GALERIA no script (arquivos galeria-1.jpg a galeria-5.jpg, 800x1000 px) -->
+    <div class="carrossel revelar" role="region" aria-roledescription="carrossel" aria-label="Galeria de fotos da Manu">
+      <div class="carrossel-trilho" id="carrossel-trilho" tabindex="0"></div>
+      <button class="carrossel-btn anterior" type="button" id="foto-anterior" aria-label="Foto anterior">‹</button>
+      <button class="carrossel-btn proxima" type="button" id="foto-proxima" aria-label="Próxima foto">›</button>
+      <div class="carrossel-pontos" id="carrossel-pontos"></div>
     </div>
   </div>
 </section>
@@ -931,11 +936,28 @@ pontosFotos.innerHTML = GALERIA.map((f, i) =>
   `<button type="button" aria-label="Ver foto ${i + 1}" aria-current="${i === 0}"></button>`
 ).join("");
 let fotoAtual = 0;
+const slides = [...trilhoFotos.children];
+function marcarAtiva(i) {
+  slides.forEach((s, k) => s.classList.toggle("ativa", k === i));
+  [...pontosFotos.children].forEach((b, k) => b.setAttribute("aria-current", String(k === i)));
+}
 function irParaFoto(i) {
   const total = GALERIA.length;
   fotoAtual = (i + total) % total;
-  trilhoFotos.scrollTo({ left: fotoAtual * trilhoFotos.clientWidth, behavior: reduzMovimento ? "auto" : "smooth" });
+  const s = slides[fotoAtual];
+  const alvo = s.offsetLeft - (trilhoFotos.clientWidth - s.offsetWidth) / 2;
+  trilhoFotos.scrollTo({ left: alvo, behavior: reduzMovimento ? "auto" : "smooth" });
+  marcarAtiva(fotoAtual);
 }
+/* começa pela foto do meio, para já aparecer foto dos dois lados */
+fotoAtual = Math.floor(GALERIA.length / 2);
+marcarAtiva(fotoAtual);
+requestAnimationFrame(() => {
+  const s = slides[fotoAtual];
+  trilhoFotos.style.scrollBehavior = "auto";
+  trilhoFotos.scrollLeft = s.offsetLeft - (trilhoFotos.clientWidth - s.offsetWidth) / 2;
+  trilhoFotos.style.scrollBehavior = "";
+});
 $("#foto-anterior").addEventListener("click", () => irParaFoto(fotoAtual - 1));
 $("#foto-proxima").addEventListener("click", () => irParaFoto(fotoAtual + 1));
 pontosFotos.addEventListener("click", (e) => {
@@ -947,12 +969,24 @@ trilhoFotos.addEventListener("keydown", (e) => {
   if (e.key === "ArrowRight") { e.preventDefault(); irParaFoto(fotoAtual + 1); }
 });
 /* acompanha a foto visível (também quando a pessoa arrasta com o dedo) */
+let esperaRolagem;
 trilhoFotos.addEventListener("scroll", () => {
-  const i = Math.round(trilhoFotos.scrollLeft / trilhoFotos.clientWidth);
-  if (i === fotoAtual && pontosFotos.children[i].getAttribute("aria-current") === "true") return;
-  fotoAtual = i;
-  [...pontosFotos.children].forEach((b, k) => b.setAttribute("aria-current", String(k === i)));
+  clearTimeout(esperaRolagem);
+  esperaRolagem = setTimeout(() => {
+    const centro = trilhoFotos.scrollLeft + trilhoFotos.clientWidth / 2;
+    let perto = 0, menor = Infinity;
+    slides.forEach((s, k) => {
+      const d = Math.abs(s.offsetLeft + s.offsetWidth / 2 - centro);
+      if (d < menor) { menor = d; perto = k; }
+    });
+    if (perto !== fotoAtual || !slides[perto].classList.contains("ativa")) { fotoAtual = perto; marcarAtiva(perto); }
+  }, 80);
 }, { passive: true });
+/* clicar numa foto da lateral traz ela para o meio */
+trilhoFotos.addEventListener("click", (e) => {
+  const k = slides.indexOf(e.target);
+  if (k >= 0 && k !== fotoAtual) irParaFoto(k);
+});
 
 /* Trabalhos com filtro por nicho */
 const filtrosEl = $("#filtros");
