@@ -201,6 +201,10 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .play{position:absolute;inset:0;margin:auto;width:70px;height:70px;border-radius:50%;background:rgba(251,247,241,.92);display:grid;place-items:center;box-shadow:0 10px 26px -8px rgba(0,0,0,.4);transition:transform .3s;z-index:1}
 .play::before{content:"";margin-left:6px;border-left:20px solid var(--azul);border-top:13px solid transparent;border-bottom:13px solid transparent}
 .destaque:hover .play{transform:scale(1.1)}
+/* prévia do Instagram: o quadro do Instagram é 4:5 com o vídeo 9:16 no meio;
+   ampliamos e recortamos para o vídeo preencher o card inteiro */
+.video.previa{container-type:inline-size;background:#1b1b1b!important}
+.video.previa iframe{position:absolute;border:0;top:-54px;left:-21.1cqw;width:142.2cqw;height:calc(54px + 177.8cqw + 160px)}
 .destaque .info{padding:18px 8px 0}
 .destaque .numero{font-family:var(--serif);font-size:2.6rem;color:var(--azul-escuro);line-height:1}
 .destaque .rotulo{font-family:var(--mao);font-size:1.35rem;color:var(--marrom-escuro);display:block;margin-bottom:.6rem}
@@ -464,8 +468,8 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
     <!--
       Os três cards são gerados a partir do array DESTAQUES no começo do script.
       LINK DO VÍDEO: campo "link" de cada item.
-      CAPA DO VÍDEO: campo "capa" de cada item (ex.: "capa-1.jpg", imagem vertical 9:16, 540x960 px).
-      Se "capa" ficar vazio, aparece o bloco com degradê.
+      CAPA DO VÍDEO: com "capa" vazio e link do Instagram, aparece a prévia do próprio vídeo.
+      Para usar uma imagem sua, preencha "capa" (ex.: "capa-1.jpg", vertical 9:16, 540x960 px).
     -->
     <div class="destaques-grade" id="destaques-grade"></div>
   </div>
@@ -645,8 +649,8 @@ const MARCAS = [
 ];
 
 /* Conteúdos de destaque (três cards de vídeo)
-   link:  endereço do vídeo (abre em nova aba)
-   capa:  caminho da imagem de capa vertical 9:16 (ex.: "capa-1.jpg"). Vazio = bloco com degradê
+   link:  endereço do vídeo no Instagram (post ou reel)
+   capa:  vazio = mostra a prévia do vídeo do Instagram. Ou uma imagem sua vertical 9:16 (ex.: "capa-1.jpg")
    numero e rotulo: TROQUE pelos números reais de cada vídeo (estão como placeholder) */
 const DESTAQUES = [
   {
@@ -855,19 +859,28 @@ montarTrilho($("#trilho-servicos"), SERVICOS.map(s => s.titulo));
 /* Destaques */
 $("#destaques-grade").innerHTML = DESTAQUES.map((d, i) => {
   const fundo = `linear-gradient(165deg, ${d.cor[0]}, ${d.cor[1]} 55%, ${d.cor[2]})`;
-  const capa = d.capa
-    ? `<img src="${d.capa}" alt="Capa do vídeo: ${d.titulo}" loading="lazy" width="540" height="960">`
-    : `<span class="tag">capa do vídeo 9:16</span>`;
-  return `<a class="destaque revelar" href="${d.link}" target="_blank" rel="noopener" aria-label="Assistir no Instagram: ${d.titulo}">
-      <div class="video" style="background:${fundo}">${capa}<span class="play" aria-hidden="true"></span></div>
+  /* Sem capa própria e com link do Instagram: mostra a prévia do próprio Instagram (toca ali mesmo).
+     Com capa própria: mostra a imagem com o botão de play. */
+  const instagram = !d.capa && /instagram\.com\/(p|reel)\//.test(d.link);
+  let midia;
+  if (instagram) {
+    const embed = d.link.split("?")[0].replace(/\/?$/, "/") + "embed/";
+    midia = `<iframe src="${embed}" title="Vídeo no Instagram: ${d.titulo}" loading="lazy" scrolling="no" allowtransparency="true"></iframe>`;
+  } else if (d.capa) {
+    midia = `<img src="${d.capa}" alt="Capa do vídeo: ${d.titulo}" loading="lazy" width="540" height="960"><span class="play" aria-hidden="true"></span>`;
+  } else {
+    midia = `<span class="tag">capa do vídeo 9:16</span><span class="play" aria-hidden="true"></span>`;
+  }
+  return `<article class="destaque revelar">
+      <div class="video${instagram ? " previa" : ""}" style="background:${fundo}">${midia}</div>
       <div class="info">
         <div class="numero">${d.numero}</div>
         <span class="rotulo">${d.rotulo}</span>
         <h3>${d.titulo}</h3>
         <p class="contexto">${d.contexto}</p>
-        <span class="abrir">Assistir no Instagram ↗</span>
+        <a class="abrir" href="${d.link}" target="_blank" rel="noopener">Assistir no Instagram ↗</a>
       </div>
-    </a>`;
+    </article>`;
 }).join("");
 
 /* Trabalhos com filtro por nicho */
