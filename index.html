@@ -153,12 +153,6 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   0%,100%{transform:translateY(0) rotate(var(--r,0deg))}
   50%{transform:translateY(-16px) rotate(calc(var(--r,0deg) + 3deg))}
 }
-/* rádio vintage */
-.radio{width:150px;height:96px;background:linear-gradient(180deg,#c86a4c,#a74d32);border-radius:18px;box-shadow:var(--sombra);--r:-8deg}
-.radio::before{content:"";position:absolute;width:3px;height:70px;background:#5a4030;left:30px;top:-58px;transform:rotate(-28deg);border-radius:3px}
-.radio .grade{position:absolute;left:14px;top:16px;width:66px;height:64px;border-radius:12px;background:radial-gradient(circle,#7d3a26 2px,transparent 2.5px) 0 0/9px 9px,#efd9c8}
-.radio .dial{position:absolute;right:18px;top:18px;width:38px;height:38px;border-radius:50%;background:radial-gradient(circle,#f6efe4 0 30%,#d8c4ad 31% 100%);border:3px solid #7d3a26}
-.radio .faixinha{position:absolute;right:14px;bottom:16px;width:46px;height:10px;border-radius:4px;background:var(--oliva)}
 /* plantinha no vaso */
 .planta{width:110px;height:150px;--r:4deg}
 .planta .vaso{position:absolute;bottom:0;left:22px;width:66px;height:56px;background:linear-gradient(90deg,#a74d32,#c86a4c 55%,#a74d32);clip-path:polygon(0 0,100% 0,86% 100%,14% 100%);border-radius:4px}
@@ -183,7 +177,6 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .envelope .selo-postal{position:absolute;right:10px;top:8px;width:26px;height:30px;background:var(--oliva);outline:2px dotted #fbf7f1;outline-offset:-4px;z-index:3}
 
 /* posições dos objetos */
-.capa .radio{right:4%;top:96px;animation-delay:-2s}
 .capa .xicara{left:-30px;bottom:110px;animation-delay:-5s}
 .sobre .planta{right:3%;bottom:40px;animation-delay:-1s}
 .contato .envelope{right:4%;top:60px;animation-delay:-3s}
@@ -348,7 +341,6 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   .trabalho h3{font-size:.95rem}
   .carimbo{width:104px;height:104px;left:-12px;bottom:30px}
   .carimbo svg{width:90px;height:90px}
-  .capa .radio{transform:scale(.6);right:-30px;top:80px}
   .capa .xicara,.servicos .xicara{display:none}
   .sobre .planta{right:0;bottom:10px;opacity:.6;width:90px}
   .contato .envelope{right:8px;top:24px;opacity:.55;transform:scale(.7)}
@@ -396,7 +388,6 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 
 <!-- ============ 1. CAPA ============ -->
 <section class="capa" id="capa" aria-labelledby="titulo-capa">
-  <div class="objeto radio" aria-hidden="true"><span class="grade"></span><span class="dial"></span><span class="faixinha"></span></div>
   <div class="objeto xicara" aria-hidden="true"><span class="pires"></span><span class="copo"></span><span class="alca"></span><span class="vapor"></span></div>
 
   <div class="container capa-grade conteudo">
