@@ -161,9 +161,11 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .enfeite,.bicho{position:absolute;height:auto;pointer-events:none;filter:drop-shadow(0 10px 14px rgba(0,0,0,.3))}
 .arara-solta{left:-20%;top:-4%;width:46%;animation:arara-voa 5s ease-in-out infinite alternate}
 .vitorias-solta{left:-24%;bottom:0;width:52%}
+/* placa do açaí em pé no chão, à direita, com a onça passando na frente */
+.placa-acai{right:-19%;bottom:6%;width:29%;transform:rotate(3deg)}
 .onca-solta{right:-16%;bottom:-7%;width:54%;animation:onca-anda 10s ease-in-out infinite alternate}
 /* no celular a foto fica menor para os enfeites caberem na tela */
-@media (max-width:600px){.capa-solta{width:74%;margin-top:56px}.vitorias-solta{left:-17%;width:46%}}
+@media (max-width:600px){.capa-solta{width:74%;margin-top:56px}.vitorias-solta{left:-17%;width:46%}.placa-acai{right:-14%;width:24%}}
 /* a arara plana subindo e descendo; a onça anda um pouco para a esquerda e volta */
 @keyframes arara-voa{
   0%{transform:translate(0,0) rotate(0deg)}
@@ -534,10 +536,11 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
     <div class="capa-foto revelar">
       <!--
         FOTO PRINCIPAL: fotos/capa-recorte.png (1149x1526, recortada sem fundo, clareada e com mais nitidez; original em fotos/originais/capa-sentada-camisa-branca.jpg).
-        Em volta, as peças da arte "Nortista" (elementos/capa/): vitórias-régias paradas, arara e onça se mexendo devagar.
+        Em volta, as peças da arte "Nortista" (elementos/capa/): placa do açaí e vitórias-régias paradas, arara e onça se mexendo devagar.
       -->
       <div class="capa-solta">
         <img class="foto-solta" src="fotos/capa-recorte.png" alt="Manu Melo sentada no chão de pernas cruzadas, sorrindo, de camisa branca e calça jeans" width="1149" height="1526" fetchpriority="high">
+        <img class="enfeite placa-acai" src="elementos/capa/placa-acai.webp" alt="" aria-hidden="true" width="300" height="488">
         <img class="enfeite vitorias-solta" src="elementos/capa/vitorias.webp" alt="" aria-hidden="true" width="470" height="176">
         <img class="bicho arara-solta" src="elementos/capa/arara.webp" alt="" aria-hidden="true" width="400" height="370">
         <img class="bicho onca-solta" src="elementos/capa/onca.webp" alt="" aria-hidden="true" width="540" height="209">
