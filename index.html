@@ -410,8 +410,9 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .avaliacoes-trilho li{flex:0 0 clamp(260px,30%,340px);scroll-snap-align:start;display:flex}
 .avaliacao{margin:0;width:100%;background:#fff;border-radius:20px;padding:22px 22px 24px;box-shadow:0 14px 28px -18px rgba(36,16,44,.45)}
 .avaliacao figcaption{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.avaliacao figcaption img{width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid #f4d6df;background:#fff}
+.avaliacao figcaption img{width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:center;flex-shrink:0;border:2px solid #f4d6df;background:#fff}
 .avaliacao figcaption strong{display:block;font-weight:700;font-size:1.05rem;color:var(--tinta);line-height:1.2}
+.avaliacao .campanha{display:block;font-size:.8rem;color:var(--tinta-suave);line-height:1.3;margin:1px 0 2px}
 .avaliacao .estrelas{color:var(--amarelo);letter-spacing:2px;font-size:1rem}
 .avaliacao time{font-size:.82rem;color:var(--tinta-suave);margin-left:8px}
 .avaliacao blockquote{margin:0;font-size:1rem;line-height:1.6;color:var(--tinta)}
@@ -1096,13 +1097,17 @@ const METRICAS = [
 
 
 /* Avaliações reais das marcas (carrossel em "Resultados e palavras de quem confia")
-   logo: arquivo em logos/avaliacoes/ (quadrado, 128x128) */
+   logo: arquivo em logos/avaliacoes/ (quadrado, 256x256, logo centralizada); campanha e data são opcionais */
 const DEPOIMENTOS = [
   { marca: "Eternizare", logo: "logos/avaliacoes/eternizare.png", data: "08/09/2026", texto: "Trabalho excelente! A comunicação também foi ótima e o resultado ficou do jeito que esperávamos. Com certeza trabalharia novamente com a Emanuela!" },
   { marca: "evida", logo: "logos/avaliacoes/evida.png", data: "07/07/2026", texto: "Rápida e boa qualidade na produção!" },
   { marca: "Kilara Joias", logo: "logos/avaliacoes/kilara.png", data: "16/03/2026", texto: "Adoramos o vídeo, a Manu captou exatamente a essência da nossa marca, nos enviou super rápido, muito obrigada!" },
   { marca: "Central Toalhas", logo: "logos/avaliacoes/central-toalhas.png", data: "07/03/2026", texto: "Campanhas perfeitas! Encontramos UGC perfeita, criativa, dinâmica e muito ágil." },
-  { marca: "VesteGo", logo: "logos/avaliacoes/vestego.png", data: "06/03/2026", texto: "simplismente encantado com mkt dela contrate sem medo ela sabe oque faz" }
+  { marca: "VesteGo", logo: "logos/avaliacoes/vestego.png", data: "06/03/2026", texto: "simplismente encantado com mkt dela contrate sem medo ela sabe oque faz" },
+  { marca: "Tuff", campanha: "Percarbonato de Sódio Tuff", logo: "logos/avaliacoes/tuff.png", data: "", texto: "Esse é o segundo trabalho que fazemos com a Emanuela e ficamos muito satisfeitos!" },
+  { marca: "Di Santinni", campanha: "TikTok Shop", logo: "logos/avaliacoes/di-santinni.png", data: "", texto: "Já trabalhamos mais de 1 vez com a Emanuela e os conteúdos são sempre ótimos." },
+  { marca: "Azulim", campanha: "Rotina de limpeza de pisos", logo: "logos/avaliacoes/azulim.png", data: "", texto: "Adoramos o trabalho, ficou muito bom!" },
+  { marca: "Coala Home", campanha: "Kit Coala Home The Queen", logo: "logos/avaliacoes/coala-home.png", data: "", texto: "Emanuela foi super criativa e entregou um ótimo conteúdo. Nota 10!" }
 ];
 
 /* Endereço do Formspree (opcional). Vazio = só mostra a confirmação na tela */
@@ -1404,8 +1409,8 @@ $("#metricas").innerHTML = METRICAS.map(m =>
 $("#depoimentos").innerHTML = DEPOIMENTOS.map(d =>
   `<li><figure class="avaliacao">
       <figcaption>
-        <img src="${d.logo}" alt="Logo ${d.marca}" width="128" height="128" loading="lazy">
-        <span><strong>${d.marca}</strong><span class="estrelas" role="img" aria-label="5 de 5 estrelas">★★★★★</span><time>${d.data}</time></span>
+        <img src="${d.logo}" alt="Logo ${d.marca}" width="256" height="256" loading="lazy">
+        <span><strong>${d.marca}</strong>${d.campanha ? `<span class="campanha">${d.campanha}</span>` : ""}<span class="estrelas" role="img" aria-label="5 de 5 estrelas">★★★★★</span>${d.data ? `<time>${d.data}</time>` : ""}</span>
       </figcaption>
       <blockquote>${d.texto}</blockquote>
     </figure></li>`
