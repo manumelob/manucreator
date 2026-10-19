@@ -116,8 +116,8 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .hamburguer[aria-expanded="true"] span::after{transform:translateY(-7px) rotate(-45deg)}
 
 /* ============ CAPA ============ */
-.capa{padding-top:calc(120px + var(--barra));padding-bottom:0;min-height:100vh;display:flex;flex-direction:column}
-.capa-grade{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center;flex:1;padding-bottom:64px}
+.capa{padding-top:calc(120px + var(--barra));padding-bottom:0;display:flex;flex-direction:column}
+.capa-grade{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center;flex:1;padding-bottom:0}
 /* título em 2 linhas: frase menor em cima e "intenção de venda." grande embaixo,
    com um brilho branco leve atrás das letras */
 .capa h1{font-size:clamp(2.1rem,4.2vw,3.4rem);margin:.2rem 0 1.2rem;
@@ -153,6 +153,12 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .capa-foto{position:relative;max-width:540px;justify-self:center;width:100%}
 /* placa do açaí embaixo dos números da capa, no lado do texto */
 .placa-acai{display:block;width:120px;height:auto;margin-top:28px;transform:rotate(-3deg);filter:drop-shadow(0 10px 14px rgba(0,0,0,.3))}
+/* no computador a coluna do texto ocupa a altura toda e a placa desce até encostar na faixa vermelha, como se saísse dela */
+@media (min-width:981px){
+  .capa-grade > .revelar:first-child{align-self:stretch;display:flex;flex-direction:column}
+  .capa-grade > .revelar:first-child > .olho{margin-top:auto}
+  .placa-acai{margin-top:auto;padding-top:24px;transform:rotate(-3deg) translateY(6px)}
+}
 @media (max-width:600px){.placa-acai{width:96px;margin-top:22px}}
 /* capa sem moldura: foto recortada em PNG (sem fundo) e as peças da arte "Nortista" em volta
    (posições em % da foto) */
@@ -166,7 +172,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .vitorias-solta{left:-24%;bottom:0;width:52%}
 .onca-solta{right:-16%;bottom:-7%;width:54%;animation:onca-anda 10s ease-in-out infinite alternate}
 /* no celular a foto fica menor para os enfeites caberem na tela */
-@media (max-width:600px){.capa-solta{width:74%;margin-top:56px}.vitorias-solta{left:-17%;width:46%}}
+@media (max-width:600px){.capa-solta{width:74%;margin-top:56px;margin-bottom:16px}.vitorias-solta{left:-17%;width:46%}}
 /* a arara plana subindo e descendo; a onça anda um pouco para a esquerda e volta */
 @keyframes arara-voa{
   0%{transform:translate(0,0) rotate(0deg)}
