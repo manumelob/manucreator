@@ -736,8 +736,6 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
     </div>
     <ul class="metricas" id="metricas"></ul>
 
-    <p class="subtitulo revelar">resultados de campanha</p>
-    <ul class="resultados" id="resultados"></ul>
 
     <!-- Avaliações das marcas em carrossel: os textos ficam em DEPOIMENTOS no script -->
     <div class="avaliacoes revelar">
@@ -1096,12 +1094,6 @@ const METRICAS = [
   { valor: 72,  prefixo: "",  sufixo: "h", rotulo: "úteis para entregar" }
 ];
 
-/* Resultados de campanha (três): TROQUE os placeholders pelos números reais */
-const RESULTADOS = [
-  { numero: "+XX%", oque: "de engajamento",       texto: "Campanha para Marca 01. Descreva em uma linha o que foi feito e o resultado." },
-  { numero: "+XX%", oque: "de cliques no anúncio", texto: "Campanha para Marca 02. Descreva em uma linha o que foi feito e o resultado." },
-  { numero: "XXk",  oque: "de alcance orgânico",   texto: "Campanha para Marca 03. Descreva em uma linha o que foi feito e o resultado." }
-];
 
 /* Avaliações reais das marcas (carrossel em "Resultados e palavras de quem confia")
    logo: arquivo em logos/avaliacoes/ (quadrado, 128x128) */
@@ -1408,9 +1400,6 @@ $("#servicos-grade").innerHTML = SERVICOS.map((s, i) =>
 /* Métricas, resultados e depoimentos */
 $("#metricas").innerHTML = METRICAS.map(m =>
   `<li class="metrica revelar"><strong class="contador" data-alvo="${m.valor}" data-prefixo="${m.prefixo}" data-sufixo="${m.sufixo}">${m.prefixo}${formatar(m.valor, 0)}${m.sufixo}</strong><span>${m.rotulo}</span></li>`
-).join("");
-$("#resultados").innerHTML = RESULTADOS.map(r =>
-  `<li class="resultado revelar"><strong>${r.numero}</strong><span class="o-que">${r.oque}</span><p>${r.texto}</p></li>`
 ).join("");
 $("#depoimentos").innerHTML = DEPOIMENTOS.map(d =>
   `<li><figure class="avaliacao">
