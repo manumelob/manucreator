@@ -232,7 +232,9 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .destaque:nth-child(2){transform:translateY(28px)}
 .destaque:hover{transform:translateY(-6px) rotate(-.6deg)}
 .destaque:nth-child(2):hover{transform:translateY(22px) rotate(.6deg)}
-.video{position:relative;aspect-ratio:9/16;border-radius:12px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+.video{position:relative;display:flex;width:100%;aspect-ratio:9/16;padding:0;border:0;border-radius:12px;overflow:hidden;align-items:flex-end;justify-content:center;background:var(--acai);cursor:pointer;font:inherit}
+.video img{transition:transform .5s ease}
+.destaque:hover .video img{transform:scale(1.04)}
 .video img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .video .tag{position:relative;z-index:1;background:rgba(255,255,255,.88);font-size:.82rem;padding:.3rem .8rem;border-radius:99px;margin-bottom:14px;font-weight:400}
 .play{position:absolute;inset:0;margin:auto;width:70px;height:70px;border-radius:50%;background:rgba(251,247,241,.92);display:grid;place-items:center;box-shadow:0 10px 26px -8px rgba(0,0,0,.4);transition:transform .3s;z-index:1}
@@ -243,7 +245,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .video.previa{container-type:inline-size;background:#1b1b1b!important}
 .video.previa iframe{position:absolute;border:0;top:-54px;left:-21.1cqw;width:142.2cqw;height:calc(54px + 177.8cqw + 160px)}
 .destaque .info{padding:18px 8px 0}
-.destaque .numero{font-family:var(--serif);font-size:2.6rem;color:var(--amarelo);text-shadow:2px 2px 0 var(--marrom);line-height:1}
+.destaque .numero{font-family:var(--serif);font-size:2.6rem;color:var(--amarelo);text-shadow:2px 2px 0 var(--marrom);line-height:1;margin:.2rem 0 .45rem}
 .destaque .rotulo{font-family:var(--corpo);font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--verde);display:block;margin:.4rem 0 .7rem}
 .destaque h3{font-size:1.3rem;margin-bottom:.4rem;color:var(--linho)}
 .destaque .contexto{color:rgba(255,246,229,.75);font-size:.96rem;margin:0}
@@ -553,13 +555,12 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
     <div class="cabeca revelar">
       <span class="olho">os queridinhos</span>
       <h2 id="titulo-destaques">Conteúdos de <em>destaque</em></h2>
-      <p>Três vídeos que mostram bem o meu jeito de criar. Toque em qualquer um para assistir no Instagram.</p>
+      <p>Três vídeos que mostram bem o meu jeito de criar. Toque em qualquer um para assistir.</p>
     </div>
     <!--
       Os três cards são gerados a partir do array DESTAQUES no começo do script.
-      LINK DO VÍDEO: campo "link" de cada item.
-      CAPA DO VÍDEO: com "capa" vazio e link do Instagram, aparece a prévia do próprio vídeo.
-      Para usar uma imagem sua, preencha "capa" (ex.: "capa-1.jpg", vertical 9:16, 540x960 px).
+      São os mesmos três vídeos em destaque do portfólio do Canva (TikTok Shop, Influ e afiliação, Conteúdo UGC).
+      Os vídeos e as capas ficam em midia/destaques/ e abrem no player da página.
     -->
     <div class="destaques-grade" id="destaques-grade"></div>
   </div>
@@ -752,37 +753,34 @@ const MARCAS = [
   "Veste Go", "Montessoriando", "Saint Germain", "Inner Circle", "Alva", "Toda Up"
 ];
 
-/* Conteúdos de destaque (três cards de vídeo)
-   link:  endereço do vídeo no Instagram (post ou reel)
-   capa:  vazio = mostra a prévia do vídeo do Instagram. Ou uma imagem sua vertical 9:16 (ex.: "capa-1.jpg")
-   numero e rotulo: TROQUE pelos números reais de cada vídeo (estão como placeholder) */
+/* Conteúdos de destaque (três cards de vídeo), os mesmos do portfólio do Canva
+   video e capa: arquivos em midia/destaques/ (vídeo 540x960 e capa .jpg)
+   numero: o número que aparece no vídeo do Canva; rotulo: frase pequena embaixo do número
+   (deixe numero ou rotulo vazio para não mostrar) */
 const DESTAQUES = [
   {
-    link: "https://www.instagram.com/p/DeMgUAWtRPz/",
-    capa: "",
-    numero: "+X,XM",
-    rotulo: "views no reels (troque pelo número real)",
-    titulo: "Título do conteúdo 01",
-    contexto: "Uma linha de contexto: marca, objetivo e formato do vídeo.",
-    cor: ["#c3d3df", "#597f9e", "#3c5468"]
+    video: "midia/destaques/01.mp4",
+    capa: "midia/destaques/01.jpg",
+    numero: "4 mi",
+    rotulo: "",
+    titulo: "TikTok Shop",
+    contexto: "Vídeo de oferta com dica de promoção, feito para vender direto no TikTok Shop."
   },
   {
-    link: "https://www.instagram.com/p/DeUrdmDtZ7e/",
-    capa: "",
-    numero: "+X,XM",
-    rotulo: "views no reels (troque pelo número real)",
-    titulo: "Título do conteúdo 02",
-    contexto: "Uma linha de contexto: marca, objetivo e formato do vídeo.",
-    cor: ["#e3d3c4", "#8a6f5c", "#5a3f31"]
+    video: "midia/destaques/02.mp4",
+    capa: "midia/destaques/02.jpg",
+    numero: "13,9 mil",
+    rotulo: "",
+    titulo: "Influ e afiliação",
+    contexto: "Conteúdo no meu perfil com link de afiliada, mostrando o produto na rotina."
   },
   {
-    link: "https://www.instagram.com/p/DdMDqCnNYGW/",
-    capa: "",
-    numero: "+X,XM",
-    rotulo: "views no reels (troque pelo número real)",
-    titulo: "Título do conteúdo 03",
-    contexto: "Uma linha de contexto: marca, objetivo e formato do vídeo.",
-    cor: ["#efd9c0", "#c98b5e", "#6b4129"]
+    video: "midia/destaques/03.mp4",
+    capa: "midia/destaques/03.jpg",
+    numero: "",
+    rotulo: "",
+    titulo: "Conteúdo UGC",
+    contexto: "Vídeo gravado para a marca usar nas redes e nos anúncios dela."
   }
 ];
 
@@ -998,31 +996,23 @@ montarLogos($("#marcas-linha-2"), metade, MARCAS.length);
 montarTrilho($("#trilho-servicos"), SERVICOS.map(s => s.titulo));
 
 /* Destaques */
-$("#destaques-grade").innerHTML = DESTAQUES.map((d, i) => {
-  const fundo = `linear-gradient(165deg, ${d.cor[0]}, ${d.cor[1]} 55%, ${d.cor[2]})`;
-  /* Sem capa própria e com link do Instagram: mostra a prévia do próprio Instagram (toca ali mesmo).
-     Com capa própria: mostra a imagem com o botão de play. */
-  const instagram = !d.capa && /instagram\.com\/(p|reel)\//.test(d.link);
-  let midia;
-  if (instagram) {
-    const embed = d.link.split("?")[0].replace(/\/?$/, "/") + "embed/";
-    midia = `<iframe src="${embed}" title="Vídeo no Instagram: ${d.titulo}" loading="lazy" scrolling="no" allowtransparency="true"></iframe>`;
-  } else if (d.capa) {
-    midia = `<img src="${d.capa}" alt="Capa do vídeo: ${d.titulo}" loading="lazy" width="540" height="960"><span class="play" aria-hidden="true"></span>`;
-  } else {
-    midia = `<span class="tag">capa do vídeo 9:16</span><span class="play" aria-hidden="true"></span>`;
-  }
-  return `<article class="destaque revelar">
-      <div class="video${instagram ? " previa" : ""}" style="background:${fundo}">${midia}</div>
+$("#destaques-grade").innerHTML = DESTAQUES.map((d, i) => `<article class="destaque revelar">
+      <button type="button" class="video" data-destaque="${i}" aria-label="Assistir: ${d.titulo}">
+        <img src="${d.capa}" alt="" loading="lazy" width="540" height="960"><span class="play" aria-hidden="true"></span>
+      </button>
       <div class="info">
-        <div class="numero">${d.numero}</div>
-        <span class="rotulo">${d.rotulo}</span>
+        ${d.numero ? `<div class="numero">${d.numero}</div>` : ""}
+        ${d.rotulo ? `<span class="rotulo">${d.rotulo}</span>` : ""}
         <h3>${d.titulo}</h3>
         <p class="contexto">${d.contexto}</p>
-        <a class="abrir" href="${d.link}" target="_blank" rel="noopener">Assistir no Instagram ↗</a>
       </div>
-    </article>`;
-}).join("");
+    </article>`
+).join("");
+/* clicar no vídeo de destaque abre o mesmo player da galeria */
+$("#destaques-grade").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-destaque]");
+  if (b) abrirVideo(DESTAQUES[+b.dataset.destaque]);
+});
 
 /* Carrossel de fotos do Sobre mim: arrasta no celular, botões e bolinhas no computador */
 const trilhoFotos = $("#carrossel-trilho");
