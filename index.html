@@ -332,6 +332,30 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .player .fechar{position:absolute;top:-6px;right:-6px;transform:translate(50%,-50%);width:44px;height:44px;border-radius:50%;border:0;background:var(--papel);color:var(--tinta);font-size:1.6rem;line-height:1;cursor:pointer;box-shadow:0 6px 16px -6px rgba(0,0,0,.4)}
 @media (max-width:600px){ .player .fechar{right:16px;top:12px;transform:none} }
 
+/* ============ EQUIPAMENTOS E CENÁRIO ============ */
+/* mesma estrutura da página do Canva: equipamentos à esquerda, cenário (vídeo + 2 fotos) à direita */
+.estrutura-grade{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(36px,5vw,72px);align-items:center}
+.equipamentos{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.equipamento{display:flex;align-items:center;gap:20px}
+.equipamento:nth-child(2){flex-direction:row-reverse;justify-content:flex-end;margin-left:clamp(40px,9vw,120px)}
+.equipamento img{width:clamp(130px,16vw,200px);height:auto;flex-shrink:0;filter:drop-shadow(0 16px 18px rgba(0,0,0,.45));transition:transform .35s ease}
+.equipamento:hover img{transform:translateY(-4px) rotate(-2deg)}
+.equipamento span{font-family:var(--serif);font-size:clamp(1.15rem,2vw,1.45rem);color:var(--amarelo);text-shadow:2px 2px 0 var(--marrom);line-height:1.2}
+.cenario{display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1fr 1fr;gap:14px}
+.cenario .cartao-video{grid-row:1 / 3;--cor-borda:var(--amarelo)}
+.cenario-foto{margin:0;border:4px solid var(--cor-borda,var(--azul-claro));border-radius:18px;overflow:hidden;box-shadow:0 18px 34px -20px rgba(0,0,0,.6)}
+.cenario-foto + .cenario-foto{--cor-borda:var(--verde)}
+.cenario-foto img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:3/4}
+.cenario-legenda{grid-column:1 / 3;text-align:center;font-family:var(--corpo);font-weight:700;font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;color:var(--verde);margin:6px 0 0}
+.estrutura .cuia-deco{right:3%;top:44px;width:150px;--r:-4deg}
+@media (max-width:980px){
+  .estrutura-grade{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:600px){
+  .equipamento img{width:120px}
+  .estrutura .cuia-deco{width:96px;top:16px;right:8px}
+}
+
 /* ============ SERVIÇOS ============ */
 .faixa-servicos{background:var(--marrom);color:#fff;padding:18px 0;overflow:hidden;transform:rotate(-1.2deg);margin:0 -20px clamp(56px,8vw,90px);box-shadow:var(--sombra-leve)}
 .faixa-servicos .trilho{animation-duration:32s}
@@ -623,6 +647,37 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
     </div>
     <!-- Uma fileira por nicho, em carrossel. A ordem vem de NICHOS e os vídeos de TRABALHOS, no script. -->
     <div class="nichos" id="galeria"></div>
+  </div>
+</section>
+
+<!-- ============ 4.1 EQUIPAMENTOS E CENÁRIO ============ -->
+<!-- Mesma estrutura da página "Meus equipamentos de gravação" do portfólio do Canva.
+     Fotos dos equipamentos em elementos/equipamentos/ (fundo transparente); vídeo e fotos do cenário em midia/cenario/. -->
+<section class="estrutura escura greca" id="estrutura" aria-labelledby="titulo-estrutura">
+  <img class="objeto cuia-deco" src="elementos/cuia.webp" alt="" aria-hidden="true" width="402" height="240" loading="lazy">
+  <div class="container conteudo">
+    <div class="cabeca revelar">
+      <span class="olho">estrutura de gravação</span>
+      <h2 id="titulo-estrutura">Meus equipamentos de <em>gravação</em></h2>
+      <p>Gravo com equipamento próprio e tenho um cenário pronto para a sua marca.</p>
+    </div>
+    <div class="estrutura-grade">
+      <ul class="equipamentos revelar">
+        <li class="equipamento"><img src="elementos/equipamentos/camera-sony-zv-e10.webp" alt="Câmera Sony ZV E10" width="520" height="419" loading="lazy"><span>Sony ZV E10</span></li>
+        <li class="equipamento"><img src="elementos/equipamentos/iphone-15.webp" alt="iPhone 15" width="422" height="520" loading="lazy"><span>iPhone 15</span></li>
+        <li class="equipamento"><img src="elementos/equipamentos/mic-ulanzi-a100.webp" alt="Microfone sem fio Ulanzi A100" width="465" height="520" loading="lazy"><span>Mic Ulanzi A100</span></li>
+      </ul>
+      <div class="cenario revelar">
+        <button type="button" class="cartao-video" id="video-cenario" aria-label="Assistir: vídeo do cenário">
+          <img src="midia/cenario/01.jpg" alt="" loading="lazy" width="540" height="960">
+          <span class="play" aria-hidden="true"></span>
+          <span class="texto-cartao"><strong>Área da piscina</strong><span class="cat">Cenário</span></span>
+        </button>
+        <figure class="cenario-foto"><img src="midia/cenario/foto-1.jpg" alt="Área gourmet com bancada, banqueta e plantas" width="600" height="800" loading="lazy"></figure>
+        <figure class="cenario-foto"><img src="midia/cenario/foto-2.jpg" alt="Manu na bancada da área gourmet" width="599" height="799" loading="lazy"></figure>
+        <p class="cenario-legenda">Opção de cenário</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1234,6 +1289,28 @@ if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
       c.classList.remove("tocando");
       if (v) { v.pause(); v.currentTime = 0; }
     });
+  });
+}
+
+/* Vídeo do cenário (seção Equipamentos): abre no mesmo player e mostra prévia ao passar o mouse */
+const CENARIO = { video: "midia/cenario/01.mp4", capa: "midia/cenario/01.jpg", previa: "midia/cenario/01-previa.mp4", titulo: "Opção de cenário" };
+const botaoCenario = $("#video-cenario");
+botaoCenario.addEventListener("click", () => abrirVideo(CENARIO));
+if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  botaoCenario.addEventListener("mouseenter", () => {
+    let v = botaoCenario.querySelector("video.previa");
+    if (!v) {
+      v = document.createElement("video");
+      v.className = "previa"; v.muted = true; v.loop = true; v.playsInline = true; v.preload = "auto";
+      v.setAttribute("aria-hidden", "true"); v.src = CENARIO.previa;
+      botaoCenario.querySelector("img").after(v);
+    }
+    v.play().then(() => botaoCenario.classList.add("tocando")).catch(() => {});
+  });
+  botaoCenario.addEventListener("mouseleave", () => {
+    const v = botaoCenario.querySelector("video.previa");
+    botaoCenario.classList.remove("tocando");
+    if (v) { v.pause(); v.currentTime = 0; }
   });
 }
 
