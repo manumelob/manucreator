@@ -283,8 +283,12 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .cartao-video .play::before{border-left-width:15px;border-top-width:10px;border-bottom-width:10px;margin-left:5px}
 .cartao-video:hover .play,.cartao-video:focus-visible .play{opacity:1}
 /* prévia: trecho curto sem som que toca quando o mouse passa pela fileira */
-.cartao-video .previa{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease;pointer-events:none}
-.cartao-video.tocando .previa{opacity:1}
+.cartao-video .previa,.destaque .video video.previa{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease;pointer-events:none}
+.cartao-video.tocando .previa,.destaque .video.tocando .previa{opacity:1}
+/* com a prévia tocando, o botão de play só aparece no card que está sob o mouse */
+.destaque .play{transition:transform .3s,opacity .3s}
+.destaque .video.tocando .play{opacity:0}
+.destaque .video.tocando:hover .play{opacity:1}
 /* player de vídeo que abre por cima da página */
 .player{position:fixed;inset:0;z-index:320;display:none;align-items:center;justify-content:center;padding:16px}
 .player.aberto{display:flex}
@@ -754,13 +758,14 @@ const MARCAS = [
 ];
 
 /* Conteúdos de destaque (três cards de vídeo), os mesmos do portfólio do Canva
-   video e capa: arquivos em midia/destaques/ (vídeo 540x960 e capa .jpg)
+   video, capa e previa: arquivos em midia/destaques/ (vídeo 540x960, capa .jpg e trecho de 4 s sem som que toca ao passar o mouse)
    numero: o número que aparece no vídeo do Canva; rotulo: frase pequena embaixo do número
    (deixe numero ou rotulo vazio para não mostrar) */
 const DESTAQUES = [
   {
     video: "midia/destaques/01.mp4",
     capa: "midia/destaques/01.jpg",
+    previa: "midia/destaques/01-previa.mp4",
     numero: "4 mi",
     rotulo: "",
     titulo: "TikTok Shop",
@@ -769,6 +774,7 @@ const DESTAQUES = [
   {
     video: "midia/destaques/02.mp4",
     capa: "midia/destaques/02.jpg",
+    previa: "midia/destaques/02-previa.mp4",
     numero: "13,9 mil",
     rotulo: "",
     titulo: "Influ e afiliação",
@@ -777,6 +783,7 @@ const DESTAQUES = [
   {
     video: "midia/destaques/03.mp4",
     capa: "midia/destaques/03.jpg",
+    previa: "midia/destaques/03-previa.mp4",
     numero: "",
     rotulo: "",
     titulo: "Conteúdo UGC",
@@ -1151,6 +1158,33 @@ if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
         c.classList.remove("tocando");
         if (v) { v.pause(); v.currentTime = 0; }
       });
+    });
+  });
+}
+
+/* Pré-visualização dos destaques: com o mouse sobre os cards, os três vídeos tocam um trecho curto sem som */
+if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  const grade = $("#destaques-grade");
+  const telas = [...grade.querySelectorAll("[data-destaque]")];
+  grade.addEventListener("mouseenter", () => {
+    telas.forEach(c => {
+      let v = c.querySelector("video.previa");
+      if (!v) {
+        v = document.createElement("video");
+        v.className = "previa";
+        v.muted = true; v.loop = true; v.playsInline = true; v.preload = "auto";
+        v.setAttribute("aria-hidden", "true");
+        v.src = DESTAQUES[+c.dataset.destaque].previa;
+        c.querySelector("img").after(v);
+      }
+      v.play().then(() => c.classList.add("tocando")).catch(() => {});
+    });
+  });
+  grade.addEventListener("mouseleave", () => {
+    telas.forEach(c => {
+      const v = c.querySelector("video.previa");
+      c.classList.remove("tocando");
+      if (v) { v.pause(); v.currentTime = 0; }
     });
   });
 }
