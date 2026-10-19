@@ -398,14 +398,23 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .resultado strong{display:block;font-family:var(--serif);font-weight:400;font-size:2.6rem;line-height:1}
 .resultado .o-que{display:block;font-weight:500;margin:.3rem 0 .6rem}
 .resultado p{margin:0;font-size:.97rem;opacity:.95}
-.depoimentos{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;list-style:none;padding:0;margin:0}
-.depoimento{background:#fff;padding:30px 30px 26px;border-radius:6px;box-shadow:var(--sombra-leve);position:relative}
-.depoimento:nth-child(odd){transform:rotate(-.6deg)}
-.depoimento:nth-child(even){transform:rotate(.6deg)}
-.depoimento::before{content:"“";position:absolute;top:-6px;left:22px;font-family:var(--serif);font-size:5rem;color:var(--marrom);line-height:1}
-.depoimento blockquote{margin:16px 0 18px;font-size:1.05rem}
-.depoimento figcaption{font-family:var(--corpo);font-weight:700;font-size:1.05rem;line-height:1.3;color:var(--azul)}
-.depoimento figcaption span{display:block;font-family:var(--corpo);font-size:.9rem;color:var(--tinta-suave)}
+/* avaliações das marcas: faixa rosa com cartões brancos em carrossel */
+.avaliacoes{background:linear-gradient(135deg,#f9d3df,#f4b3c8);border-radius:28px;padding:clamp(24px,4vw,40px);box-shadow:var(--sombra-leve)}
+.avaliacoes-topo{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px}
+.avaliacoes .subtitulo{margin:0 0 6px}
+.avaliacoes h3{font-size:clamp(1.4rem,2.8vw,2rem);color:var(--acai)}
+.avaliacoes .nicho-setas button{border-color:var(--acai);color:var(--acai)}
+.avaliacoes-trilho{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;list-style:none;margin:0;padding:4px 2px 10px;scrollbar-width:none}
+.avaliacoes-trilho::-webkit-scrollbar{display:none}
+.avaliacoes-trilho li{flex:0 0 clamp(260px,30%,340px);scroll-snap-align:start;display:flex}
+.avaliacao{margin:0;width:100%;background:#fff;border-radius:20px;padding:22px 22px 24px;box-shadow:0 14px 28px -18px rgba(36,16,44,.45)}
+.avaliacao figcaption{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.avaliacao figcaption img{width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid #f4d6df;background:#fff}
+.avaliacao figcaption strong{display:block;font-weight:700;font-size:1.05rem;color:var(--tinta);line-height:1.2}
+.avaliacao .estrelas{color:var(--amarelo);letter-spacing:2px;font-size:1rem}
+.avaliacao time{font-size:.82rem;color:var(--tinta-suave);margin-left:8px}
+.avaliacao blockquote{margin:0;font-size:1rem;line-height:1.6;color:var(--tinta)}
+@media (max-width:600px){.avaliacoes-trilho li{flex-basis:82%}.avaliacoes-topo{align-items:flex-start}}
 
 /* ============ CONTATO ============ */
 .contato{background:var(--marrom);color:var(--linho)}
@@ -483,7 +492,6 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   .destaques-grade{grid-template-columns:1fr;max-width:380px;margin-inline:auto;gap:36px}
   .destaque:nth-child(2){transform:none}
   .destaque:nth-child(2):hover{transform:translateY(-6px)}
-  .depoimentos{grid-template-columns:1fr}
 }
 @media (max-width:760px){
   :root{--barra:68px}
@@ -723,8 +731,20 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
     <p class="subtitulo revelar">resultados de campanha</p>
     <ul class="resultados" id="resultados"></ul>
 
-    <p class="subtitulo revelar">o que dizem por aí</p>
-    <ul class="depoimentos" id="depoimentos"></ul>
+    <!-- Avaliações das marcas em carrossel: os textos ficam em DEPOIMENTOS no script -->
+    <div class="avaliacoes revelar">
+      <div class="avaliacoes-topo">
+        <div>
+          <p class="subtitulo">o que as marcas dizem</p>
+          <h3>Avaliações de quem já trabalhou comigo</h3>
+        </div>
+        <div class="nicho-setas" id="setas-avaliacoes">
+          <button type="button" data-dir="-1" aria-label="Avaliações anteriores">‹</button>
+          <button type="button" data-dir="1" aria-label="Próximas avaliações">›</button>
+        </div>
+      </div>
+      <ul class="avaliacoes-trilho" id="depoimentos"></ul>
+    </div>
   </div>
 </section>
 
@@ -783,7 +803,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
             <span><strong>Instagram</strong><span>@manumelo_b</span></span>
           </a>
         </div>
-        <p class="nota-mao">atendo marcas do Brasil inteiro, direto de Belém do Pará&nbsp;♥</p>
+        <p class="nota-mao">atendo marcas do Brasil inteiro, direto de Belém do Pará ♥</p>
       </div>
     </div>
   </div>
@@ -1073,12 +1093,14 @@ const RESULTADOS = [
   { numero: "XXk",  oque: "de alcance orgânico",   texto: "Campanha para Marca 03. Descreva em uma linha o que foi feito e o resultado." }
 ];
 
-/* Depoimentos (quatro): TROQUE pelos depoimentos reais dos seus clientes */
+/* Avaliações reais das marcas (carrossel em "Resultados e palavras de quem confia")
+   logo: arquivo em logos/avaliacoes/ (quadrado, 128x128) */
 const DEPOIMENTOS = [
-  { texto: "Cole aqui o depoimento real do cliente. Algo como: a Manu entendeu a nossa marca de primeira e entregou antes do prazo.", nome: "Cliente 01", empresa: "Marca 01" },
-  { texto: "Cole aqui o depoimento real do cliente. Algo como: o roteiro chegou redondinho e o vídeo virou o nosso melhor anúncio.", nome: "Cliente 02", empresa: "Marca 02" },
-  { texto: "Cole aqui o depoimento real do cliente. Algo como: comunicação leve, prazos cumpridos e conteúdo com muita verdade.", nome: "Cliente 03", empresa: "Marca 03" },
-  { texto: "Cole aqui o depoimento real do cliente. Algo como: já fechamos o pacote mensal porque o resultado apareceu rápido.", nome: "Cliente 04", empresa: "Marca 04" }
+  { marca: "Eternizare", logo: "logos/avaliacoes/eternizare.png", data: "08/09/2026", texto: "Trabalho excelente! A comunicação também foi ótima e o resultado ficou do jeito que esperávamos. Com certeza trabalharia novamente com a Emanuela!" },
+  { marca: "evida", logo: "logos/avaliacoes/evida.png", data: "07/07/2026", texto: "Rápida e boa qualidade na produção!" },
+  { marca: "Kilara Joias", logo: "logos/avaliacoes/kilara.png", data: "16/03/2026", texto: "Adoramos o vídeo, a Manu captou exatamente a essência da nossa marca, nos enviou super rápido, muito obrigada!" },
+  { marca: "Central Toalhas", logo: "logos/avaliacoes/central-toalhas.png", data: "07/03/2026", texto: "Campanhas perfeitas! Encontramos UGC perfeita, criativa, dinâmica e muito ágil." },
+  { marca: "VesteGo", logo: "logos/avaliacoes/vestego.png", data: "06/03/2026", texto: "simplismente encantado com mkt dela contrate sem medo ela sabe oque faz" }
 ];
 
 /* Endereço do Formspree (opcional). Vazio = só mostra a confirmação na tela */
@@ -1381,8 +1403,29 @@ $("#resultados").innerHTML = RESULTADOS.map(r =>
   `<li class="resultado revelar"><strong>${r.numero}</strong><span class="o-que">${r.oque}</span><p>${r.texto}</p></li>`
 ).join("");
 $("#depoimentos").innerHTML = DEPOIMENTOS.map(d =>
-  `<li class="revelar"><figure class="depoimento" style="margin:0"><blockquote>${d.texto}</blockquote><figcaption>${d.nome}<span>${d.empresa}</span></figcaption></figure></li>`
+  `<li><figure class="avaliacao">
+      <figcaption>
+        <img src="${d.logo}" alt="Logo ${d.marca}" width="128" height="128" loading="lazy">
+        <span><strong>${d.marca}</strong><span class="estrelas" role="img" aria-label="5 de 5 estrelas">★★★★★</span><time>${d.data}</time></span>
+      </figcaption>
+      <blockquote>${d.texto}</blockquote>
+    </figure></li>`
 ).join("");
+/* setas do carrossel de avaliações */
+(() => {
+  const trilho = $("#depoimentos"), [ant, prox] = document.querySelectorAll("#setas-avaliacoes button");
+  const atualizar = () => {
+    ant.disabled = trilho.scrollLeft < 4;
+    prox.disabled = trilho.scrollLeft + trilho.clientWidth >= trilho.scrollWidth - 4;
+  };
+  document.querySelector("#setas-avaliacoes").addEventListener("click", (e) => {
+    const b = e.target.closest("button");
+    if (b) trilho.scrollBy({ left: trilho.clientWidth * 0.85 * +b.dataset.dir, behavior: reduzMovimento ? "auto" : "smooth" });
+  });
+  trilho.addEventListener("scroll", atualizar, { passive: true });
+  window.addEventListener("resize", atualizar);
+  atualizar();
+})();
 
 /* Ano automático no rodapé */
 $("#ano").textContent = new Date().getFullYear();
