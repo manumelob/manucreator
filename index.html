@@ -152,7 +152,26 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .fita{position:absolute;width:110px;height:30px;background:rgba(214,196,160,.75);top:-14px;left:50%;transform:translateX(-50%) rotate(-4deg);box-shadow:0 2px 4px rgba(0,0,0,.06)}
 .capa-foto{position:relative;max-width:540px;justify-self:center;width:100%}
 /* foto da capa na moldura redonda, com arara, bandeira do Pará, onça e vitórias-régias */
-.foto-capa{display:block;width:100%;height:auto;aspect-ratio:763/841;filter:drop-shadow(0 22px 30px rgba(0,0,0,.35))}
+.moldura-capa{position:relative;filter:drop-shadow(0 22px 30px rgba(0,0,0,.35))}
+.foto-capa{display:block;width:100%;height:auto;aspect-ratio:763/841}
+/* arara e onça por cima da foto, nas posições da arte original (em % da imagem de 763x841) */
+.bicho{position:absolute;height:auto;pointer-events:none}
+.arara-capa{left:2.36%;top:0;width:29.62%;transform-origin:80% 50%;animation:arara-voa 6s ease-in-out infinite alternate}
+.frente-arara{left:0;top:0;width:41.94%}
+.onca-capa{left:39.06%;top:78.36%;width:59.76%;transform-origin:50% 100%;animation:onca-anda 9s ease-in-out infinite alternate}
+/* movimentos lentos e curtos, para não descolar da moldura */
+@keyframes arara-voa{
+  0%{transform:translate(0,0) rotate(0deg)}
+  50%{transform:translate(-4px,-10px) rotate(-7deg)}
+  100%{transform:translate(-2px,-4px) rotate(4deg)}
+}
+@keyframes onca-anda{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-3px) translateY(-1.5px)}
+  50%{transform:translateX(-6px)}
+  75%{transform:translateX(-9px) translateY(-1.5px)}
+  100%{transform:translateX(-12px)}
+}
 
 /* faixa fina das marcas, numa faixa creme com grafismo marajoara no topo */
 .faixa-marcas{padding:40px 0 26px;overflow:hidden;background:var(--linho);color:var(--tinta)}
@@ -457,6 +476,9 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   .faixa-marcas .trilho-logos.reverso{animation:rolar 130s linear infinite reverse!important}
   .faixa-marcas .trilho-logos ul{flex-wrap:nowrap}
   .faixa-marcas .trilho-logos ul[aria-hidden="true"]{display:flex}
+  /* a arara e a onça da capa continuam se mexendo, porque o movimento é lento e pequeno */
+  .arara-capa{animation:arara-voa 6s ease-in-out infinite alternate!important}
+  .onca-capa{animation:onca-anda 9s ease-in-out infinite alternate!important}
 }
 </style>
 </head>
@@ -506,11 +528,18 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 
     <div class="capa-foto revelar">
       <!--
-        FOTO PRINCIPAL: arquivo fotos/foto-manu-moldura.webp.
-        A moldura redonda, a arara, a bandeira do Pará, a onça e as vitórias-régias já fazem parte da imagem
-        (fundo transparente, 763x841 px). Para trocar, substitua por outra imagem no mesmo formato.
+        FOTO PRINCIPAL em 3 camadas, para a arara e a onça se mexerem devagar:
+        fotos/foto-manu-moldura-fundo.webp (foto, moldura, bandeira e vitórias-régias, 763x841 px)
+        elementos/arara-capa.webp e elementos/onca-capa.webp, posicionadas por cima no mesmo lugar da arte.
+        A imagem inteira, sem camadas, continua em fotos/foto-manu-moldura.webp.
       -->
-      <img class="foto-capa" src="fotos/foto-manu-moldura.webp" alt="Manu Melo com a mão no queixo, batom vermelho e blazer verde-oliva, numa moldura redonda com arara, bandeira do Pará, onça-pintada e vitórias-régias" width="763" height="841" fetchpriority="high">
+      <div class="moldura-capa">
+        <img class="foto-capa" src="fotos/foto-manu-moldura-fundo.webp" alt="Manu Melo com a mão no queixo, batom vermelho e blazer verde-oliva, numa moldura redonda com arara, bandeira do Pará, onça-pintada e vitórias-régias" width="763" height="841" fetchpriority="high">
+        <img class="bicho arara-capa" src="elementos/arara-capa.webp" alt="" aria-hidden="true" width="226" height="415">
+        <!-- pedaço da foto que fica na frente da arara, para ela voar por trás da foto como na arte -->
+        <img class="bicho frente-arara" src="elementos/foto-frente-arara.webp" alt="" aria-hidden="true" width="320" height="470">
+        <img class="bicho onca-capa" src="elementos/onca-capa.webp" alt="" aria-hidden="true" width="456" height="182">
+      </div>
     </div>
   </div>
 
