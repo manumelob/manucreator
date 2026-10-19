@@ -154,11 +154,11 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 /* capa montada com as peças separadas da arte "Nortista": o fundo tem a moldura, a foto,
    a bandeira, as vitórias-régias e a palavra Nortista; a arara e a onça ficam por cima e se mexem */
 .moldura-capa{position:relative;filter:drop-shadow(0 22px 30px rgba(0,0,0,.35))}
-.foto-capa{display:block;width:100%;height:auto;aspect-ratio:1140/1260}
-/* posições em % da imagem de 1140x1260 */
+.foto-capa{display:block;width:100%;height:auto;aspect-ratio:1140/1330}
+/* posições em % da imagem de 1140x1330 */
 .bicho{position:absolute;height:auto;pointer-events:none}
-.arara-capa{left:0;top:2.38%;width:35.09%;animation:arara-voa 5s ease-in-out infinite alternate}
-.onca-capa{left:43.86%;top:80.32%;width:54.39%;transform-origin:50% 100%;animation:onca-anda 10s ease-in-out infinite alternate}
+.arara-capa{left:0;top:2.26%;width:35.09%;animation:arara-voa 5s ease-in-out infinite alternate}
+.onca-capa{left:51.75%;top:84.06%;width:47.37%;transform-origin:50% 100%;animation:onca-anda 10s ease-in-out infinite alternate}
 /* a arara plana subindo e descendo; a onça anda um pouco para a esquerda e volta */
 @keyframes arara-voa{
   0%{transform:translate(0,0) rotate(0deg)}
@@ -529,13 +529,13 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
     <div class="capa-foto revelar">
       <!--
         FOTO PRINCIPAL em camadas, montada com as peças da arte "Nortista" (PDF original em elementos/original-nortista.pdf, fora do Git):
-        fotos/capa-fundo.webp (moldura, foto, bandeira, vitórias-régias e "Nortista", 1140x1260 px)
+        fotos/capa-fundo.webp (moldura, foto, bandeira, vitórias-régias e "Nortista", 1140x1330 px; foto original em fotos/originais/capa-caneca-sofa.jpg, com a caneca trocada para bege)
         elementos/capa/arara.webp e elementos/capa/onca.webp ficam por cima e se mexem devagar.
       -->
       <div class="moldura-capa">
-        <img class="foto-capa" src="fotos/capa-fundo.webp" alt="Manu Melo com a mão no queixo, batom vermelho e blazer verde-oliva, numa moldura redonda com arara, bandeira do Pará, onça-pintada, vitórias-régias e a palavra Nortista" width="1140" height="1260" fetchpriority="high">
+        <img class="foto-capa" src="fotos/capa-fundo.webp" alt="Manu Melo sentada no sofá, mandando um beijinho e segurando uma caneca bege, de camiseta branca escrita Égua, mana!, numa moldura redonda com arara, bandeira do Pará, onça-pintada, vitórias-régias e a palavra Nortista" width="1140" height="1330" fetchpriority="high">
         <img class="bicho arara-capa" src="elementos/capa/arara.webp" alt="" aria-hidden="true" width="400" height="370">
-        <img class="bicho onca-capa" src="elementos/capa/onca.webp" alt="" aria-hidden="true" width="620" height="240">
+        <img class="bicho onca-capa" src="elementos/capa/onca.webp" alt="" aria-hidden="true" width="540" height="209">
       </div>
     </div>
   </div>
