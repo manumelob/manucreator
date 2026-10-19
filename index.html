@@ -118,8 +118,13 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 /* ============ CAPA ============ */
 .capa{padding-top:calc(120px + var(--barra));padding-bottom:0;min-height:100vh;display:flex;flex-direction:column}
 .capa-grade{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center;flex:1;padding-bottom:64px}
-.capa h1{font-size:clamp(2.1rem,3.6vw,3.3rem);margin:.2rem 0 1.2rem}
-.capa h1 em{display:block}
+/* título em 2 linhas: frase menor em cima e "intenção de venda." grande embaixo,
+   com um brilho branco leve atrás das letras */
+.capa h1{font-size:clamp(2.1rem,4.2vw,3.4rem);margin:.2rem 0 1.2rem;
+  text-shadow:2px 2px 0 var(--linho), 4px 4px 0 var(--azul), 0 0 22px rgba(255,255,255,.28)}
+.capa h1 .linha-menor{display:block;font-size:.6em;white-space:nowrap;margin-bottom:.15em;
+  text-shadow:1px 1px 0 var(--linho), 2.5px 2.5px 0 var(--azul), 0 0 16px rgba(255,255,255,.28)}
+.capa h1 em{display:block;white-space:nowrap}
 .capa .frase{font-size:clamp(1.1rem,2.2vw,1.3rem);max-width:520px;color:rgba(255,246,229,.85)}
 .botoes{display:flex;flex-wrap:wrap;gap:12px;margin:2rem 0 2.6rem}
 .numeros-capa{display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,48px);list-style:none;padding:0;margin:0}
@@ -388,6 +393,8 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 @media (max-width:980px){
   .capa-grade,.sobre-grade,.contato-grade{grid-template-columns:minmax(0,1fr)}
   .capa-foto{max-width:440px;margin-top:10px}
+  /* título ocupa a largura toda: o tamanho acompanha a tela para "intenção de venda." caber numa linha */
+  .capa h1{font-size:min(3.4rem,calc((100vw - 40px) / 10))}
   .servicos-grade{grid-template-columns:repeat(2,1fr)}
   .metricas{grid-template-columns:repeat(2,1fr)}
   .resultados{grid-template-columns:1fr}
@@ -481,7 +488,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   <div class="container capa-grade conteudo">
     <div class="revelar">
       <span class="olho">Portfólio UGC - Influencer - Shop Creator</span>
-      <h1 id="titulo-capa">Conteúdo criativo com <em>intenção de venda.</em></h1>
+      <h1 id="titulo-capa"><span class="linha-menor">Conteúdo criativo com</span> <em>intenção de venda.</em></h1>
       <p class="frase">Crio vídeos que fazem a sua marca parecer conversa de amiga e vender como anúncio. Roteiro, gravação e edição com cara de gente de verdade.</p>
       <div class="botoes">
         <a href="#contato" class="btn btn-cheio">Falar comigo</a>
