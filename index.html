@@ -151,19 +151,17 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .foto-vazia .tag{background:rgba(255,255,255,.85);color:var(--tinta);font-size:.85rem;padding:.3rem .8rem;border-radius:99px;margin-bottom:14px;font-weight:400}
 .fita{position:absolute;width:110px;height:30px;background:rgba(214,196,160,.75);top:-14px;left:50%;transform:translateX(-50%) rotate(-4deg);box-shadow:0 2px 4px rgba(0,0,0,.06)}
 .capa-foto{position:relative;max-width:540px;justify-self:center;width:100%}
-/* capa sem moldura: foto da cintura para cima, com a parte de baixo sumindo em degradê,
-   e as peças da arte "Nortista" em volta (posições em % da foto) */
-.capa-solta{position:relative;width:min(100%,460px);margin:40px auto 0}
-.foto-solta{display:block;width:100%;height:auto;aspect-ratio:870/1040;border-radius:30px 30px 0 0;
-  -webkit-mask-image:linear-gradient(to bottom,#000 70%,rgba(0,0,0,.55) 86%,transparent 100%);
-          mask-image:linear-gradient(to bottom,#000 70%,rgba(0,0,0,.55) 86%,transparent 100%)}
+/* capa sem moldura: foto recortada em PNG (sem fundo) e as peças da arte "Nortista" em volta
+   (posições em % da foto) */
+.capa-solta{position:relative;width:min(100%,430px);margin:40px auto 0}
+.foto-solta{display:block;width:100%;height:auto;aspect-ratio:574/763;filter:drop-shadow(0 24px 30px rgba(0,0,0,.4))}
 .enfeite,.bicho{position:absolute;height:auto;pointer-events:none;filter:drop-shadow(0 10px 14px rgba(0,0,0,.3))}
-.arara-solta{left:-17%;top:-6%;width:44%;animation:arara-voa 5s ease-in-out infinite alternate}
-.bandeira-solta{right:-13%;top:-4%;width:32%}
-.vitorias-solta{left:-18%;bottom:3%;width:52%}
-.onca-solta{right:-15%;bottom:-2%;width:58%;animation:onca-anda 10s ease-in-out infinite alternate}
+.arara-solta{left:-20%;top:-4%;width:46%;animation:arara-voa 5s ease-in-out infinite alternate}
+.bandeira-solta{right:-24%;top:-8%;width:28%}
+.vitorias-solta{left:-24%;bottom:0;width:52%}
+.onca-solta{right:-16%;bottom:-7%;width:54%;animation:onca-anda 10s ease-in-out infinite alternate}
 /* no celular a foto fica menor para os enfeites caberem na tela */
-@media (max-width:600px){.capa-solta{width:74%;margin-top:56px}}
+@media (max-width:600px){.capa-solta{width:74%;margin-top:56px}.bandeira-solta{right:-15%;width:26%}.vitorias-solta{left:-17%;width:46%}}
 /* a arara plana subindo e descendo; a onça anda um pouco para a esquerda e volta */
 @keyframes arara-voa{
   0%{transform:translate(0,0) rotate(0deg)}
@@ -533,12 +531,11 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 
     <div class="capa-foto revelar">
       <!--
-        FOTO PRINCIPAL sem moldura: fotos/capa-solta.jpg (870x1040, da cintura para cima; original em fotos/originais/capa-egua-mana.jpg).
-        A parte de baixo some num degradê feito no CSS (.foto-solta).
+        FOTO PRINCIPAL: fotos/capa-recorte.png (574x763, recortada sem fundo; original em fotos/originais/capa-sentada-camisa-branca.jpg).
         Em volta, as peças da arte "Nortista" (elementos/capa/): bandeira e vitórias-régias paradas, arara e onça se mexendo devagar.
       -->
       <div class="capa-solta">
-        <img class="foto-solta" src="fotos/capa-solta.jpg" alt="Manu Melo sentada no sofá, mandando um beijinho e segurando uma caneca bege, de camiseta branca escrita Égua, mana!" width="870" height="1040" fetchpriority="high">
+        <img class="foto-solta" src="fotos/capa-recorte.png" alt="Manu Melo sentada no chão de pernas cruzadas, sorrindo, de camisa branca e calça jeans" width="574" height="763" fetchpriority="high">
         <img class="enfeite bandeira-solta" src="elementos/capa/bandeira.webp" alt="" aria-hidden="true" width="300" height="299">
         <img class="enfeite vitorias-solta" src="elementos/capa/vitorias.webp" alt="" aria-hidden="true" width="470" height="176">
         <img class="bicho arara-solta" src="elementos/capa/arara.webp" alt="" aria-hidden="true" width="400" height="370">
