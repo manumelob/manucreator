@@ -161,11 +161,11 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .enfeite,.bicho{position:absolute;height:auto;pointer-events:none;filter:drop-shadow(0 10px 14px rgba(0,0,0,.3))}
 .arara-solta{left:-20%;top:-4%;width:46%;animation:arara-voa 5s ease-in-out infinite alternate}
 .vitorias-solta{left:-24%;bottom:0;width:52%}
-/* placa do açaí em pé no chão, à direita, com a onça passando na frente */
-.placa-acai{right:-19%;bottom:6%;width:29%;transform:rotate(3deg)}
+/* placa do açaí em pé à esquerda, afastada da foto */
+.placa-acai{left:-46%;bottom:14%;width:27%;transform:rotate(-3deg)}
 .onca-solta{right:-16%;bottom:-7%;width:54%;animation:onca-anda 10s ease-in-out infinite alternate}
 /* no celular a foto fica menor para os enfeites caberem na tela */
-@media (max-width:600px){.capa-solta{width:74%;margin-top:56px}.vitorias-solta{left:-17%;width:46%}.placa-acai{right:-14%;width:24%}}
+@media (max-width:600px){.capa-solta{width:74%;margin-top:56px}.vitorias-solta{left:-17%;width:46%}.placa-acai{left:-19%;bottom:24%;width:21%}}
 /* a arara plana subindo e descendo; a onça anda um pouco para a esquerda e volta */
 @keyframes arara-voa{
   0%{transform:translate(0,0) rotate(0deg)}
