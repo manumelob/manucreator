@@ -285,6 +285,14 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .destaque .abrir{display:inline-block;margin-top:.8rem;font-weight:700;color:var(--amarelo);font-size:.95rem}
 
 /* ============ TRABALHOS ============ */
+/* botões de atalho para cada nicho, embaixo do título */
+.atalhos-nicho{display:flex;flex-wrap:wrap;gap:10px;margin:-18px 0 clamp(40px,5vw,56px)}
+.atalhos-nicho a{display:inline-block;padding:.55rem 1.1rem;border-radius:999px;border:2px solid var(--cor-botao,var(--marrom));color:var(--cor-botao,var(--marrom));background:transparent;font-weight:700;font-size:.92rem;text-decoration:none;transition:background .2s,color .2s,transform .2s}
+.atalhos-nicho a:nth-child(4n+2){--cor-botao:var(--azul)}
+.atalhos-nicho a:nth-child(4n+3){--cor-botao:#c48a00}
+.atalhos-nicho a:nth-child(4n+4){--cor-botao:var(--verde)}
+.atalhos-nicho a:hover,.atalhos-nicho a:focus-visible{background:var(--cor-botao,var(--marrom));color:#fff;transform:translateY(-2px)}
+@media (max-width:600px){.atalhos-nicho{gap:8px}.atalhos-nicho a{font-size:.85rem;padding:.5rem .95rem}}
 /* galeria por nicho: uma fileira por nicho, vídeos em carrossel */
 .nichos{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(48px,6vw,72px)}
 .nicho-bloco{min-width:0}
@@ -648,6 +656,8 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
       <h2 id="titulo-trabalhos">Trabalhos por <em>nicho</em></h2>
       <p>Deslize em cada nicho para ver os vídeos. Toque em um vídeo para assistir.</p>
     </div>
+    <!-- Botões de atalho: um por nicho, gerados a partir de NICHOS no script -->
+    <nav class="atalhos-nicho revelar" id="atalhos-nicho" aria-label="Ir direto para um nicho"></nav>
     <!-- Uma fileira por nicho, em carrossel. A ordem vem de NICHOS e os vídeos de TRABALHOS, no script. -->
     <div class="nichos" id="galeria"></div>
   </div>
@@ -1192,11 +1202,16 @@ trilhoFotos.addEventListener("click", (e) => {
 
 /* Trabalhos: uma fileira por nicho (na ordem de NICHOS), cada uma com seus vídeos em carrossel */
 const galeriaEl = $("#galeria");
+/* Botões de atalho dos nichos: cada um leva até a fileira do nicho */
+$("#atalhos-nicho").innerHTML = NICHOS.filter(nicho => TRABALHOS.some(t => t.nicho === nicho)).map(nicho =>
+  `<a href="#bloco-nicho-${NICHOS.indexOf(nicho)}">${nicho}</a>`
+).join("");
+
 galeriaEl.innerHTML = NICHOS.map((nicho, n) => {
   const lista = TRABALHOS.map((t, k) => ({ t, k })).filter(x => x.t.nicho === nicho);
   if (!lista.length) return "";
   const id = "nicho-" + n;
-  return `<div class="nicho-bloco revelar" role="region" aria-labelledby="${id}">
+  return `<div class="nicho-bloco revelar" id="bloco-${id}" role="region" aria-labelledby="${id}">
       <div class="nicho-topo">
         <div>
           <h3 id="${id}">${nicho} <small>${String(lista.length).padStart(2, "0")}</small></h3>
