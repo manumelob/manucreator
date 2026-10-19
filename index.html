@@ -103,6 +103,11 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .bf-botao:focus-visible{outline:3px solid var(--tinta);outline-offset:2px}
 .marca{font-family:var(--serif);font-size:1.45rem;text-decoration:none;color:var(--marrom);text-shadow:1px 1px 0 var(--linho), 3px 3px 0 var(--azul)}
 .marca em{font-style:normal;color:var(--amarelo)}
+/* botão de idioma PT / EN */
+.idioma{display:flex;gap:2px;padding:3px;border-radius:999px;border:1.5px solid rgba(255,246,229,.4);margin-left:22px;order:3}
+.idioma button{border:0;background:transparent;color:var(--linho);font:inherit;font-weight:700;font-size:.8rem;letter-spacing:.06em;padding:.32rem .7rem;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+.idioma button[aria-pressed="true"]{background:var(--amarelo);color:var(--acai)}
+.idioma button:hover:not([aria-pressed="true"]){background:rgba(255,246,229,.15)}
 .menu ul{display:flex;gap:1.6rem;list-style:none;margin:0;padding:0}
 .menu a{text-decoration:none;font-weight:500;font-size:.98rem;position:relative;padding:4px 0}
 .menu a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--amarelo);transition:width .3s}
@@ -561,6 +566,11 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   </div>
   <div class="container">
     <a href="#capa" class="marca">Manu <em>Melo</em></a>
+    <!-- Botão de idioma: português ou inglês (os textos em inglês ficam no script, em IDIOMA) -->
+    <div class="idioma" id="idioma" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="pt" lang="pt-BR">PT</button>
+      <button type="button" data-lang="en" lang="en">EN</button>
+    </div>
     <button class="hamburguer" id="hamburguer" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span></button>
     <nav class="menu" id="menu" aria-label="Menu principal">
       <ul>
@@ -1119,6 +1129,183 @@ document.documentElement.classList.add("js");
 const reduzMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const $ = (s) => document.querySelector(s);
 
+/* =====================================================================
+   IDIOMA: português (padrão) ou inglês. O botão PT / EN do menu guarda a escolha
+   e recarrega a página. Também dá para abrir direto em inglês com ?lang=en no link.
+   Para mudar um texto em inglês, edite as listas abaixo.
+   ===================================================================== */
+const IDIOMA = (() => {
+  try {
+    const q = new URLSearchParams(location.search).get("lang");
+    if (q === "pt" || q === "en") { localStorage.setItem("idioma", q); return q; }
+    return localStorage.getItem("idioma") === "en" ? "en" : "pt";
+  } catch (e) { return "pt"; }
+})();
+const EN = IDIOMA === "en";
+const tx = (pt, en) => (EN ? en : pt);
+
+/* nomes dos nichos em inglês (os nomes em português continuam valendo nas listas acima) */
+const NICHOS_EN = {
+  "Tech & Apps": "Tech & Apps", "Casa & Decor": "Home & Decor", "Maternidade": "Motherhood",
+  "Autocuidado": "Self-care", "Saúde e bem-estar": "Health & Wellness", "Moda e calçados": "Fashion & Shoes",
+  "Acessórios": "Accessories", "Gastronomia": "Food & Drinks", "Experiência presencial": "On-site Experiences", "Pet": "Pets"
+};
+const nomeNicho = (n) => (EN ? NICHOS_EN[n] || n : n);
+
+if (EN) {
+  document.documentElement.lang = "en";
+
+  [NUMEROS_CAPA, METRICAS].forEach(lista => lista.forEach(m => {
+    m.rotulo = { "vídeos entregues": "videos delivered", "marcas atendidas": "brands served", "views somadas": "total views", "úteis para entregar": "business days to deliver" }[m.rotulo] || m.rotulo;
+    if (m.sufixo === " dias") m.sufixo = "";
+  }));
+
+  const destaquesEN = [
+    { titulo: "TikTok Shop", contexto: "Offer video with a promo tip, made to sell directly on TikTok Shop." },
+    { titulo: "Influencer & Affiliate", contexto: "Content on my own profile with an affiliate link, showing the product in my routine." },
+    { titulo: "UGC Content", contexto: "Video recorded for the brand to use on its social media and ads." }
+  ];
+  DESTAQUES.forEach((d, i) => { Object.assign(d, destaquesEN[i] || {}); d.numero = d.numero.replace("4 mi", "4M").replace("13,9 mil", "13.9K"); });
+
+  Object.assign(FRASE_NICHO, {
+    "Tech & Apps": "Apps, platforms and services explained in a simple way",
+    "Casa & Decor": "Products that make the home prettier, fresher and more practical",
+    "Maternidade": "Real routine with Laura, the way every mom can relate",
+    "Autocuidado": "Hair, skin and makeup with real results",
+    "Saúde e bem-estar": "Supplements and habits from my 30 kg weight-loss journey",
+    "Moda e calçados": "Outfits, shoes and comfort for everyday life",
+    "Acessórios": "Plated jewelry and details that complete the look",
+    "Gastronomia": "Recipes, launches and flavors that make you want a taste",
+    "Experiência presencial": "Places I visit and truly recommend",
+    "Pet": "Caring for my pets, turned into content"
+  });
+
+  const TITULOS_EN = {
+    "Acelera Casas Bahia": "Acelera Casas Bahia", "Acompanhamento para emagrecimento": "Weight-loss coaching", "Amaciante Comfort": "Comfort fabric softener",
+    "App de controle financeiro": "Budgeting app", "App de motorista": "Driver app", "App de resumo de livros": "Book summary app",
+    "Arrumando a mochila com Bepantol": "Packing the diaper bag with Bepantol", "Banho pet": "Pet bath", "Barra de whey proteica": "Whey protein bar",
+    "Batom": "Lipstick", "Bebedouro pet": "Pet water fountain", "Bebida proteica Nutren": "Nutren protein drink", "Bebida proteica na rotina": "Protein drink in my routine",
+    "Brincos semijoias": "Plated earrings", "Cabelo encorpado com Elseve": "Fuller hair with Elseve", "Cabelo protegido do sol com Dove": "Sun-protected hair with Dove",
+    "Cama Ortobom": "Ortobom bed", "Camisa básica": "Basic shirt", "Chinelo Pé de Algodão": "Pé de Algodão slides", "Cinta modeladora": "Shapewear",
+    "Colar com inicial": "Initial necklace", "Colágeno com proteína": "Collagen with protein", "Consulta online de emagrecimento": "Online weight-loss consultation",
+    "Creatina FTW": "FTW creatine", "Creme para pentear Seda + Kibon": "Seda + Kibon styling cream", "Cuidado oral diário": "Daily oral care",
+    "Degustação de bebida": "Drink tasting", "Emagrecimento": "Weight loss", "Empréstimo CLT": "Payroll loan", "Estética corporal e facial": "Body and facial aesthetics",
+    "Fraldas": "Diapers", "Grupo de promoção": "Deals group", "Inner Circle": "Inner Circle", "Joias infantis Pingo de Gente": "Pingo de Gente kids' jewelry",
+    "Joias mãe e filha": "Mother and daughter jewelry", "Kit Coala The Queen": "Coala The Queen kit", "Lavando o cabelo com Elseve": "Washing my hair with Elseve",
+    "Lay's": "Lay's", "Livrinhos infantis Corações Preciosos": "Corações Preciosos kids' books", "Loja de calçados": "Shoe store", "Luminária decorativa": "Decorative lamp",
+    "Mercado Livre + BBB": "Mercado Livre + BBB", "Mochila personalizada da Laura": "Laura's personalized backpack", "Moda feminina Posthaus": "Posthaus women's fashion",
+    "Moda praia": "Swimwear", "Moda street": "Streetwear", "Máquina de cartão": "Card machine", "Máscara de hidratação": "Hydrating hair mask",
+    "Palmilha ortopédica": "Orthopedic insole", "Passeio com a Laura": "Day out with Laura", "Passeio cultural": "Cultural outing", "Plano de saúde pet": "Pet health plan",
+    "Presenteando com chocolate": "Gifting chocolate", "Provador virtual com IA": "AI virtual fitting room", "Pão de alho": "Garlic bread", "Pão sem glúten": "Gluten-free bread",
+    "Receita com Super Dicer": "Recipe with Super Dicer", "Receita de bolo de banana": "Banana cake recipe", "Refeição saudável": "Healthy meal",
+    "Restaurante fitness": "Healthy restaurant", "Restaurante praiano": "Beach restaurant", "Rotina e café": "Routine and coffee", "Roupa fitness": "Activewear",
+    "Roupinhas de bebê": "Baby clothes", "Rímel de tratamento": "Treatment mascara", "Saco a vácuo Coza": "Coza vacuum storage bags", "Sandália anatômica": "Anatomic sandals",
+    "Sapatinhos infantis": "Kids' shoes", "Semijoias": "Plated jewelry", "Skincare": "Skincare", "Skincare com vitamina C": "Vitamin C skincare", "SmartZoo": "SmartZoo",
+    "Suplemento": "Supplement", "Sérum GHK-Cu Biomarine": "Biomarine GHK-Cu serum", "Tema do aniversário da Laura": "Laura's birthday theme",
+    "Teste de toalha Hoomy": "Hoomy towel test", "Tira-manchas de estofados": "Upholstery stain remover", "Toalha de banho": "Bath towel", "Toalhas": "Towels",
+    "Tratamento de otite canina": "Dog ear infection treatment", "Vela aromática": "Scented candle", "Velas aromáticas Olie Velas": "Olie Velas scented candles",
+    "Vitaminas": "Vitamins", "Óculos": "Glasses", "Óleo essencial": "Essential oil"
+  };
+  const FORMATOS_EN = {
+    "Vídeo UGC": "UGC video", "Antes e depois": "Before and after", "Aplicativo de namoro": "Dating app", "App de IA": "AI app", "Arrume-se comigo": "Get ready with me",
+    "Campanha": "Campaign", "Comparativo": "Comparison", "Conteúdo educativo": "Educational", "Conteúdo financeiro": "Finance content", "Conteúdo para ads": "Ad content",
+    "Conteúdo sensorial": "Sensory content", "Fundo de funil": "Bottom of funnel", "Lançamento": "Launch", "Lo-fi e nativo": "Lo-fi and native", "Organização": "Organizing",
+    "Problema x solução": "Problem x solution", "Programa para criadores de conteúdo": "Creator program", "React": "React", "Receita": "Recipe", "Shopping": "Shopping mall",
+    "Storytelling": "Storytelling", "Storytelling de rotina real": "Real-life storytelling", "TikTok Shop": "TikTok Shop", "Topo de funil": "Top of funnel", "Vlog": "Vlog"
+  };
+  TRABALHOS.forEach(t => { t.titulo = TITULOS_EN[t.titulo] || t.titulo; t.formato = FORMATOS_EN[t.formato] || t.formato; });
+
+  const servicosEN = [
+    { titulo: "UGC video", descricao: "Vertical video with script, filming and editing, talking about your product the way real people talk." },
+    { titulo: "Ad cuts", descricao: "Versions with different hooks and the right length to run on Meta Ads and TikTok Ads." },
+    { titulo: "Product photos", descricao: "Lifestyle photos with natural light and styled tabletop, ready for feed, website and marketplace." },
+    { titulo: "Unboxing", descricao: "The experience of opening the package with a genuine reaction, highlighting the packaging and first details." },
+    { titulo: "Post on my profile", descricao: "The content goes live on @manumelo_b, with a thoughtful caption and supporting stories." },
+    { titulo: "Monthly package", descricao: "A batch of content every month with planning, scripts and scheduled deliveries." }
+  ];
+  SERVICOS.forEach((s, i) => Object.assign(s, servicosEN[i] || {}));
+
+  const AVALIACOES_EN = {
+    "Tuff": { campanha: "Tuff Sodium Percarbonate", texto: "This is the second project we've done with Emanuela and we were very satisfied!" },
+    "Di Santinni": { campanha: "TikTok Shop", texto: "We've worked with Emanuela more than once and the content is always great." },
+    "Azulim": { campanha: "Floor cleaning routine", texto: "We loved the work, it turned out really well!" },
+    "Coala Home": { campanha: "Coala Home The Queen kit", texto: "Emanuela was super creative and delivered great content. A perfect 10!" },
+    "Eternizare": { texto: "Excellent work! Communication was great too and the result was exactly what we expected. We would definitely work with Emanuela again!" },
+    "evida": { texto: "Fast and high-quality production!" },
+    "Kilara Joias": { texto: "We loved the video, Manu captured the essence of our brand perfectly and delivered super fast, thank you so much!" },
+    "Central Toalhas": { texto: "Perfect campaigns! We found the perfect UGC creator: creative, dynamic and very quick." },
+    "VesteGo": { texto: "Simply delighted with her marketing. Hire her without fear, she knows what she's doing." }
+  };
+  DEPOIMENTOS.forEach(d => Object.assign(d, AVALIACOES_EN[d.marca] || {}));
+
+  /* textos fixos da página: [seletor, texto em inglês] */
+  [
+    [".pular", "Skip to content"],
+    [".bf-frase", "LAST SPOTS FOR CONTENT CREATION"],
+    [".bf-botao", "BOOK NOW!"],
+    ['.menu a[href="#sobre"]', "About"], ['.menu a[href="#destaques"]', "Highlights"], ['.menu a[href="#trabalhos"]', "Work"],
+    ['.menu a[href="#servicos"]', "Services"], ['.menu a[href="#numeros"]', "Numbers"], ['.menu a[href="#contato"]', "Contact"],
+    [".capa .olho", "UGC Portfolio - Influencer - Shop Creator"],
+    ["#titulo-capa", '<span class="linha-menor">Creative content with</span> <em>the intent to sell.</em>'],
+    [".capa .frase", "I create videos that make your brand feel like a chat with a friend and sell like an ad. Script, filming and editing that feel like real people."],
+    ['.capa .btn-cheio', "Let's talk"], ['.capa .btn-vazado', "See my work"],
+    [".faixa-marcas .rotulo", "brands that have trusted my work"],
+    [".sobre .olho", "content that communicates value"],
+    ["#titulo-sobre", "Your brand has something to say. I turn it into <em>content</em>."],
+    [".sobre .texto p:nth-of-type(1)", "I'm 30, a midi-size model, mom to Laura and to 2 pets, an entrepreneur, and on a weight-loss journey (-30 kg)."],
+    [".sobre .texto p:nth-of-type(2)", "As a content creator, I turn my real routine into dynamic, creative, high-retention videos, designed to grab attention from the very first second and keep the audience watching until the end."],
+    [".sobre .texto p:nth-of-type(3)", "I'm from Belém, Pará (Brazil), and I bring a light, natural and strategic tone to my content that builds real connection and makes people trust and buy."],
+    [".destaques .olho", "fan favorites"],
+    ["#titulo-destaques", "Featured <em>content</em>"],
+    [".destaques .cabeca p", "Three videos that really show my creative style. Tap any of them to watch."],
+    [".trabalhos .olho", "A bit of everything, made with strategy."],
+    ["#titulo-trabalhos", "Work by <em>niche</em>"],
+    [".trabalhos .cabeca p", "Swipe through each niche to see the videos. Tap a video to watch."],
+    [".estrutura .olho", "filming setup"],
+    ["#titulo-estrutura", "My filming <em>equipment</em>"],
+    [".estrutura .cabeca p", "I film with my own equipment and have a ready-made set for your brand."],
+    ["#video-cenario .texto-cartao", "<strong>Pool area</strong><span class=\"cat\">Set</span>"],
+    [".cenario-legenda", "Set option"],
+    [".servicos .olho", "what I do for you"],
+    ["#titulo-servicos", "How I can <em>help</em>"],
+    [".servicos .cabeca p", "From a single video to a full monthly package. Tell me your goal and I'll put together the ideal format."],
+    [".numeros .olho", "what the numbers say"],
+    ["#titulo-numeros", "Results and <em>words</em> from those who trust me"],
+    [".avaliacoes .subtitulo", "what brands say"],
+    [".avaliacoes h3", "Reviews from brands I've worked with"],
+    [".contato .olho", "let's talk?"],
+    ["#titulo-contato", "Let's create <em>together</em>"],
+    [".contato .cabeca p", "Tell me about your brand and what you need. I reply quickly."],
+    ['label[for="nome"]', "Your name"], ['label[for="email"]', "Your email"], ['label[for="mensagem"]', "Message"],
+    ['#form-contato button[type="submit"]', "Send message"],
+    ["#confirmacao .grande", "Got it, thank you!"],
+    ["#confirmacao p:not(.grande)", "Your message arrived. I reply within one business day. For a faster answer, message me on WhatsApp."],
+    ["#enviar-email", "Also send by email"],
+    [".rodape small", '© <span id="ano">2026</span> Manu Melo. UGC Creator in Ananindeua, Pará, Brazil. All rights reserved.'],
+    [".modal .carimbinho", "free gift"],
+    ["#titulo-modal", "Want my <em>full</em> media kit?"],
+    [".modal .card > p", "Prices, formats and cases in a pretty PDF. Leave your contact and I'll send it to you."],
+    ['label[for="kit-nome"]', "Name"], ['label[for="kit-email"]', "Email"],
+    ['.modal button[type="submit"]', "Send it to me"],
+    ["#kit-ok .grande", "Noted!"],
+    ["#kit-ok p:not(.grande)", "Your media kit will arrive in your inbox soon. Thanks for your interest!"]
+  ].forEach(([sel, html]) => document.querySelectorAll(sel).forEach(el => { el.innerHTML = html; }));
+  const ph = $("#mensagem"); if (ph) ph.placeholder = "Tell me a bit about the brand, the product and the deadline";
+  const foto = $(".foto-solta"); if (foto) foto.alt = "Manu Melo sitting cross-legged on the floor, smiling, in a white shirt and jeans";
+  document.title = "Manu Melo | UGC Creator Portfolio";
+}
+
+/* botão PT / EN do menu */
+document.querySelectorAll("#idioma button").forEach(b => {
+  b.setAttribute("aria-pressed", String(b.dataset.lang === IDIOMA));
+  b.addEventListener("click", () => {
+    if (b.dataset.lang === IDIOMA) return;
+    try { localStorage.setItem("idioma", b.dataset.lang); } catch (e) {}
+    const url = new URL(location.href); url.searchParams.set("lang", b.dataset.lang); location.href = url.toString();
+  });
+});
+
+
 
 
 function formatar(n, decimais) {
@@ -1232,7 +1419,7 @@ trilhoFotos.addEventListener("click", (e) => {
 const galeriaEl = $("#galeria");
 /* Botões de atalho dos nichos: cada um leva até a fileira do nicho */
 $("#atalhos-nicho").innerHTML = NICHOS.filter(nicho => TRABALHOS.some(t => t.nicho === nicho)).map(nicho =>
-  `<a href="#bloco-nicho-${NICHOS.indexOf(nicho)}">${nicho}</a>`
+  `<a href="#bloco-nicho-${NICHOS.indexOf(nicho)}">${nomeNicho(nicho)}</a>`
 ).join("");
 
 galeriaEl.innerHTML = NICHOS.map((nicho, n) => {
@@ -1242,12 +1429,12 @@ galeriaEl.innerHTML = NICHOS.map((nicho, n) => {
   return `<div class="nicho-bloco revelar" id="bloco-${id}" role="region" aria-labelledby="${id}">
       <div class="nicho-topo">
         <div>
-          <h3 id="${id}">${nicho} <small>${String(lista.length).padStart(2, "0")}</small></h3>
+          <h3 id="${id}">${nomeNicho(nicho)} <small>${String(lista.length).padStart(2, "0")}</small></h3>
           ${FRASE_NICHO[nicho] ? `<p>${FRASE_NICHO[nicho]}</p>` : ""}
         </div>
         <div class="nicho-setas">
-          <button type="button" data-dir="-1" aria-label="Vídeos anteriores de ${nicho}">‹</button>
-          <button type="button" data-dir="1" aria-label="Próximos vídeos de ${nicho}">›</button>
+          <button type="button" data-dir="-1" aria-label="${tx("Vídeos anteriores de", "Previous videos:")} ${nomeNicho(nicho)}">‹</button>
+          <button type="button" data-dir="1" aria-label="${tx("Próximos vídeos de", "Next videos:")} ${nomeNicho(nicho)}">›</button>
         </div>
       </div>
       <ul class="nicho-trilho">
@@ -1256,7 +1443,7 @@ galeriaEl.innerHTML = NICHOS.map((nicho, n) => {
             <img src="${t.capa}" alt="" loading="lazy" width="540" height="960">
             <span class="selo">${t.formato}</span>
             <span class="play" aria-hidden="true"></span>
-            <span class="texto-cartao"><strong>${t.titulo}</strong><span class="cat">${nicho}</span></span>
+            <span class="texto-cartao"><strong>${t.titulo}</strong><span class="cat">${nomeNicho(nicho)}</span></span>
           </button>
         </li>`).join("")}
       </ul>
@@ -1339,7 +1526,7 @@ if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
 }
 
 /* Vídeo do cenário (seção Equipamentos): abre no mesmo player e mostra prévia ao passar o mouse */
-const CENARIO = { video: "midia/cenario/01.mp4", capa: "midia/cenario/01.jpg", previa: "midia/cenario/01-previa.mp4", titulo: "Opção de cenário" };
+const CENARIO = { video: "midia/cenario/01.mp4", capa: "midia/cenario/01.jpg", previa: "midia/cenario/01-previa.mp4", titulo: tx("Opção de cenário", "Set option") };
 const botaoCenario = $("#video-cenario");
 botaoCenario.addEventListener("click", () => abrirVideo(CENARIO));
 if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
@@ -1495,9 +1682,9 @@ if ("IntersectionObserver" in window && !reduzMovimento) {
 function validar(form, erroEl) {
   const campos = [...form.querySelectorAll("[required]")];
   for (const c of campos) {
-    if (!c.value.trim()) { erroEl.textContent = "Preencha todos os campos, por favor."; c.focus(); return false; }
+    if (!c.value.trim()) { erroEl.textContent = tx("Preencha todos os campos, por favor.", "Please fill in all fields."); c.focus(); return false; }
     if (c.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.value.trim())) {
-      erroEl.textContent = "Confere o e-mail? Parece que falta alguma coisa."; c.focus(); return false;
+      erroEl.textContent = tx("Confere o e-mail? Parece que falta alguma coisa.", "Please check your email, something seems to be missing."); c.focus(); return false;
     }
   }
   erroEl.textContent = "";
