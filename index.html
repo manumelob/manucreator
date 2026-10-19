@@ -151,6 +151,9 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .foto-vazia .tag{background:rgba(255,255,255,.85);color:var(--tinta);font-size:.85rem;padding:.3rem .8rem;border-radius:99px;margin-bottom:14px;font-weight:400}
 .fita{position:absolute;width:110px;height:30px;background:rgba(214,196,160,.75);top:-14px;left:50%;transform:translateX(-50%) rotate(-4deg);box-shadow:0 2px 4px rgba(0,0,0,.06)}
 .capa-foto{position:relative;max-width:540px;justify-self:center;width:100%}
+/* placa do açaí embaixo dos números da capa, no lado do texto */
+.placa-acai{display:block;width:120px;height:auto;margin-top:28px;transform:rotate(-3deg);filter:drop-shadow(0 10px 14px rgba(0,0,0,.3))}
+@media (max-width:600px){.placa-acai{width:96px;margin-top:22px}}
 /* capa sem moldura: foto recortada em PNG (sem fundo) e as peças da arte "Nortista" em volta
    (posições em % da foto) */
 .capa-solta{position:relative;width:min(100%,430px);margin:40px auto 0}
@@ -161,11 +164,9 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .enfeite,.bicho{position:absolute;height:auto;pointer-events:none;filter:drop-shadow(0 10px 14px rgba(0,0,0,.3))}
 .arara-solta{left:-20%;top:-4%;width:46%;animation:arara-voa 5s ease-in-out infinite alternate}
 .vitorias-solta{left:-24%;bottom:0;width:52%}
-/* placa do açaí em pé à esquerda, afastada da foto */
-.placa-acai{left:-46%;bottom:14%;width:27%;transform:rotate(-3deg)}
 .onca-solta{right:-16%;bottom:-7%;width:54%;animation:onca-anda 10s ease-in-out infinite alternate}
 /* no celular a foto fica menor para os enfeites caberem na tela */
-@media (max-width:600px){.capa-solta{width:74%;margin-top:56px}.vitorias-solta{left:-17%;width:46%}.placa-acai{left:-19%;bottom:24%;width:21%}}
+@media (max-width:600px){.capa-solta{width:74%;margin-top:56px}.vitorias-solta{left:-17%;width:46%}}
 /* a arara plana subindo e descendo; a onça anda um pouco para a esquerda e volta */
 @keyframes arara-voa{
   0%{transform:translate(0,0) rotate(0deg)}
@@ -531,16 +532,17 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
       </div>
       <!-- Números da capa: edite em NUMEROS_CAPA no script -->
       <ul class="numeros-capa" id="numeros-capa"></ul>
+      <!-- placa do açaí (elementos/capa/placa-acai.webp), embaixo dos números -->
+      <img class="placa-acai" src="elementos/capa/placa-acai.webp" alt="" aria-hidden="true" width="300" height="488">
     </div>
 
     <div class="capa-foto revelar">
       <!--
         FOTO PRINCIPAL: fotos/capa-recorte.png (1149x1526, recortada sem fundo, clareada e com mais nitidez; original em fotos/originais/capa-sentada-camisa-branca.jpg).
-        Em volta, as peças da arte "Nortista" (elementos/capa/): placa do açaí e vitórias-régias paradas, arara e onça se mexendo devagar.
+        Em volta, as peças da arte "Nortista" (elementos/capa/): vitórias-régias paradas, arara e onça se mexendo devagar.
       -->
       <div class="capa-solta">
         <img class="foto-solta" src="fotos/capa-recorte.png" alt="Manu Melo sentada no chão de pernas cruzadas, sorrindo, de camisa branca e calça jeans" width="1149" height="1526" fetchpriority="high">
-        <img class="enfeite placa-acai" src="elementos/capa/placa-acai.webp" alt="" aria-hidden="true" width="300" height="488">
         <img class="enfeite vitorias-solta" src="elementos/capa/vitorias.webp" alt="" aria-hidden="true" width="470" height="176">
         <img class="bicho arara-solta" src="elementos/capa/arara.webp" alt="" aria-hidden="true" width="400" height="370">
         <img class="bicho onca-solta" src="elementos/capa/onca.webp" alt="" aria-hidden="true" width="540" height="209">
