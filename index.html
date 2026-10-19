@@ -414,7 +414,8 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .avaliacao .estrelas{color:var(--amarelo);letter-spacing:2px;font-size:1rem}
 .avaliacao time{font-size:.82rem;color:var(--tinta-suave);margin-left:8px}
 .avaliacao blockquote{margin:0;font-size:1rem;line-height:1.6;color:var(--tinta)}
-@media (max-width:600px){.avaliacoes-trilho li{flex-basis:82%}.avaliacoes-topo{align-items:flex-start}}
+@media (max-width:600px){.metricas{gap:12px}.metrica{padding:20px 10px}.metrica strong{font-size:2.1rem}.metrica span{font-size:.88rem}}
+@media (max-width:600px){.avaliacoes-trilho li{flex-basis:82%}.avaliacoes-topo{flex-direction:column;align-items:flex-start;gap:12px}.avaliacoes-topo .nicho-setas{align-self:flex-end}}
 
 /* ============ CONTATO ============ */
 .contato{background:var(--marrom);color:var(--linho)}
@@ -489,7 +490,10 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   .menu.aberto{max-height:420px;visibility:visible}
   .menu ul{flex-direction:column;gap:0;padding:8px 16px 20px}
   .menu a{display:block;padding:14px 4px;font-size:1.1rem;border-bottom:1px solid rgba(255,246,229,.12)}
-  .destaques-grade{grid-template-columns:1fr;max-width:380px;margin-inline:auto;gap:36px}
+  /* no celular os 3 destaques ficam lado a lado, como no computador, deslizando para o lado */
+  .destaques-grade{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 14px;scrollbar-width:none}
+  .destaques-grade::-webkit-scrollbar{display:none}
+  .destaques-grade .destaque{flex:0 0 min(72%,300px);scroll-snap-align:start}
   .destaque:nth-child(2){transform:none}
   .destaque:nth-child(2):hover{transform:translateY(-6px)}
 }
@@ -513,11 +517,14 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   .passaros{width:130px}
   .barco{width:140px}
   .sobre .boto,.trabalhos .arara,.destaques .passaros,.numeros .barco{top:16px;right:8px}
+  /* a arara fica acima do título, sem cobrir o texto */
+  .trabalhos .arara{top:4px;width:78px}
+  .trabalhos{padding-top:96px}
   .botoes .btn{flex:1 1 100%}
   .faixa-servicos li{font-size:1.25rem}
 }
 @media (max-width:380px){
-  .metricas{grid-template-columns:1fr}
+  .metricas{grid-template-columns:repeat(2,1fr)}
 }
 
 /* ============ MOVIMENTO REDUZIDO ============ */
