@@ -151,26 +151,26 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .foto-vazia .tag{background:rgba(255,255,255,.85);color:var(--tinta);font-size:.85rem;padding:.3rem .8rem;border-radius:99px;margin-bottom:14px;font-weight:400}
 .fita{position:absolute;width:110px;height:30px;background:rgba(214,196,160,.75);top:-14px;left:50%;transform:translateX(-50%) rotate(-4deg);box-shadow:0 2px 4px rgba(0,0,0,.06)}
 .capa-foto{position:relative;max-width:540px;justify-self:center;width:100%}
-/* foto da capa na moldura redonda, com arara, bandeira do Pará, onça e vitórias-régias */
+/* capa montada com as peças separadas da arte "Nortista": o fundo tem a moldura, a foto,
+   a bandeira, as vitórias-régias e a palavra Nortista; a arara e a onça ficam por cima e se mexem */
 .moldura-capa{position:relative;filter:drop-shadow(0 22px 30px rgba(0,0,0,.35))}
-.foto-capa{display:block;width:100%;height:auto;aspect-ratio:763/841}
-/* arara e onça por cima da foto, nas posições da arte original (em % da imagem de 763x841) */
+.foto-capa{display:block;width:100%;height:auto;aspect-ratio:1140/1260}
+/* posições em % da imagem de 1140x1260 */
 .bicho{position:absolute;height:auto;pointer-events:none}
-.arara-capa{left:2.36%;top:0;width:29.62%;transform-origin:80% 50%;animation:arara-voa 6s ease-in-out infinite alternate}
-.frente-arara{left:0;top:0;width:41.94%}
-.onca-capa{left:39.06%;top:78.36%;width:59.76%;transform-origin:50% 100%;animation:onca-anda 9s ease-in-out infinite alternate}
-/* movimentos lentos e curtos, para não descolar da moldura */
+.arara-capa{left:0;top:2.38%;width:35.09%;animation:arara-voa 5s ease-in-out infinite alternate}
+.onca-capa{left:43.86%;top:80.32%;width:54.39%;transform-origin:50% 100%;animation:onca-anda 10s ease-in-out infinite alternate}
+/* a arara plana subindo e descendo; a onça anda um pouco para a esquerda e volta */
 @keyframes arara-voa{
   0%{transform:translate(0,0) rotate(0deg)}
-  50%{transform:translate(-4px,-10px) rotate(-7deg)}
-  100%{transform:translate(-2px,-4px) rotate(4deg)}
+  50%{transform:translate(6px,-14px) rotate(-4deg)}
+  100%{transform:translate(12px,-4px) rotate(3deg)}
 }
 @keyframes onca-anda{
   0%{transform:translateX(0)}
-  25%{transform:translateX(-3px) translateY(-1.5px)}
-  50%{transform:translateX(-6px)}
-  75%{transform:translateX(-9px) translateY(-1.5px)}
-  100%{transform:translateX(-12px)}
+  25%{transform:translateX(-5px) translateY(-2px)}
+  50%{transform:translateX(-10px)}
+  75%{transform:translateX(-15px) translateY(-2px)}
+  100%{transform:translateX(-20px)}
 }
 
 /* faixa fina das marcas, numa faixa creme com grafismo marajoara no topo */
@@ -477,8 +477,8 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   .faixa-marcas .trilho-logos ul{flex-wrap:nowrap}
   .faixa-marcas .trilho-logos ul[aria-hidden="true"]{display:flex}
   /* a arara e a onça da capa continuam se mexendo, porque o movimento é lento e pequeno */
-  .arara-capa{animation:arara-voa 6s ease-in-out infinite alternate!important}
-  .onca-capa{animation:onca-anda 9s ease-in-out infinite alternate!important}
+  .arara-capa{animation:arara-voa 5s ease-in-out infinite alternate!important}
+  .onca-capa{animation:onca-anda 10s ease-in-out infinite alternate!important}
 }
 </style>
 </head>
@@ -528,17 +528,14 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 
     <div class="capa-foto revelar">
       <!--
-        FOTO PRINCIPAL em 3 camadas, para a arara e a onça se mexerem devagar:
-        fotos/foto-manu-moldura-fundo.webp (foto, moldura, bandeira e vitórias-régias, 763x841 px)
-        elementos/arara-capa.webp e elementos/onca-capa.webp, posicionadas por cima no mesmo lugar da arte.
-        A imagem inteira, sem camadas, continua em fotos/foto-manu-moldura.webp.
+        FOTO PRINCIPAL em camadas, montada com as peças da arte "Nortista" (PDF original em elementos/original-nortista.pdf, fora do Git):
+        fotos/capa-fundo.webp (moldura, foto, bandeira, vitórias-régias e "Nortista", 1140x1260 px)
+        elementos/capa/arara.webp e elementos/capa/onca.webp ficam por cima e se mexem devagar.
       -->
       <div class="moldura-capa">
-        <img class="foto-capa" src="fotos/foto-manu-moldura-fundo.webp" alt="Manu Melo com a mão no queixo, batom vermelho e blazer verde-oliva, numa moldura redonda com arara, bandeira do Pará, onça-pintada e vitórias-régias" width="763" height="841" fetchpriority="high">
-        <img class="bicho arara-capa" src="elementos/arara-capa.webp" alt="" aria-hidden="true" width="226" height="415">
-        <!-- pedaço da foto que fica na frente da arara, para ela voar por trás da foto como na arte -->
-        <img class="bicho frente-arara" src="elementos/foto-frente-arara.webp" alt="" aria-hidden="true" width="320" height="470">
-        <img class="bicho onca-capa" src="elementos/onca-capa.webp" alt="" aria-hidden="true" width="456" height="182">
+        <img class="foto-capa" src="fotos/capa-fundo.webp" alt="Manu Melo com a mão no queixo, batom vermelho e blazer verde-oliva, numa moldura redonda com arara, bandeira do Pará, onça-pintada, vitórias-régias e a palavra Nortista" width="1140" height="1260" fetchpriority="high">
+        <img class="bicho arara-capa" src="elementos/capa/arara.webp" alt="" aria-hidden="true" width="400" height="370">
+        <img class="bicho onca-capa" src="elementos/capa/onca.webp" alt="" aria-hidden="true" width="620" height="240">
       </div>
     </div>
   </div>
