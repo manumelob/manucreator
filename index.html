@@ -383,12 +383,15 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .servicos h2 em{color:var(--linho);text-shadow:2px 2px 0 var(--marrom), 4px 4px 0 var(--acai)}
 .servicos .olho{color:var(--amarelo)}
 .servicos .cabeca p{color:rgba(255,246,229,.85)}
-.servicos-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;list-style:none;padding:0;margin:0}
+/* cartões em linhas de 3; o que sobra na última linha fica centralizado */
+.servicos-grade{display:flex;flex-wrap:wrap;justify-content:center;gap:22px;list-style:none;padding:0;margin:0}
+.servicos-grade .servico{flex:0 0 calc((100% - 44px) / 3)}
 .servico{background:var(--linho);color:var(--tinta);border-radius:var(--raio);padding:32px 28px;box-shadow:var(--sombra-leve);transition:transform .3s, box-shadow .3s}
 .servico:hover{transform:translateY(-4px);box-shadow:var(--sombra)}
 .servico .num{font-family:var(--serif);font-size:2.2rem;color:var(--cor-num,var(--marrom));line-height:1}
 .servico:nth-child(3n+2){--cor-num:var(--azul)}
 .servico:nth-child(3n+3){--cor-num:var(--verde)}
+.servico:nth-child(7){--cor-num:var(--amarelo)}
 .servico h3{font-family:var(--corpo);font-weight:700;font-size:1.2rem;margin:.7rem 0 .5rem}
 .servico p{color:var(--tinta-suave);margin:0;font-size:1rem}
 
@@ -1090,14 +1093,15 @@ const TRABALHOS = [
   T("Pet", "05", "Plano de saúde pet")
 ];
 
-/* Serviços (seis cards) */
+/* Serviços (sete cards; os títulos também aparecem na faixa vermelha que corre) */
 const SERVICOS = [
   { titulo: "Vídeo UGC",              descricao: "Vídeo vertical com roteiro, gravação e edição, falando do seu produto do jeito que gente de verdade fala." },
   { titulo: "Corte para anúncio",     descricao: "Versões com ganchos diferentes e duração certa para rodar no Meta Ads e no TikTok Ads." },
   { titulo: "Fotos do produto",       descricao: "Fotos lifestyle com luz natural e composição de mesa, prontas para feed, site e marketplace." },
   { titulo: "Unboxing",               descricao: "A experiência de abrir o pacote com reação sincera, valorizando embalagem e primeiros detalhes." },
   { titulo: "Publicação no meu perfil", descricao: "O conteúdo vai ao ar no @manumelo_b, com legenda pensada e stories de apoio." },
-  { titulo: "Pacote mensal",          descricao: "Uma leva de conteúdos por mês com planejamento, roteiro e entregas programadas." }
+  { titulo: "Pacote mensal",          descricao: "Uma leva de conteúdos por mês com planejamento, roteiro e entregas programadas." },
+  { titulo: "Experiência presencial", descricao: "Vou até o seu espaço (loja, restaurante, salão ou evento) e gravo a experiência real, do jeito que o cliente vai viver." }
 ];
 
 /* Métricas com contador (quatro) */
@@ -1225,7 +1229,8 @@ if (EN) {
     { titulo: "Product photos", descricao: "Lifestyle photos with natural light and styled tabletop, ready for feed, website and marketplace." },
     { titulo: "Unboxing", descricao: "The experience of opening the package with a genuine reaction, highlighting the packaging and first details." },
     { titulo: "Post on my profile", descricao: "The content goes live on @manumelo_b, with a thoughtful caption and supporting stories." },
-    { titulo: "Monthly package", descricao: "A batch of content every month with planning, scripts and scheduled deliveries." }
+    { titulo: "Monthly package", descricao: "A batch of content every month with planning, scripts and scheduled deliveries." },
+    { titulo: "On-site experiences", descricao: "I go to your place (store, restaurant, salon or event) and film the real experience, just the way your customers will live it." }
   ];
   SERVICOS.forEach((s, i) => Object.assign(s, servicosEN[i] || {}));
 
@@ -1335,8 +1340,7 @@ function montarLogos(el, inicio, fim) {
 const metade = Math.ceil(MARCAS.length / 2);
 montarLogos($("#marcas-linha-1"), 0, metade);
 montarLogos($("#marcas-linha-2"), metade, MARCAS.length);
-/* faixa vermelha: os serviços e mais a experiência presencial */
-montarTrilho($("#trilho-servicos"), [...SERVICOS.map(s => s.titulo), tx("Experiência presencial", "On-site experiences")]);
+montarTrilho($("#trilho-servicos"), SERVICOS.map(s => s.titulo));
 
 /* Destaques */
 $("#destaques-grade").innerHTML = DESTAQUES.map((d, i) => `<article class="destaque revelar">
