@@ -547,6 +547,10 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
   .faixa-marcas .trilho-logos.reverso{animation:rolar 130s linear infinite reverse!important}
   .faixa-marcas .trilho-logos ul{flex-wrap:nowrap}
   .faixa-marcas .trilho-logos ul[aria-hidden="true"]{display:flex}
+  /* a faixa vermelha dos serviços fica numa linha só, sempre correndo */
+  .faixa-servicos .trilho{width:max-content;flex-wrap:nowrap;justify-content:flex-start;animation:rolar 32s linear infinite!important}
+  .faixa-servicos .trilho ul{flex-wrap:nowrap}
+  .faixa-servicos .trilho ul[aria-hidden="true"]{display:flex}
   /* a arara e a onça da capa continuam se mexendo, porque o movimento é lento e pequeno */
   .arara-solta{animation:arara-voa 5s ease-in-out infinite alternate!important}
   .onca-solta{animation:onca-anda 10s ease-in-out infinite alternate!important}
@@ -1331,7 +1335,8 @@ function montarLogos(el, inicio, fim) {
 const metade = Math.ceil(MARCAS.length / 2);
 montarLogos($("#marcas-linha-1"), 0, metade);
 montarLogos($("#marcas-linha-2"), metade, MARCAS.length);
-montarTrilho($("#trilho-servicos"), SERVICOS.map(s => s.titulo));
+/* faixa vermelha: os serviços e mais a experiência presencial */
+montarTrilho($("#trilho-servicos"), [...SERVICOS.map(s => s.titulo), tx("Experiência presencial", "On-site experiences")]);
 
 /* Destaques */
 $("#destaques-grade").innerHTML = DESTAQUES.map((d, i) => `<article class="destaque revelar">
