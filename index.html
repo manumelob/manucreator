@@ -285,7 +285,9 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .video.previa iframe{position:absolute;border:0;top:-54px;left:-21.1cqw;width:142.2cqw;height:calc(54px + 177.8cqw + 160px)}
 .destaque .info{padding:18px 8px 0}
 .destaque .numero{font-family:var(--serif);font-size:2.6rem;color:var(--amarelo);text-shadow:2px 2px 0 var(--marrom);line-height:1;margin:.2rem 0 .45rem}
-.destaque .rotulo{font-family:var(--corpo);font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--verde);display:block;margin:.4rem 0 .7rem}
+.destaque .rotulo{font-family:var(--corpo);font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--verde);display:block;margin:-.1rem 0 .6rem}
+/* destaque extra do vídeo (ex.: vendas em GMV), num selo amarelo */
+.destaque .extra{display:inline-block;background:var(--amarelo);color:var(--acai);font-weight:700;font-size:.85rem;padding:.3rem .8rem;border-radius:999px;margin:0 0 .7rem}
 .destaque h3{font-size:1.3rem;margin-bottom:.4rem;color:var(--linho)}
 .destaque .contexto{color:rgba(255,246,229,.75);font-size:.96rem;margin:0}
 .destaque .abrir{display:inline-block;margin-top:.8rem;font-weight:700;color:var(--amarelo);font-size:.95rem}
@@ -912,15 +914,16 @@ const MARCAS = [
 
 /* Conteúdos de destaque (três cards de vídeo), os mesmos do portfólio do Canva
    video, capa e previa: arquivos em midia/destaques/ (vídeo 540x960, capa .jpg e trecho de 4 s sem som que toca ao passar o mouse)
-   numero: o número que aparece no vídeo do Canva; rotulo: frase pequena embaixo do número
+   numero: o número que aparece no vídeo do Canva; extra: um destaque a mais (ex.: vendas em GMV); rotulo: frase pequena embaixo do número
    (deixe numero ou rotulo vazio para não mostrar) */
 const DESTAQUES = [
   {
     video: "midia/destaques/01.mp4",
     capa: "midia/destaques/01.jpg",
     previa: "midia/destaques/01-previa.mp4",
-    numero: "4 mi",
-    rotulo: "",
+    numero: "5,6 mi",
+    rotulo: "de visualizações",
+    extra: "+250 mil em GMV no TikTok Shop",
     titulo: "TikTok Shop",
     contexto: "Vídeo de oferta com dica de promoção, feito para vender direto no TikTok Shop."
   },
@@ -1169,11 +1172,11 @@ if (EN) {
   }));
 
   const destaquesEN = [
-    { titulo: "TikTok Shop", contexto: "Offer video with a promo tip, made to sell directly on TikTok Shop." },
+    { titulo: "TikTok Shop", rotulo: "views", extra: "+250K in GMV on TikTok Shop", contexto: "Offer video with a promo tip, made to sell directly on TikTok Shop." },
     { titulo: "Influencer & Affiliate", contexto: "Content on my own profile with an affiliate link, showing the product in my routine." },
     { titulo: "UGC Content", contexto: "Video recorded for the brand to use on its social media and ads." }
   ];
-  DESTAQUES.forEach((d, i) => { Object.assign(d, destaquesEN[i] || {}); d.numero = d.numero.replace("4 mi", "4M").replace("13,9 mil", "13.9K"); });
+  DESTAQUES.forEach((d, i) => { Object.assign(d, destaquesEN[i] || {}); d.numero = d.numero.replace("5,6 mi", "5.6M").replace("13,9 mil", "13.9K"); });
 
   Object.assign(FRASE_NICHO, {
     "Tech & Apps": "Apps, platforms and services explained in a simple way",
@@ -1350,6 +1353,7 @@ $("#destaques-grade").innerHTML = DESTAQUES.map((d, i) => `<article class="desta
       <div class="info">
         ${d.numero ? `<div class="numero">${d.numero}</div>` : ""}
         ${d.rotulo ? `<span class="rotulo">${d.rotulo}</span>` : ""}
+        ${d.extra ? `<span class="extra">${d.extra}</span>` : ""}
         <h3>${d.titulo}</h3>
         <p class="contexto">${d.contexto}</p>
       </div>
