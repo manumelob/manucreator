@@ -950,10 +950,11 @@ const DESTAQUES = [
     video: "midia/destaques/03.mp4",
     capa: "midia/destaques/03.jpg",
     previa: "midia/destaques/03-previa.mp4",
-    numero: "",
-    rotulo: "",
+    numero: "2,4 mi",
+    rotulo: "de visualizações",
+    extra: "Conteúdo próprio para anúncio",
     titulo: "Conteúdo UGC",
-    contexto: "Vídeo gravado para a marca usar nas redes e nos anúncios dela."
+    contexto: "Vídeo da Di Santinni gravado para a marca rodar como anúncio."
   }
 ];
 
@@ -1185,9 +1186,9 @@ if (EN) {
     { titulo: "On-site experience", rotulo: "views", contexto: "Beach restaurant: I visited the place and showed the real experience, from the setting to the food." },
     { titulo: "TikTok Shop", rotulo: "views", extra: "+250K in GMV on TikTok Shop", contexto: "Offer video with a promo tip, made to sell directly on TikTok Shop." },
     { titulo: "Influencer & Affiliate", contexto: "Content on my own profile with an affiliate link, showing the product in my routine." },
-    { titulo: "UGC Content", contexto: "Video recorded for the brand to use on its social media and ads." }
+    { titulo: "UGC Content", rotulo: "views", extra: "Made for ads", contexto: "Di Santinni video recorded for the brand to run as an ad." }
   ];
-  DESTAQUES.forEach((d, i) => { Object.assign(d, destaquesEN[i] || {}); d.numero = d.numero.replace("5,6 mi", "5.6M").replace("116 mil", "116K").replace("13,9 mil", "13.9K"); });
+  DESTAQUES.forEach((d, i) => { Object.assign(d, destaquesEN[i] || {}); d.numero = d.numero.replace("5,6 mi", "5.6M").replace("116 mil", "116K").replace("2,4 mi", "2.4M").replace("13,9 mil", "13.9K"); });
 
   Object.assign(FRASE_NICHO, {
     "Tech & Apps": "Apps, platforms and services explained in a simple way",
