@@ -431,9 +431,15 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .mk-destaques li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:10px;border-radius:50%;background:var(--amarelo)}
 .mk-destaques strong{color:var(--amarelo);font-weight:700}
 .mk-painel > .btn{justify-self:start}
-.mk-reels{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.mk-reels img{width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:14px;box-shadow:var(--sombra);border:3px solid rgba(255,246,229,.15)}
-.mk-reels img:nth-child(2),.mk-reels img:nth-child(5){transform:translateY(22px)}
+.mk-reels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.mk-reel{position:relative;display:block;aspect-ratio:9/16;border-radius:16px;overflow:hidden;box-shadow:var(--sombra);border:3px solid rgba(255,246,229,.18);background:#000;transition:transform .3s ease,border-color .3s ease}
+.mk-reel:nth-child(2){transform:translateY(26px)}
+.mk-reel:hover{border-color:var(--amarelo)}
+.mk-reel img,.mk-reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.mk-reel video{opacity:0;transition:opacity .35s ease}
+.mk-reel.tocando video{opacity:1}
+.mk-reel::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 60%,rgba(0,0,0,.6))}
+.mk-reel-ig{position:absolute;left:10px;right:10px;bottom:10px;z-index:1;color:var(--linho);font-size:.78rem;font-weight:600;letter-spacing:.03em}
 @media (max-width:980px){ .mk-grade{grid-template-columns:minmax(0,1fr)} .mk-reels{max-width:520px} }
 @media (max-width:600px){
   .mk-interacoes{grid-template-columns:repeat(3,1fr)}
@@ -1184,8 +1190,13 @@ const MIDIA_KIT = {
     { valor: 8800,  pt: "compartilhamentos", en: "shares" },
     { valor: 1100,  pt: "salvamentos", en: "saves" }
   ],
-  fotos: ["fotos/midiakit/reel-1.jpg", "fotos/midiakit/reel-2.jpg", "fotos/midiakit/reel-3.jpg",
-          "fotos/midiakit/reel-4.jpg", "fotos/midiakit/reel-5.jpg", "fotos/midiakit/reel-6.jpg"]
+  /* reels do Instagram ao lado dos números: capa + trecho curto sem som (toca ao passar o mouse).
+     O clique abre o reel no Instagram. Arquivos em midia/midiakit/ (gerados com FFmpeg a partir do reel). */
+  reels: [
+    { link: "https://www.instagram.com/reel/DXkNqmpkSu_/", capa: "midia/midiakit/01.jpg", previa: "midia/midiakit/01-previa.mp4" },
+    { link: "https://www.instagram.com/reel/DXXUN5ykSSI/", capa: "midia/midiakit/02.jpg", previa: "midia/midiakit/02-previa.mp4" },
+    { link: "https://www.instagram.com/reel/DXcCJbkETLD/", capa: "midia/midiakit/03.jpg", previa: "midia/midiakit/03-previa.mp4" }
+  ]
 };
 
 const METRICAS = [
@@ -1721,9 +1732,28 @@ $("#servicos-grade").innerHTML = SERVICOS.map((s, i) =>
       </ul>
       <a class="btn btn-cheio" href="#contato">${tx("Quero divulgar minha marca", "I want to promote my brand")}</a>
     </div>
-    <div class="mk-reels revelar" aria-label="${tx("Reels do período", "Reels from the period")}">
-      ${mk.fotos.map(f => `<img src="${f}" alt="" width="230" height="408" loading="lazy">`).join("")}
+    <div class="mk-reels revelar">
+      ${mk.reels.map((r, i) => `<a class="mk-reel" href="${r.link}" target="_blank" rel="noopener" aria-label="${tx("Assistir no Instagram: reel", "Watch on Instagram: reel")} ${i + 1}">
+        <img src="${r.capa}" alt="" width="360" height="640" loading="lazy">
+        <video muted loop playsinline preload="none" aria-hidden="true" data-src="${r.previa}"></video>
+        <span class="mk-reel-ig">${tx("Ver no Instagram", "View on Instagram")} ↗</span>
+      </a>`).join("")}
     </div>`;
+
+  /* prévias: no computador tocam ao passar o mouse; no celular tocam sozinhas quando aparecem na tela */
+  const reels = [...document.querySelectorAll(".mk-reel")];
+  const tocar = (a) => {
+    const v = a.querySelector("video");
+    if (!v.src) v.src = v.dataset.src;
+    v.play().then(() => a.classList.add("tocando")).catch(() => {});
+  };
+  const parar = (a) => { const v = a.querySelector("video"); a.classList.remove("tocando"); if (v.src) v.pause(); };
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    reels.forEach(a => { a.addEventListener("mouseenter", () => tocar(a)); a.addEventListener("mouseleave", () => parar(a)); });
+  } else if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => (e.isIntersecting ? tocar(e.target) : parar(e.target))), { threshold: 0.6 });
+    reels.forEach(a => io.observe(a));
+  }
 })();
 
 $("#metricas").innerHTML = METRICAS.map(m =>
