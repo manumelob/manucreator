@@ -426,10 +426,6 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .mk-interacoes li{border:2px solid rgba(255,246,229,.22);border-radius:14px;padding:14px 10px;text-align:center}
 .mk-interacoes strong{display:block;font-family:var(--serif);font-weight:400;font-size:1.45rem;color:var(--amarelo);line-height:1.1}
 .mk-interacoes span{font-size:.82rem;color:rgba(255,246,229,.8)}
-.mk-destaques{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.mk-destaques li{padding-left:22px;position:relative;color:rgba(255,246,229,.9)}
-.mk-destaques li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:10px;border-radius:50%;background:var(--amarelo)}
-.mk-destaques strong{color:var(--amarelo);font-weight:700}
 .mk-painel > .btn{justify-self:start}
 .mk-reels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .mk-reel{position:relative;display:block;aspect-ratio:9/16;border-radius:16px;overflow:hidden;box-shadow:var(--sombra);border:3px solid rgba(255,246,229,.18);background:#000;transition:transform .3s ease,border-color .3s ease}
@@ -820,7 +816,6 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
     <div class="cabeca revelar">
       <span class="olho">para contratar como influenciadora</span>
       <h2 id="titulo-midiakit">Mídia <em>kit</em></h2>
-      <p id="mk-periodo"></p>
     </div>
     <div class="mk-grade" id="midiakit-conteudo"></div>
   </div>
@@ -1147,6 +1142,7 @@ const TRABALHOS = [
   T("Gastronomia", "07", "Refeição saudável"),
 
   T("Experiência presencial", "06", "Circo Americano", "Passeio em família"),
+  T("Experiência presencial", "07", "Marmitíssima", "Delivery de marmitas"),
   T("Experiência presencial", "01", "SmartZoo", "Shopping"),
   T("Experiência presencial", "02", "Passeio cultural"),
   T("Experiência presencial", "03", "Restaurante praiano"),
@@ -1174,7 +1170,7 @@ const SERVICOS = [
 /* Métricas com contador (quatro) */
 /* Mídia kit: métricas do Instagram (relatório do Edits, últimos 30 dias).
    Para atualizar: troque os números e o período. Use o número inteiro (357 mil = 357000).
-   A média por reel e o "alcance x seguidores" são calculados sozinhos a partir destes números. */
+   O período fica guardado aqui só para referência (não aparece no site). */
 const MIDIA_KIT = {
   perfil: "@manumelo_b",
   link: "https://www.instagram.com/manumelo_b/",
@@ -1182,7 +1178,6 @@ const MIDIA_KIT = {
   periodo: { pt: "23 de out a 22 de nov de 2026", en: "Oct 23 to Nov 22, 2026" },
   visualizacoes: 357000,   /* visualizações de reels */
   visualizadores: 301000,  /* contas que assistiram */
-  reels: 33,               /* reels publicados no período */
   interacoes: [
     { valor: 22000, pt: "curtidas", en: "likes" },
     { valor: 213,   pt: "comentários", en: "comments" },
@@ -1192,7 +1187,7 @@ const MIDIA_KIT = {
   ],
   /* reels do Instagram ao lado dos números: capa + trecho curto sem som (toca ao passar o mouse).
      O clique abre o reel no Instagram. Arquivos em midia/midiakit/ (gerados com FFmpeg a partir do reel). */
-  reels: [
+  videos: [
     { link: "https://www.instagram.com/reel/DXkNqmpkSu_/", capa: "midia/midiakit/01.jpg", previa: "midia/midiakit/01-previa.mp4" },
     { link: "https://www.instagram.com/reel/DXXUN5ykSSI/", capa: "midia/midiakit/02.jpg", previa: "midia/midiakit/02-previa.mp4" },
     { link: "https://www.instagram.com/reel/DXcCJbkETLD/", capa: "midia/midiakit/03.jpg", previa: "midia/midiakit/03-previa.mp4" }
@@ -1301,7 +1296,7 @@ if (EN) {
     "Palmilha ortopédica": "Orthopedic insole", "Passeio com a Laura": "Day out with Laura", "Passeio cultural": "Cultural outing", "Plano de saúde pet": "Pet health plan",
     "Presenteando com chocolate": "Gifting chocolate", "Provador virtual com IA": "AI virtual fitting room", "Pão de alho": "Garlic bread", "Pão sem glúten": "Gluten-free bread",
     "Receita com Super Dicer": "Recipe with Super Dicer", "Receita de bolo de banana": "Banana cake recipe", "Refeição saudável": "Healthy meal",
-    "Restaurante fitness": "Healthy restaurant", "Restaurante praiano": "Beach restaurant", "Circo Americano": "Circo Americano", "Rotina e café": "Routine and coffee", "Roupa fitness": "Activewear",
+    "Restaurante fitness": "Healthy restaurant", "Restaurante praiano": "Beach restaurant", "Circo Americano": "Circo Americano", "Marmitíssima": "Marmitíssima", "Rotina e café": "Routine and coffee", "Roupa fitness": "Activewear",
     "Roupinhas de bebê": "Baby clothes", "Rímel de tratamento": "Treatment mascara", "Saco a vácuo Coza": "Coza vacuum storage bags", "Sandália anatômica": "Anatomic sandals",
     "Sapatinhos infantis": "Kids' shoes", "Semijoias": "Plated jewelry", "Skincare": "Skincare", "Skincare com vitamina C": "Vitamin C skincare", "SmartZoo": "SmartZoo",
     "Suplemento": "Supplement", "Sérum GHK-Cu Biomarine": "Biomarine GHK-Cu serum", "Tema do aniversário da Laura": "Laura's birthday theme",
@@ -1310,6 +1305,7 @@ if (EN) {
     "Vitaminas": "Vitamins", "Óculos": "Glasses", "Óleo essencial": "Essential oil"
   };
   const FORMATOS_EN = {
+    "Delivery de marmitas": "Meal delivery",
     "Vídeo UGC": "UGC video", "Antes e depois": "Before and after", "Aplicativo de namoro": "Dating app", "App de IA": "AI app", "Arrume-se comigo": "Get ready with me",
     "Campanha": "Campaign", "Comparativo": "Comparison", "Conteúdo educativo": "Educational", "Conteúdo financeiro": "Finance content", "Conteúdo para ads": "Ad content",
     "Conteúdo sensorial": "Sensory content", "Fundo de funil": "Bottom of funnel", "Lançamento": "Launch", "Lo-fi e nativo": "Lo-fi and native", "Organização": "Organizing",
@@ -1706,11 +1702,6 @@ $("#servicos-grade").innerHTML = SERVICOS.map((s, i) =>
     if (n >= 1e3) return (n / 1e3).toLocaleString(loc, { maximumFractionDigits: 1 }) + tx(" mil", "K");
     return n.toLocaleString(loc);
   };
-  const media = mk.visualizacoes / mk.reels;
-  const vezes = Math.round(mk.visualizadores / mk.seguidores);
-  $("#mk-periodo").textContent = tx(
-    `Números do meu Instagram nos últimos 30 dias (${mk.periodo.pt}). Fonte: relatório do próprio Instagram.`,
-    `My Instagram numbers for the last 30 days (${mk.periodo.en}). Source: Instagram's own report.`);
   $("#midiakit-conteudo").innerHTML = `
     <div class="mk-painel revelar">
       <div class="mk-perfil">
@@ -1725,15 +1716,10 @@ $("#servicos-grade").innerHTML = SERVICOS.map((s, i) =>
       <ul class="mk-interacoes">
         ${mk.interacoes.map(i => `<li><strong>${curto(i.valor)}</strong><span>${tx(i.pt, i.en)}</span></li>`).join("")}
       </ul>
-      <ul class="mk-destaques">
-        <li><strong>${mk.reels}</strong> ${tx("reels publicados no período", "reels posted in the period")}</li>
-        <li>${tx("média de", "average of")} <strong>${curto(Math.round(media / 100) * 100)}</strong> ${tx("visualizações por reel", "views per reel")}</li>
-        <li>${tx("alcance", "reach")} <strong>${vezes}x</strong> ${tx("maior que a base de seguidores", "larger than my follower base")}</li>
-      </ul>
       <a class="btn btn-cheio" href="#contato">${tx("Quero divulgar minha marca", "I want to promote my brand")}</a>
     </div>
     <div class="mk-reels revelar">
-      ${mk.reels.map((r, i) => `<a class="mk-reel" href="${r.link}" target="_blank" rel="noopener" aria-label="${tx("Assistir no Instagram: reel", "Watch on Instagram: reel")} ${i + 1}">
+      ${mk.videos.map((r, i) => `<a class="mk-reel" href="${r.link}" target="_blank" rel="noopener" aria-label="${tx("Assistir no Instagram: reel", "Watch on Instagram: reel")} ${i + 1}">
         <img src="${r.capa}" alt="" width="360" height="640" loading="lazy">
         <video muted loop playsinline preload="none" aria-hidden="true" data-src="${r.previa}"></video>
         <span class="mk-reel-ig">${tx("Ver no Instagram", "View on Instagram")} ↗</span>
