@@ -410,6 +410,37 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
 .resultado strong{display:block;font-family:var(--serif);font-weight:400;font-size:2.6rem;line-height:1}
 .resultado .o-que{display:block;font-weight:500;margin:.3rem 0 .6rem}
 .resultado p{margin:0;font-size:.97rem;opacity:.95}
+/* mídia kit */
+.mk-grade{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,4vw,56px);align-items:center}
+.mk-painel{display:grid;gap:26px}
+.mk-perfil{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.mk-perfil img{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:50% 28%;border:3px solid var(--amarelo)}
+.mk-perfil strong{display:block;font-size:1.15rem;font-weight:600}
+.mk-perfil span{color:rgba(255,246,229,.78);font-size:.95rem}
+.mk-perfil .mk-ig{margin-left:auto;padding:.6rem 1.2rem;font-size:.92rem}
+.mk-principais{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.mk-principais div{background:var(--azul);border-radius:var(--raio);padding:22px 22px 18px;box-shadow:var(--sombra-leve)}
+.mk-principais strong{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,5vw,3.6rem);color:var(--amarelo);text-shadow:2px 2px 0 var(--marrom);line-height:1}
+.mk-principais span{display:block;margin-top:8px;color:var(--linho)}
+.mk-interacoes{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;list-style:none;margin:0;padding:0}
+.mk-interacoes li{border:2px solid rgba(255,246,229,.22);border-radius:14px;padding:14px 10px;text-align:center}
+.mk-interacoes strong{display:block;font-family:var(--serif);font-weight:400;font-size:1.45rem;color:var(--amarelo);line-height:1.1}
+.mk-interacoes span{font-size:.82rem;color:rgba(255,246,229,.8)}
+.mk-destaques{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.mk-destaques li{padding-left:22px;position:relative;color:rgba(255,246,229,.9)}
+.mk-destaques li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:10px;border-radius:50%;background:var(--amarelo)}
+.mk-destaques strong{color:var(--amarelo);font-weight:700}
+.mk-painel > .btn{justify-self:start}
+.mk-reels{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.mk-reels img{width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:14px;box-shadow:var(--sombra);border:3px solid rgba(255,246,229,.15)}
+.mk-reels img:nth-child(2),.mk-reels img:nth-child(5){transform:translateY(22px)}
+@media (max-width:980px){ .mk-grade{grid-template-columns:minmax(0,1fr)} .mk-reels{max-width:520px} }
+@media (max-width:600px){
+  .mk-interacoes{grid-template-columns:repeat(3,1fr)}
+  .mk-principais{grid-template-columns:1fr 1fr;gap:12px}
+  .mk-principais div{padding:16px 14px}
+  .mk-perfil .mk-ig{margin-left:0}
+}
 /* avaliações das marcas: faixa rosa com cartões brancos em carrossel */
 .avaliacoes{background:linear-gradient(135deg,#f9d3df,#f4b3c8);border-radius:28px;padding:clamp(24px,4vw,40px);box-shadow:var(--sombra-leve)}
 .avaliacoes-topo{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px}
@@ -589,6 +620,7 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
         <li><a href="#trabalhos">Trabalhos</a></li>
         <li><a href="#servicos">Serviços</a></li>
         <li><a href="#numeros">Números</a></li>
+        <li><a href="#midiakit">Mídia kit</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
     </nav>
@@ -772,6 +804,19 @@ section{position:relative;padding:clamp(80px,11vw,140px) 0;overflow:hidden}
       </div>
       <ul class="avaliacoes-trilho" id="depoimentos"></ul>
     </div>
+  </div>
+</section>
+
+<!-- ============ MÍDIA KIT (métricas do Instagram) ============ -->
+<!-- Os números ficam em MIDIA_KIT no começo do script: atualize lá todo mês. -->
+<section class="midiakit escura greca" id="midiakit" aria-labelledby="titulo-midiakit">
+  <div class="container conteudo">
+    <div class="cabeca revelar">
+      <span class="olho">para contratar como influenciadora</span>
+      <h2 id="titulo-midiakit">Mídia <em>kit</em></h2>
+      <p id="mk-periodo"></p>
+    </div>
+    <div class="mk-grade" id="midiakit-conteudo"></div>
   </div>
 </section>
 
@@ -1121,6 +1166,28 @@ const SERVICOS = [
 ];
 
 /* Métricas com contador (quatro) */
+/* Mídia kit: métricas do Instagram (relatório do Edits, últimos 30 dias).
+   Para atualizar: troque os números e o período. Use o número inteiro (357 mil = 357000).
+   A média por reel e o "alcance x seguidores" são calculados sozinhos a partir destes números. */
+const MIDIA_KIT = {
+  perfil: "@manumelo_b",
+  link: "https://www.instagram.com/manumelo_b/",
+  seguidores: 8100,
+  periodo: { pt: "23 de out a 22 de nov de 2026", en: "Oct 23 to Nov 22, 2026" },
+  visualizacoes: 357000,   /* visualizações de reels */
+  visualizadores: 301000,  /* contas que assistiram */
+  reels: 33,               /* reels publicados no período */
+  interacoes: [
+    { valor: 22000, pt: "curtidas", en: "likes" },
+    { valor: 213,   pt: "comentários", en: "comments" },
+    { valor: 2000,  pt: "reposts", en: "reposts" },
+    { valor: 8800,  pt: "compartilhamentos", en: "shares" },
+    { valor: 1100,  pt: "salvamentos", en: "saves" }
+  ],
+  fotos: ["fotos/midiakit/reel-1.jpg", "fotos/midiakit/reel-2.jpg", "fotos/midiakit/reel-3.jpg",
+          "fotos/midiakit/reel-4.jpg", "fotos/midiakit/reel-5.jpg", "fotos/midiakit/reel-6.jpg"]
+};
+
 const METRICAS = [
   { valor: 300, prefixo: "+", sufixo: "",  rotulo: "vídeos entregues" },
   { valor: 250, prefixo: "+", sufixo: "",  rotulo: "marcas atendidas" },
@@ -1271,6 +1338,9 @@ if (EN) {
     [".bf-botao", "BOOK NOW!"],
     ['.menu a[href="#sobre"]', "About"], ['.menu a[href="#destaques"]', "Highlights"], ['.menu a[href="#trabalhos"]', "Work"],
     ['.menu a[href="#servicos"]', "Services"], ['.menu a[href="#numeros"]', "Numbers"], ['.menu a[href="#contato"]', "Contact"],
+    ['.menu a[href="#midiakit"]', "Media kit"],
+    [".midiakit .olho", "to hire me as an influencer"],
+    ["#titulo-midiakit", "Media <em>kit</em>"],
     [".capa .olho", "UGC Portfolio - Influencer - Shop Creator"],
     ["#titulo-capa", '<span class="linha-menor">Creative content with</span> <em>the intent to sell.</em>'],
     [".capa .frase", "I create videos that make your brand feel like a chat with a friend and sell like an ad. Script, filming and editing that feel like real people."],
@@ -1616,6 +1686,46 @@ $("#servicos-grade").innerHTML = SERVICOS.map((s, i) =>
 ).join("");
 
 /* Métricas, resultados e depoimentos */
+/* Mídia kit */
+(function () {
+  const mk = MIDIA_KIT, loc = tx("pt-BR", "en-US");
+  /* 357000 -> "357 mil" (ou "357K" em inglês) */
+  const curto = (n) => {
+    if (n >= 1e6) return (n / 1e6).toLocaleString(loc, { maximumFractionDigits: 1 }) + tx(" mi", "M");
+    if (n >= 1e3) return (n / 1e3).toLocaleString(loc, { maximumFractionDigits: 1 }) + tx(" mil", "K");
+    return n.toLocaleString(loc);
+  };
+  const media = mk.visualizacoes / mk.reels;
+  const vezes = Math.round(mk.visualizadores / mk.seguidores);
+  $("#mk-periodo").textContent = tx(
+    `Números do meu Instagram nos últimos 30 dias (${mk.periodo.pt}). Fonte: relatório do próprio Instagram.`,
+    `My Instagram numbers for the last 30 days (${mk.periodo.en}). Source: Instagram's own report.`);
+  $("#midiakit-conteudo").innerHTML = `
+    <div class="mk-painel revelar">
+      <div class="mk-perfil">
+        <img src="fotos/foto-manu.jpg" alt="" width="64" height="64" loading="lazy">
+        <div><strong>${mk.perfil}</strong><span>${curto(mk.seguidores)} ${tx("seguidores", "followers")}</span></div>
+        <a class="btn btn-vazado mk-ig" href="${mk.link}" target="_blank" rel="noopener">${tx("Ver perfil", "View profile")}</a>
+      </div>
+      <div class="mk-principais">
+        <div><strong class="contador" data-alvo="${mk.visualizacoes / 1000}" data-prefixo="" data-sufixo="${tx(" mil", "K")}">${curto(mk.visualizacoes)}</strong><span>${tx("visualizações de reels", "reel views")}</span></div>
+        <div><strong class="contador" data-alvo="${mk.visualizadores / 1000}" data-prefixo="" data-sufixo="${tx(" mil", "K")}">${curto(mk.visualizadores)}</strong><span>${tx("contas alcançadas", "accounts reached")}</span></div>
+      </div>
+      <ul class="mk-interacoes">
+        ${mk.interacoes.map(i => `<li><strong>${curto(i.valor)}</strong><span>${tx(i.pt, i.en)}</span></li>`).join("")}
+      </ul>
+      <ul class="mk-destaques">
+        <li><strong>${mk.reels}</strong> ${tx("reels publicados no período", "reels posted in the period")}</li>
+        <li>${tx("média de", "average of")} <strong>${curto(Math.round(media / 100) * 100)}</strong> ${tx("visualizações por reel", "views per reel")}</li>
+        <li>${tx("alcance", "reach")} <strong>${vezes}x</strong> ${tx("maior que a base de seguidores", "larger than my follower base")}</li>
+      </ul>
+      <a class="btn btn-cheio" href="#contato">${tx("Quero divulgar minha marca", "I want to promote my brand")}</a>
+    </div>
+    <div class="mk-reels revelar" aria-label="${tx("Reels do período", "Reels from the period")}">
+      ${mk.fotos.map(f => `<img src="${f}" alt="" width="230" height="408" loading="lazy">`).join("")}
+    </div>`;
+})();
+
 $("#metricas").innerHTML = METRICAS.map(m =>
   `<li class="metrica revelar"><strong class="contador" data-alvo="${m.valor}" data-prefixo="${m.prefixo}" data-sufixo="${m.sufixo}">${m.prefixo}${formatar(m.valor, 0)}${m.sufixo}</strong><span>${m.rotulo}</span></li>`
 ).join("");
